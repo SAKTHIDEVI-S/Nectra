@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Nectra Orders</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+  <header class="admin-nav">
+    <a class="wordmark" href="/" aria-label="Nectra storefront">NECTRA<small>My Orders</small></a>
+    <a class="text-link" href="/">Shop <span>-></span></a>
+  </header>
+  <main class="admin-shell">
+    <section class="admin-hero">
+      <p class="eyebrow">My Nectra</p>
+      <h1>Your orders, all in one place.</h1>
+      <p>Verify the phone number used at checkout to see payment and fulfilment updates.</p>
+    </section>
+    <section class="admin-panel" id="ordersLogin">
+      <form id="ordersOtpRequest">
+        <p class="eyebrow">Sign in</p>
+        <label>Phone number<input id="ordersPhone" required inputmode="tel" autocomplete="tel" placeholder="10 digit mobile number"></label>
+        <button class="button gold full" type="submit">Send OTP <span>-></span></button>
+      </form>
+      <form id="ordersOtpVerify" hidden>
+        <label>Enter OTP<input id="ordersOtp" required inputmode="numeric" autocomplete="one-time-code"></label>
+        <button class="button gold full" type="submit">View my orders <span>-></span></button>
+      </form>
+      <p class="form-note" id="ordersNote"></p>
+    </section>
+    <section class="admin-dashboard" id="ordersDashboard" hidden>
+      <div class="admin-toolbar">
+        <div>
+          <p class="eyebrow">Order history</p>
+          <h2>Your orders</h2>
+          <p class="admin-muted" id="ordersCount"></p>
+        </div>
+        <button class="button" id="ordersLogout" type="button">Sign out <span>x</span></button>
+      </div>
+      <div class="orders-list" id="customerOrders"></div>
+      <section class="account-details"><div><p class="eyebrow">Saved delivery details</p><h2>For your next order.</h2><p>Keep your delivery information ready for a smoother checkout.</p></div><form id="addressBook"><label>Verified phone number<input id="accountPhone" readonly></label><label>Full name<input id="accountName" autocomplete="name"></label><label>Address<input id="accountAddress" autocomplete="street-address"></label><div class="two"><label>City<input id="accountCity" autocomplete="address-level2"></label><label>PIN code<input id="accountPincode" inputmode="numeric" autocomplete="postal-code"></label></div><button class="button gold" type="submit">Save delivery details <span>→</span></button><p class="form-note" id="addressBookNote"></p></form></section>
+    </section>
+  </main>
+  <script src="/orders.js"></script>
+</body>
+</html>

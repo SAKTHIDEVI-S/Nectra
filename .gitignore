@@ -1,0 +1,4 @@
+.env
+data/nectra.db
+data/nectra.db-*
+node_modules/
