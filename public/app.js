@@ -171,6 +171,7 @@ function bundleDiscount() { return promotion().saving; }
 function total() { const afterOffer = subtotal() - bundleDiscount(); return afterOffer + shippingFor(afterOffer); }
 function openWhatsAppOrder(items = cartEntries(), options = {}) {
   if (!items.length) return;
+  window.gtag?.('event', 'generate_lead', { lead_source: 'website_whatsapp', item_count: items.reduce((count, item) => count + item.quantity, 0), value: items.reduce((sum, item) => sum + item.price * item.quantity, 0), currency: 'INR' });
   const offer = promotion();
   const orderSubtotal = options.subtotal ?? items.reduce((sum, item) => sum + item.price * item.quantity, 0) - offer.saving;
   const shipping = shippingFor(orderSubtotal);

@@ -53,6 +53,7 @@ function total() { return subtotal() - bundleDiscount(); }
 function shippingFor(value) { return value >= 999 ? 0 : 50; }
 function openWhatsAppOrder(items, { fromBag = false } = {}) {
   if (!items.length) return;
+  window.gtag?.('event', 'generate_lead', { lead_source: 'product_page_whatsapp', item_count: items.reduce((count, item) => count + item.quantity, 0), value: items.reduce((sum, item) => sum + item.price * item.quantity, 0), currency: 'INR' });
   const offer = promotion(items, fromBag ? state.giftBundles : []);
   const orderSubtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0) - offer.saving;
   const shipping = shippingFor(orderSubtotal);
