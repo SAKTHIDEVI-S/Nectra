@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
+import { journalArticles, journalArticleBySlug } from './public/journal-data.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 loadEnv(path.join(__dirname, '.env'));
@@ -182,9 +183,55 @@ function productSeoTags(product) {
   const safeSchema = JSON.stringify(schema).replace(/</g, '\\u003c');
   return `\n  <link rel="canonical" href="${canonical}">\n  <meta property="og:type" content="product">\n  <meta property="og:title" content="${escapeHtml(`${product.name} | Nectra Honey`)}">\n  <meta property="og:description" content="${escapeHtml(description)}">\n  <meta property="og:url" content="${canonical}">\n  <meta property="og:image" content="${image}">\n  <meta name="twitter:card" content="summary_large_image">\n  <script type="application/ld+json">${safeSchema}</script>`;
 }
+function journalHeader() {
+  return `<div class="topline"><div class="topline-track"><span>GIFT HAMPERS ARE NOW OPEN</span><i>✦</i><span>FREE DELIVERY ABOVE ₹999</span><i>✦</i><span>GIFT HAMPERS ARE NOW OPEN</span><i>✦</i><span>FREE DELIVERY ABOVE ₹999</span><i>✦</i></div></div>
+  <header class="site-header"><a class="brand-lockup" href="/" aria-label="Nectra home"><img src="/assets/logo.png" alt="Nectra logo"></a><nav class="main-nav"><a href="/bulk-orders">Bulk orders</a><a href="/#shop">Shop</a><a href="/story">Our story</a></nav><div class="nav-actions"><a class="bag-button" href="/#shop">Bag</a></div></header>`;
+}
+function journalFooter() {
+  return `<footer><a class="wordmark" href="/">NECTRA<small>From the Hive, with Love</small></a><div><a href="/#shop">Shop</a><a href="/story">Our story</a><a href="/journal">Journal</a><a href="https://www.instagram.com/nectrahoney.in?igsi=MW1lZjZrNjlpMnp5YQ==" target="_blank" rel="noreferrer">Instagram</a></div><div class="footer-contact"><a href="tel:+919360464594">+91 93604 64594</a></div><p>© 2026 Nectra. All rights reserved.</p></footer>`;
+}
+function renderJournalTemplate(fileName, head, content) {
+  return fs.readFileSync(path.join(__dirname, 'public', fileName), 'utf8').replace('{{HEAD}}', head).replace('{{CONTENT}}', content);
+}
+function journalCard(article, eager = false) {
+  return `<article class="journal-card"><a class="journal-card-image" href="/journal/${article.slug}" aria-label="Read ${escapeHtml(article.title)}"><img src="${article.image}" alt="${escapeHtml(article.imageAlt)}"${eager ? '' : ' loading="lazy"'}></a><div class="journal-card-copy"><p class="journal-kicker">${escapeHtml(article.category)} <span>•</span> ${escapeHtml(article.readTime)}</p><h2><a href="/journal/${article.slug}">${escapeHtml(article.title)}</a></h2><p>${escapeHtml(article.description)}</p><a class="journal-read" href="/journal/${article.slug}">Read the journal <span>→</span></a></div></article>`;
+}
+function journalIndexHead() {
+  const canonical = `${siteUrl}/journal`;
+  const schema = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Nectra Journal', description: 'Simple honey guides, thoughtful gifting ideas and kitchen notes from Nectra.', url: canonical, publisher: { '@type': 'Organization', name: 'Nectra Honey', url: siteUrl } };
+  return `<meta name="description" content="Simple honey guides, kitchen notes and thoughtful gifting ideas from Nectra Honey.">\n  <link rel="canonical" href="${canonical}">\n  <meta name="robots" content="index,follow">\n  <title>Nectra Journal | Honey Guides, Recipes and Gift Ideas</title>\n  <meta property="og:type" content="website">\n  <meta property="og:title" content="Nectra Journal | Honey Guides, Recipes and Gift Ideas">\n  <meta property="og:description" content="Simple honey guides, kitchen notes and thoughtful gifting ideas from Nectra Honey.">\n  <meta property="og:url" content="${canonical}">\n  <meta property="og:image" content="${siteUrl}${journalArticles[0].image}">\n  <meta name="twitter:card" content="summary_large_image">\n  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`;
+}
+function journalArticleHead(article) {
+  const canonical = `${siteUrl}/journal/${article.slug}`;
+  const schema = { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.description, image: [`${siteUrl}${article.image}`], datePublished: article.dateISO, dateModified: article.dateISO, author: { '@type': 'Organization', name: 'Nectra Honey' }, publisher: { '@type': 'Organization', name: 'Nectra Honey', url: siteUrl, logo: { '@type': 'ImageObject', url: `${siteUrl}/assets/logo.png` } }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical } };
+  return `<meta name="description" content="${escapeHtml(article.description)}">\n  <link rel="canonical" href="${canonical}">\n  <meta name="robots" content="index,follow">\n  <title>${escapeHtml(`${article.title} | Nectra Journal`)}</title>\n  <meta property="og:type" content="article">\n  <meta property="og:title" content="${escapeHtml(`${article.title} | Nectra Journal`)}">\n  <meta property="og:description" content="${escapeHtml(article.description)}">\n  <meta property="og:url" content="${canonical}">\n  <meta property="og:image" content="${siteUrl}${article.image}">\n  <meta property="article:published_time" content="${article.dateISO}">\n  <meta name="twitter:card" content="summary_large_image">\n  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`;
+}
+function renderJournalIndex() {
+  const [featured, ...articles] = journalArticles;
+  const content = `${journalHeader()}<main><section class="journal-hero"><div><p class="eyebrow">The Nectra Journal</p><h1>Little things worth<br><i>knowing about honey.</i></h1><p>A calm place for kitchen questions, thoughtful gifts and the everyday rituals that make a jar feel personal.</p></div><a class="journal-feature" href="/journal/${featured.slug}"><img src="${featured.image}" alt="${escapeHtml(featured.imageAlt)}"><span><small>${escapeHtml(featured.category)}</small><b>${escapeHtml(featured.title)}</b><em>Read the story <span>→</span></em></span></a></section><section class="journal-listing"><div class="journal-listing-head"><p class="eyebrow">From the hive</p><h2>Read slowly. Take what helps.</h2></div><div class="journal-grid">${articles.map((article, index) => journalCard(article, index < 2)).join('')}</div></section></main>${journalFooter()}`;
+  return renderJournalTemplate('journal.html', journalIndexHead(), content);
+}
+function renderJournalArticle(article) {
+  const related = journalArticles.filter(entry => entry.slug !== article.slug).slice(0, 3);
+  const content = `${journalHeader()}<main><article class="journal-article"><a class="journal-back" href="/journal"><span>←</span> All journal notes</a><header class="article-hero"><p class="journal-kicker">${escapeHtml(article.category)} <span>•</span> ${escapeHtml(article.date)} <span>•</span> ${escapeHtml(article.readTime)}</p><h1>${escapeHtml(article.title)}</h1><p>${escapeHtml(article.subtitle)}</p></header><figure class="article-image"><img src="${article.image}" alt="${escapeHtml(article.imageAlt)}"></figure><div class="article-layout"><div class="article-content">${article.body}<aside class="article-product-note"><span>From the Nectra collection</span><h2>${escapeHtml(article.product.name)}</h2><a class="button gold" href="${article.product.href}">Explore the jar <span>→</span></a></aside></div><aside class="article-aside"><p>From the Nectra Journal</p><span>Good food is allowed to be simple.</span></aside></div></article><section class="journal-related"><div class="journal-listing-head"><p class="eyebrow">Keep reading</p><h2>A few more notes for your table.</h2></div><div class="journal-grid">${related.map(article => journalCard(article)).join('')}</div></section></main>${journalFooter()}`;
+  return renderJournalTemplate('journal-article.html', journalArticleHead(article), content);
+}
 function serveStatic(req, res, pathname) {
   const cleanPath = decodeURIComponent(pathname);
   if (['/admin', '/admin.html', '/admin.js', '/orders', '/orders.html', '/orders.js'].includes(cleanPath)) return false;
+  if (cleanPath === '/journal') {
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+    res.end(renderJournalIndex());
+    return true;
+  }
+  const journalMatch = cleanPath.match(/^\/journal\/([a-z0-9-]+)$/);
+  if (journalMatch) {
+    const article = journalArticleBySlug(journalMatch[1]);
+    if (!article) return false;
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+    res.end(renderJournalArticle(article));
+    return true;
+  }
   const requested = cleanPath === '/bulk-orders'
       ? '/public/bulk-orders.html'
     : cleanPath === '/story'
