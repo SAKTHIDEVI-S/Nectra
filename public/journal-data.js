@@ -8,8 +8,8 @@ export const journalArticles = [
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '7 minute read',
-    image: '/assets/journal-honey-tasting.png',
-    imageAlt: 'Honey tasting scene with wildflowers, toast and a honey dipper',
+    image: '/assets/journal-flavour-map.png',
+    imageAlt: 'Five honey tasting bowls showing different colours and floral notes',
     product: { href: '/product/signature', name: 'Explore Multiflora Honey' },
     body: `<p class="article-intro">Honey can look familiar from across a kitchen shelf. Open the lid, though, and the story changes. One jar smells floral and light. Another feels deeper, warmer, almost like the last part of a sunny afternoon. Both can belong at the same table.</p>
       <h2>Why one honey can taste different from another</h2>
@@ -33,8 +33,8 @@ export const journalArticles = [
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '8 minute read',
-    image: '/assets/journal-honey-tasting.png',
-    imageAlt: 'Honey bowl and ingredients on a warm table',
+    image: '/assets/journal-label-checklist.svg',
+    imageAlt: 'Illustrated honey label checklist showing ingredients, net weight, batch details and FSSAI details',
     product: { href: '/product/signature', name: 'See the Nectra collection' },
     body: `<p class="article-intro">A good label does not need grand promises. It should give you enough information to understand what you are buying, how much you are receiving, and who will answer if you have a question later.</p>
       <h2>Read the back before the front wins you over</h2>
@@ -85,8 +85,8 @@ export const journalArticles = [
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '6 minute read',
-    image: '/assets/journal-kitchen-ritual.png',
-    imageAlt: 'Warm ginger honey drink with fruit and oats on a kitchen table',
+    image: '/assets/journal-ginger-rain.png',
+    imageAlt: 'Steaming ginger lemon honey drink by a rainy window',
     product: { href: '/product/vital', name: 'Explore Energy Honey' },
     body: `<p class="article-intro">Rain has a way of making a kitchen feel closer. The windows fog a little. The cup stays warm in both hands. This is not a cure or a clever shortcut. It is simply a good drink for a wet evening, especially when you want something softer than another cup of tea.</p>
       <h2>The simple version makes one cup</h2>
@@ -110,8 +110,8 @@ export const journalArticles = [
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '8 minute read',
-    image: '/assets/journal-kitchen-ritual.png',
-    imageAlt: 'Curd, fruit, oats and honey arranged for a breakfast bowl',
+    image: '/assets/journal-breakfast-trio.png',
+    imageAlt: 'Three breakfast bowls with curd, fruit, oats and honey',
     product: { href: '/product/blush', name: 'Explore the floral Nectra jar' },
     body: `<p class="article-intro">There are days when breakfast needs to happen in five minutes. That does not mean it has to feel like an afterthought. Curd, fruit, oats and honey are useful because they can become several different bowls with almost no planning.</p>
       <h2>1. Curd, banana and honey</h2>
@@ -136,8 +136,8 @@ export const journalArticles = [
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '7 minute read',
-    image: '/assets/journal-honey-tasting.png',
-    imageAlt: 'Golden honey, toast and flowers in a honey tasting scene',
+    image: '/assets/journal-multiflora-botanical.png',
+    imageAlt: 'Botanical illustration of a bee visiting several flowers around honeycomb',
     product: { href: '/product/signature', name: 'Shop Multiflora Honey' },
     body: `<p class="article-intro">Multiflora honey is less mysterious than it sounds. It begins when bees visit more than one kind of flower while gathering nectar. The word simply describes a broad floral source rather than one named blossom.</p>
       <h2>More than one blossom, one rounded jar</h2>
@@ -161,8 +161,8 @@ export const journalArticles = [
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '6 minute read',
-    image: '/assets/journal-honey-tasting.png',
-    imageAlt: 'Golden honey with flowers and a wooden dipper',
+    image: '/assets/journal-honey-colour-study.png',
+    imageAlt: 'Five honey samples showing a range from pale gold to deep amber',
     product: { href: '/product/signature', name: 'See Nectra Multiflora Honey' },
     body: `<p class="article-intro">Honey can be almost clear, pale gold, amber, or deep brown. That shift is one of the first things people notice, and it is also one of the most beautiful parts of a real pantry shelf. A different shade does not make a jar suspicious. It gives you a reason to look a little closer.</p>
       <h2>Colour begins with the flowers</h2>
@@ -184,8 +184,8 @@ export const journalArticles = [
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '9 minute read',
-    image: '/assets/journal-kitchen-ritual.png',
-    imageAlt: 'Honey, oats, fruit and kitchen ingredients on a warm table',
+    image: '/assets/journal-honey-baking.png',
+    imageAlt: 'Golden honey being poured into banana oat batter for baking',
     product: { href: '/product/signature', name: 'Bake with Multiflora Honey' },
     body: `<p class="article-intro">Honey can replace some sugar in a bake, but it is not a one for one swap in every recipe. It brings sweetness, moisture, and its own flavour. That is why the first experiment is worth doing in a forgiving recipe rather than the cake you promised to bring to someone else.</p>
       <h2>What changes when you bake with honey?</h2>
@@ -209,8 +209,8 @@ export const journalArticles = [
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '6 minute read',
-    image: '/assets/journal-coffee-ritual.png',
-    imageAlt: 'Honey being stirred into a warm ceramic cup of coffee',
+    image: '/assets/journal-coffee-closeup.png',
+    imageAlt: 'Honey being stirred into a dark ceramic cup of coffee',
     product: { href: '/product/vital', name: 'Explore Nectra Energy Honey' },
     body: `<p class="article-intro">Coffee and honey sound like they belong to different mornings. One is bold and bitter. The other is soft and floral. Together, they can be surprisingly easy company when you use a small enough amount.</p>
       <h2>Start smaller than you think</h2>

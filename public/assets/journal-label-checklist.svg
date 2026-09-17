@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1067" role="img" aria-labelledby="title desc">
+  <title id="title">Honey label checklist illustration</title>
+  <desc id="desc">A honey jar label with callout arrows for ingredient list, net weight, batch details, FSSAI details and seller contact.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" x2="1"><stop stop-color="#fbf5e8"/><stop offset="1" stop-color="#f1e2be"/></linearGradient>
+    <linearGradient id="honey" x1="0" x2="1"><stop stop-color="#d99b2b"/><stop offset=".55" stop-color="#f7ca58"/><stop offset="1" stop-color="#b86e1c"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="18" stdDeviation="17" flood-color="#1c281f" flood-opacity=".18"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b88125"/></marker>
+  </defs>
+  <rect width="1600" height="1067" fill="url(#paper)"/>
+  <g opacity=".28" fill="none" stroke="#b88125" stroke-width="3" stroke-dasharray="6 11"><path d="M170 154c85-84 179-44 190 32 10 70-74 89-91 40-17-49 39-66 67-26"/><path d="M1279 851c56-62 129-36 136 17 8 57-59 69-67 30-7-38 34-49 54-20"/></g>
+  <g fill="none" stroke="#1e4937" stroke-width="3" opacity=".48"><path d="M115 771c56-48 88-91 105-161M1511 276c-61 46-97 105-111 174"/><path d="M174 822c31 2 57 16 77 42M1430 200c-30-2-56-15-75-40"/></g>
+  <g filter="url(#shadow)">
+    <rect x="570" y="122" width="464" height="101" rx="26" fill="#183e2f"/>
+    <rect x="589" y="105" width="426" height="67" rx="22" fill="#d8a334"/>
+    <path d="M596 325c0-66 54-120 120-120h172c66 0 120 54 120 120v508c0 48-39 87-87 87H683c-48 0-87-39-87-87z" fill="url(#honey)" stroke="#a6611a" stroke-width="8"/>
+    <path d="M614 394c49-33 91-36 134-19 72 29 146 29 242-11v401c0 54-44 98-98 98H712c-54 0-98-44-98-98z" fill="#173e30"/>
+    <rect x="639" y="432" width="326" height="312" rx="3" fill="#f8f0dc" stroke="#d4ae59" stroke-width="4"/>
+    <text x="802" y="480" fill="#b67a1e" font-family="Georgia, serif" font-size="31" text-anchor="middle" letter-spacing="5">HONEY</text>
+    <path d="M678 511h248" stroke="#d4ae59" stroke-width="2"/>
+    <text x="678" y="550" fill="#173e30" font-family="Arial, sans-serif" font-size="18" font-weight="700">INGREDIENTS</text>
+    <path d="M678 564h186" stroke="#69776d" stroke-width="3"/>
+    <text x="678" y="610" fill="#173e30" font-family="Arial, sans-serif" font-size="18" font-weight="700">NET WT. 250 g</text>
+    <path d="M678 625h186" stroke="#69776d" stroke-width="3"/>
+    <text x="678" y="670" fill="#173e30" font-family="Arial, sans-serif" font-size="17" font-weight="700">BATCH  •  PACKED  •  BEST BEFORE</text>
+    <path d="M678 686h231" stroke="#69776d" stroke-width="3"/>
+    <text x="678" y="724" fill="#173e30" font-family="Arial, sans-serif" font-size="16" font-weight="700">FSSAI  •  SELLER CONTACT</text>
+  </g>
+  <g font-family="Arial, sans-serif" fill="#173e30">
+    <g><circle cx="250" cy="380" r="35" fill="#d8a334"/><text x="250" y="388" font-size="23" font-weight="700" text-anchor="middle">01</text><text x="105" y="453" font-size="31" font-weight="700">Ingredients</text><text x="105" y="488" font-size="22">Look for what is inside</text><path d="M377 462C500 462 555 514 675 540" fill="none" stroke="#b88125" stroke-width="4" marker-end="url(#arrow)"/></g>
+    <g><circle cx="260" cy="648" r="35" fill="#d8a334"/><text x="260" y="656" font-size="23" font-weight="700" text-anchor="middle">02</text><text x="105" y="721" font-size="31" font-weight="700">Net weight</text><text x="105" y="756" font-size="22">Compare grams, then price</text><path d="M395 729C510 720 558 663 675 605" fill="none" stroke="#b88125" stroke-width="4" marker-end="url(#arrow)"/></g>
+    <g><circle cx="1338" cy="400" r="35" fill="#d8a334"/><text x="1338" y="408" font-size="23" font-weight="700" text-anchor="middle">03</text><text x="1176" y="474" font-size="31" font-weight="700">Batch details</text><text x="1176" y="509" font-size="22">Keep this reference</text><path d="M1140 485C1055 493 1037 595 920 663" fill="none" stroke="#b88125" stroke-width="4" marker-end="url(#arrow)"/></g>
+    <g><circle cx="1338" cy="668" r="35" fill="#d8a334"/><text x="1338" y="676" font-size="23" font-weight="700" text-anchor="middle">04</text><text x="1176" y="741" font-size="31" font-weight="700">FSSAI details</text><text x="1176" y="776" font-size="22">Find the food business</text><path d="M1140 752C1050 749 1016 740 920 720" fill="none" stroke="#b88125" stroke-width="4" marker-end="url(#arrow)"/></g>
+  </g>
+  <text x="800" y="1002" fill="#173e30" font-family="Georgia, serif" font-size="34" text-anchor="middle">Read the whole label, not only the front.</text>
+</svg>
