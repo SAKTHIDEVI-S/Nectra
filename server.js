@@ -10,6 +10,7 @@ loadEnv(path.join(__dirname, '.env'));
 const port = Number(process.env.PORT || 3000);
 const appSecret = process.env.APP_SECRET || 'change-me-before-production';
 const adminPassword = process.env.ADMIN_PASSWORD || 'nectra-admin-change-me';
+const siteUrl = 'https://www.nectrahoney.in';
 const products = [
   {
     id: 'signature', name: 'Multiflora Honey', collection: 'Our Bestseller', price: 249, size: '250 g', color: '#113c2e', accent: '#d7ad45', note: 'Raw multiflora honey', image: '/assets/Multiflora%20honey.png',
@@ -164,6 +165,23 @@ async function syncPendingPayments() {
     try { await syncCashfreePayment(row.id); } catch (error) { console.warn(`Could not sync ${row.id}: ${error.message}`); }
   }
 }
+function escapeHtml(value) {
+  return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+function productSeoTags(product) {
+  const canonical = `${siteUrl}/product/${product.id}`;
+  const image = `${siteUrl}${product.image}`;
+  const price = Math.min(...product.variants.map(variant => variant.price));
+  const description = `${product.description} Shop ${product.name} from Nectra Honey and order through WhatsApp.`;
+  const schema = {
+    '@context': 'https://schema.org', '@type': 'Product', name: product.name,
+    description, image: [image], sku: `NECTRA-${product.id.toUpperCase()}`,
+    brand: { '@type': 'Brand', name: 'Nectra Honey' },
+    offers: { '@type': 'Offer', url: canonical, priceCurrency: 'INR', price: String(price), availability: 'https://schema.org/InStock', itemCondition: 'https://schema.org/NewCondition' }
+  };
+  const safeSchema = JSON.stringify(schema).replace(/</g, '\\u003c');
+  return `\n  <link rel="canonical" href="${canonical}">\n  <meta property="og:type" content="product">\n  <meta property="og:title" content="${escapeHtml(`${product.name} | Nectra Honey`)}">\n  <meta property="og:description" content="${escapeHtml(description)}">\n  <meta property="og:url" content="${canonical}">\n  <meta property="og:image" content="${image}">\n  <meta name="twitter:card" content="summary_large_image">\n  <script type="application/ld+json">${safeSchema}</script>`;
+}
 function serveStatic(req, res, pathname) {
   const cleanPath = decodeURIComponent(pathname);
   if (['/admin', '/admin.html', '/admin.js', '/orders', '/orders.html', '/orders.js'].includes(cleanPath)) return false;
@@ -179,6 +197,19 @@ function serveStatic(req, res, pathname) {
   const file = path.normalize(path.join(__dirname, requested));
   if (!file.startsWith(path.join(__dirname, 'public')) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return false;
   const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8' };
+  if (cleanPath.startsWith('/product/')) {
+    const id = cleanPath.split('/').filter(Boolean).pop();
+    const product = products.find(entry => entry.id === id) || products[0];
+    const title = `${product.name} | Nectra Honey`;
+    const description = `${product.description} Shop ${product.name} from Nectra Honey and order through WhatsApp.`;
+    const page = fs.readFileSync(file, 'utf8')
+      .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapeHtml(description)}">`)
+      .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
+      .replace('</head>', `${productSeoTags(product)}\n</head>`);
+    res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
+    res.end(page);
+    return true;
+  }
   res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' }); fs.createReadStream(file).pipe(res); return true;
 }
 

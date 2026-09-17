@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.nectrahoney.in/</loc></url>
-  <url><loc>https://www.nectrahoney.in/story</loc></url>
-  <url><loc>https://www.nectrahoney.in/bulk-orders</loc></url>
-  <url><loc>https://www.nectrahoney.in/product/signature</loc></url>
-  <url><loc>https://www.nectrahoney.in/product/blush</loc></url>
-  <url><loc>https://www.nectrahoney.in/product/vital</loc></url>
-  <url><loc>https://www.nectrahoney.in/product/verdant</loc></url>
-  <url><loc>https://www.nectrahoney.in/product/serene</loc></url>
+  <url><loc>https://www.nectrahoney.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.nectrahoney.in/story</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.nectrahoney.in/bulk-orders</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.nectrahoney.in/product/signature</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.nectrahoney.in/product/blush</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.nectrahoney.in/product/vital</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.nectrahoney.in/product/verdant</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.nectrahoney.in/product/serene</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
