@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { journalArticles, journalArticleBySlug } from './public/journal-data.js';
+import { recipes, bodyTopics, nourishNotes, habitOptions, plateFoods, weeklyNourishWeeks, getCurrentNourishWeek } from './public/nourish-data.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 loadEnv(path.join(__dirname, '.env'));
@@ -234,7 +235,10 @@ function serveStatic(req, res, pathname) {
     res.end(renderJournalArticle(article));
     return true;
   }
-  const requested = cleanPath === '/bulk-orders'
+  const nourishRoute = cleanPath === '/nourish' || cleanPath === '/nourish/recipes' || /^\/nourish\/recipes\/[a-z0-9-]+$/.test(cleanPath) || cleanPath === '/nourish/notes' || /^\/nourish\/notes\/[a-z0-9-]+$/.test(cleanPath) || /^\/nourish\/body\/[a-z0-9-]+$/.test(cleanPath);
+  const requested = nourishRoute
+      ? '/public/nourish.html'
+    : cleanPath === '/bulk-orders'
       ? '/public/bulk-orders.html'
     : cleanPath === '/story'
       ? '/public/story.html'
@@ -276,6 +280,25 @@ http.createServer(async (req, res) => {
       return json(res, 200, { received: true });
     }
     if (req.method === 'GET' && url.pathname === '/api/products') return json(res, 200, products);
+    if (req.method === 'GET' && url.pathname === '/api/nourish/recipes') {
+      const tag = String(url.searchParams.get('tag') || '').trim().toLowerCase();
+      const search = String(url.searchParams.get('search') || '').trim().toLowerCase();
+      const filtered = recipes.filter(recipe => (!tag || tag === 'all' || recipe.tags.some(item => item.toLowerCase() === tag)) && (!search || `${recipe.title} ${recipe.description} ${recipe.tags.join(' ')}`.toLowerCase().includes(search)));
+      return json(res, 200, { recipes: filtered, total: filtered.length });
+    }
+    const recipeMatch = url.pathname.match(/^\/api\/nourish\/recipes\/([a-z0-9-]+)$/);
+    if (req.method === 'GET' && recipeMatch) { const recipe = recipes.find(item => item.slug === recipeMatch[1]); return recipe ? json(res, 200, recipe) : json(res, 404, { error: 'Recipe not found.' }); }
+    if (req.method === 'GET' && url.pathname === '/api/nourish/body-topics') return json(res, 200, bodyTopics);
+    const topicMatch = url.pathname.match(/^\/api\/nourish\/body-topics\/([a-z0-9-]+)$/);
+    if (req.method === 'GET' && topicMatch) { const topic = bodyTopics.find(item => item.slug === topicMatch[1]); return topic ? json(res, 200, topic) : json(res, 404, { error: 'Topic not found.' }); }
+    if (req.method === 'GET' && url.pathname === '/api/nourish/notes') return json(res, 200, nourishNotes);
+    const noteMatch = url.pathname.match(/^\/api\/nourish\/notes\/([a-z0-9-]+)$/);
+    if (req.method === 'GET' && noteMatch) { const note = nourishNotes.find(item => item.slug === noteMatch[1]); return note ? json(res, 200, note) : json(res, 404, { error: 'Note not found.' }); }
+    if (req.method === 'GET' && url.pathname === '/api/nourish/weekly-todo/current') return json(res, 200, getCurrentNourishWeek());
+    const weekMatch = url.pathname.match(/^\/api\/nourish\/weekly-todo\/([\w-]+)$/);
+    if (req.method === 'GET' && weekMatch) { const week = weeklyNourishWeeks.find(item => item.id === weekMatch[1]); return week ? json(res, 200, week) : json(res, 404, { error: 'Week not found.' }); }
+    if (req.method === 'GET' && url.pathname === '/api/nourish/habits') return json(res, 200, habitOptions);
+    if (req.method === 'GET' && url.pathname === '/api/nourish/plate-foods') return json(res, 200, plateFoods);
     if (req.method === 'POST' && url.pathname === '/api/auth/request-otp') {
       const { phone } = await readBody(req); const normalized = normalizePhone(phone);
       if (!normalized) return json(res, 400, { error: 'Enter a valid 10 digit Indian phone number.' });
