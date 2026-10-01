@@ -47,6 +47,52 @@ function initCarousel() {
   showHeroSlide(0);
   startCarousel();
 }
+function initCampaignCarousel() {
+  const carousel = qs('.campaign-cards');
+  const cards = carousel ? [...carousel.querySelectorAll('.campaign-card')] : [];
+  const dots = [...document.querySelectorAll('[data-campaign-dot]')];
+  if (!carousel || !cards.length || !dots.length) return;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mobileView = window.matchMedia('(max-width: 900px)');
+  let activeIndex = 0;
+  let scrollFrame;
+  const setActive = index => {
+    activeIndex = Math.max(0, Math.min(index, cards.length - 1));
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === activeIndex;
+      dot.classList.toggle('is-active', isActive);
+      if (isActive) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
+    });
+  };
+  const scrollToCard = index => {
+    const card = cards[index];
+    if (!card) return;
+    carousel.scrollTo({ left: card.offsetLeft - carousel.offsetLeft, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    setActive(index);
+  };
+  const updateFromScroll = () => {
+    cancelAnimationFrame(scrollFrame);
+    scrollFrame = requestAnimationFrame(() => {
+      const midpoint = carousel.scrollLeft + carousel.clientWidth * .43;
+      let nearest = 0;
+      let distance = Infinity;
+      cards.forEach((card, index) => {
+        const nextDistance = Math.abs((card.offsetLeft + card.offsetWidth / 2) - midpoint);
+        if (nextDistance < distance) { nearest = index; distance = nextDistance; }
+      });
+      setActive(nearest);
+    });
+  };
+  dots.forEach((dot, index) => dot.addEventListener('click', () => scrollToCard(index)));
+  carousel.addEventListener('scroll', updateFromScroll, { passive: true });
+  carousel.addEventListener('keydown', event => {
+    if (!mobileView.matches || !['ArrowRight', 'ArrowLeft'].includes(event.key)) return;
+    event.preventDefault();
+    scrollToCard(activeIndex + (event.key === 'ArrowRight' ? 1 : -1));
+  });
+  mobileView.addEventListener('change', () => { if (!mobileView.matches) { carousel.scrollLeft = 0; setActive(0); } });
+  setActive(0);
+}
 function initScrollMotion() {
   const revealNodes = [...document.querySelectorAll('[data-reveal]')];
   if ('IntersectionObserver' in window) {
@@ -412,6 +458,7 @@ qs('#checkoutGiftToggle')?.addEventListener('change', toggleCheckoutGiftFields);
 fetch('/api/products').then(r => r.json()).then(async products => {
   state.products = products;
   initCarousel();
+  initCampaignCarousel();
   initScrollMotion();
   renderProducts();
   renderGiftJarList();

@@ -30,10 +30,28 @@
   <header class="site-header"><a class="brand-lockup" href="#top" aria-label="Nectra home"><img src="/assets/logo.png" alt="Nectra logo"></a><nav class="main-nav"><a href="/bulk-orders">Bulk orders</a><a href="#shop">Shop</a><a href="/story">Our story</a></nav><div class="nav-actions"><button class="bag-button" id="openCart" aria-label="Open shopping bag">Bag <b id="bagCount">0</b></button></div></header>
   <main id="top">
     <h1 class="sr-only">Nectra Honey - Multiflora Honey and Thoughtful Honey Gifts</h1>
-    <section class="campaign-cards" aria-label="Nectra highlights">
-      <article class="campaign-card campaign-bestseller" data-reveal><div class="campaign-art"><img src="/assets/slide%201.png" alt="Nectra Multiflora Honey bestseller campaign"></div><div class="campaign-footer"><span>OUR SIGNATURE HARVEST</span><a href="/product/signature">Shop now <i>→</i></a></div></article>
-      <article class="campaign-card campaign-gift" data-reveal><div class="campaign-art"><img src="/assets/slide%202.png" alt="Nectra gift hamper campaign"></div><div class="campaign-footer"><span>GIFTING, MADE PERSONAL</span><button class="campaign-link" type="button" data-open-gift-builder="true">Gift now <i>→</i></button></div></article>
-      <article class="campaign-card campaign-harvest" data-reveal><div class="campaign-art"><img src="/assets/slide%203.png" alt="Nectra seasonal honey collection"></div><div class="campaign-footer"><span>THIS SEASON’S HARVEST</span><a href="#shop">Explore <i>→</i></a></div></article>
+    <section class="campaign-cards" aria-roledescription="carousel" aria-label="Nectra highlights" tabindex="0">
+      <article class="campaign-card campaign-bestseller" data-reveal role="group" aria-label="1 of 3"><div class="campaign-art"><img src="/assets/slide%201.png" alt="Nectra Multiflora Honey bestseller campaign"></div><div class="campaign-footer"><span>OUR SIGNATURE HARVEST</span><a href="/product/signature">Shop now <i>→</i></a></div></article>
+      <article class="campaign-card campaign-gift" data-reveal role="group" aria-label="2 of 3"><div class="campaign-art"><img src="/assets/slide%202.png" alt="Nectra gift hamper campaign"></div><div class="campaign-footer"><span>GIFTING, MADE PERSONAL</span><button class="campaign-link" type="button" data-open-gift-builder="true">Gift now <i>→</i></button></div></article>
+      <article class="campaign-card campaign-harvest" data-reveal role="group" aria-label="3 of 3"><div class="campaign-art"><img src="/assets/slide%203.png" alt="Nectra seasonal honey collection"></div><div class="campaign-footer"><span>THIS SEASON’S HARVEST</span><a href="#shop">Explore <i>→</i></a></div></article>
+    </section>
+    <div class="campaign-progress" aria-label="Campaign slide navigation">
+      <button class="is-active" type="button" data-campaign-dot="0" aria-label="Show signature harvest" aria-current="true"></button>
+      <button type="button" data-campaign-dot="1" aria-label="Show gifting campaign"></button>
+      <button type="button" data-campaign-dot="2" aria-label="Show seasonal harvest"></button>
+    </div>
+    <section class="wellness-worlds" aria-labelledby="wellnessWorldsTitle">
+      <div class="wellness-worlds-head" data-reveal>
+        <p class="eyebrow">A Nectra way of living</p>
+        <h2 id="wellnessWorldsTitle">MORE WAYS TO <i>LIVE WELL.</i></h2>
+        <p>Small rituals for the way you eat, move, care and rest.</p>
+      </div>
+      <div class="wellness-worlds-grid">
+        <a class="wellness-world wellness-nourish" href="/nourish" data-reveal><img src="/assets/nourish%20home%20card.png" alt="Fresh ingredients for everyday nourishment"><span class="wellness-world-index">01 / NOURISH</span><span class="wellness-world-copy"><strong>NOURISH</strong><small>Eat well. Feel good every day.</small></span><span class="wellness-world-link">Explore <i>→</i></span></a>
+        <a class="wellness-world wellness-move" href="/move" data-reveal><img src="/assets/move%20home%20card.png" alt="An energising everyday movement ritual"><span class="wellness-world-index">02 / MOVE</span><span class="wellness-world-copy"><strong>MOVE</strong><small>Build energy. Keep moving.</small></span><span class="wellness-world-link">Explore <i>→</i></span></a>
+        <a class="wellness-world wellness-glow" href="/glow" data-reveal><img src="/assets/glow%20home%20card.png" alt="A soft self care ritual for a natural glow"><span class="wellness-world-index">03 / GLOW</span><span class="wellness-world-copy"><strong>GLOW</strong><small>Care for yourself.</small></span><span class="wellness-world-link">Explore <i>→</i></span></a>
+        <a class="wellness-world wellness-unwind" href="/unwind" data-reveal><img src="/assets/unwind%20home%20card.png" alt="A peaceful evening ritual for rest and reset"><span class="wellness-world-index">04 / UNWIND</span><span class="wellness-world-copy"><strong>UNWIND</strong><small>Slow down. Rest. Reset.</small></span><span class="wellness-world-link">Explore <i>→</i></span></a>
+      </div>
     </section>
     <section class="ticker" aria-label="Nectra quality promises"><div class="ticker-track"><span>FSSAI CERTIFIED</span><i>✦</i><span>PURE HONEY, NO ADDITIVES</span><i>✦</i><span>DIRECTLY FROM THE HIVE</span><i>✦</i><span>FSSAI CERTIFIED</span><i>✦</i><span>PURE HONEY, NO ADDITIVES</span><i>✦</i><span>DIRECTLY FROM THE HIVE</span><i>✦</i></div></section>
     <section class="section featured" id="shop"><div class="section-head"><div><p class="eyebrow">The Nectra Honey collection</p><h2>Find a ritual<br><i>in every jar.</i></h2></div><p>Begin with our signature harvest, then follow what your day needs.</p></div><div class="product-grid" id="products" aria-live="polite"></div></section>
