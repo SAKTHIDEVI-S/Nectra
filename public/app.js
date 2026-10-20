@@ -427,7 +427,10 @@ async function updateOrder(event) {
 
 document.addEventListener('click', event => {
   const selectedProduct = event.target.closest('[data-product-select]');
-  if (selectedProduct) track('select_item', { item_list_name: 'Nectra collection', items: [{ item_id: selectedProduct.dataset.productSelect }] });
+  if (selectedProduct) {
+    sessionStorage.setItem('nectra-selected-product', selectedProduct.dataset.productSelect);
+    track('select_item', { item_list_name: 'Nectra collection', items: [{ item_id: selectedProduct.dataset.productSelect }] });
+  }
   if (event.target.closest('#openCart')) openCart();
   if (event.target.closest('[data-close]') || event.target === qs('#overlay')) closeCart();
   const changeButton = event.target.closest('[data-change]');

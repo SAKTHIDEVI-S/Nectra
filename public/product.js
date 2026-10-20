@@ -298,8 +298,11 @@ document.addEventListener('submit', event => {
 
 fetch('/api/products').then(r => r.json()).then(products => {
   state.products = products;
-  const id = location.pathname.split('/').filter(Boolean).pop();
-  state.product = products.find(product => product.id === id) || products[0];
+  const pathId = location.pathname.split('/').filter(Boolean).pop();
+  const savedId = sessionStorage.getItem('nectra-selected-product');
+  const requestedId = new URLSearchParams(location.search).get('product') || pathId;
+  state.product = products.find(product => product.id === requestedId) || products.find(product => product.id === savedId) || products[0];
+  sessionStorage.setItem('nectra-selected-product', state.product.id);
   document.title = `${state.product.name} - Nectra`;
   renderProduct();
   const variant = firstVariant(state.product);
