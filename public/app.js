@@ -10,6 +10,7 @@ const state = {
 const money = value => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value);
 const qs = selector => document.querySelector(selector);
 const WHATSAPP_ORDER_NUMBER = '919360464594';
+const track = (name, params = {}) => window.gtag?.('event', name, params);
 const jar = product => `<img class="product-image" src="${product.image}" alt="${product.name} jar">`;
 const cartKey = item => `${item.id}::${item.size || ''}`;
 
@@ -160,6 +161,7 @@ function toggleCheckoutGiftFields() {
 }
 function openGiftBuilder(makeGift = false) {
   if (!state.products.length) return;
+  track('begin_gift_builder', { gift_wrap_requested: makeGift });
   renderGiftJarList();
   const toggle = qs('#giftToggle');
   if (toggle) toggle.checked = makeGift;
@@ -217,7 +219,9 @@ function bundleDiscount() { return promotion().saving; }
 function total() { const afterOffer = subtotal() - bundleDiscount(); return afterOffer + shippingFor(afterOffer); }
 function openWhatsAppOrder(items = cartEntries(), options = {}) {
   if (!items.length) return;
-  window.gtag?.('event', 'generate_lead', { lead_source: 'website_whatsapp', item_count: items.reduce((count, item) => count + item.quantity, 0), value: items.reduce((sum, item) => sum + item.price * item.quantity, 0), currency: 'INR' });
+  const orderValue = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  track('generate_lead', { lead_source: 'website_whatsapp', item_count: items.reduce((count, item) => count + item.quantity, 0), value: orderValue, currency: 'INR' });
+  track('whatsapp_order_click', { source: options.source || 'shopping_bag', item_count: items.reduce((count, item) => count + item.quantity, 0), value: orderValue, currency: 'INR' });
   const offer = promotion();
   const orderSubtotal = options.subtotal ?? items.reduce((sum, item) => sum + item.price * item.quantity, 0) - offer.saving;
   const shipping = shippingFor(orderSubtotal);
@@ -244,7 +248,7 @@ function openWhatsAppOrder(items = cartEntries(), options = {}) {
 function renderProducts() {
   qs('#products').innerHTML = state.products.map(product => {
     const variant = firstVariant(product);
-    return `<a class="product-card" href="/product/${product.id}" aria-label="View ${product.name}">
+    return `<a class="product-card" href="/product/${product.id}" data-product-select="${product.id}" aria-label="View ${product.name}">
       <div class="product-visual" style="--card-bg:${product.color}">${jar(product)}</div>
       <div class="product-info">
         <small>${product.collection}</small>
@@ -422,6 +426,8 @@ async function updateOrder(event) {
 }
 
 document.addEventListener('click', event => {
+  const selectedProduct = event.target.closest('[data-product-select]');
+  if (selectedProduct) track('select_item', { item_list_name: 'Nectra collection', items: [{ item_id: selectedProduct.dataset.productSelect }] });
   if (event.target.closest('#openCart')) openCart();
   if (event.target.closest('[data-close]') || event.target === qs('#overlay')) closeCart();
   const changeButton = event.target.closest('[data-change]');

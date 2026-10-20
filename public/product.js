@@ -12,6 +12,7 @@ const state = {
 const money = value => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value);
 const qs = selector => document.querySelector(selector);
 const WHATSAPP_ORDER_NUMBER = '919360464594';
+const track = (name, params = {}) => window.gtag?.('event', name, params);
 const cartKey = item => `${item.id}::${item.size || ''}`;
 const image = (src, alt, className = '') => `<img class="${className}" src="${src}" alt="${alt}">`;
 
@@ -36,6 +37,7 @@ function addSelectedToCart(open = true) {
   const existing = state.cart.find(i => i.id === state.product.id && i.size === variant.size);
   if (existing) existing.quantity += state.quantity;
   else state.cart.push({ id: state.product.id, size: variant.size, quantity: state.quantity });
+  track('add_to_cart', { currency: 'INR', value: variant.price * state.quantity, items: [{ item_id: state.product.id, item_name: state.product.name, item_variant: variant.size, quantity: state.quantity }] });
   saveBag();
   if (open) openCart();
 }
@@ -53,7 +55,9 @@ function total() { return subtotal() - bundleDiscount(); }
 function shippingFor(value) { return value >= 999 ? 0 : 50; }
 function openWhatsAppOrder(items, { fromBag = false } = {}) {
   if (!items.length) return;
-  window.gtag?.('event', 'generate_lead', { lead_source: 'product_page_whatsapp', item_count: items.reduce((count, item) => count + item.quantity, 0), value: items.reduce((sum, item) => sum + item.price * item.quantity, 0), currency: 'INR' });
+  const orderValue = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  track('generate_lead', { lead_source: 'product_page_whatsapp', item_count: items.reduce((count, item) => count + item.quantity, 0), value: orderValue, currency: 'INR' });
+  track('whatsapp_order_click', { source: fromBag ? 'shopping_bag' : 'product_page', item_count: items.reduce((count, item) => count + item.quantity, 0), value: orderValue, currency: 'INR' });
   const offer = promotion(items, fromBag ? state.giftBundles : []);
   const orderSubtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0) - offer.saving;
   const shipping = shippingFor(orderSubtotal);
@@ -165,15 +169,15 @@ function renderProduct() {
       <div class="price-row"><span id="detailPrice">${money(variant.price)}</span><small>We’re taking orders via WhatsApp. Free delivery above ₹999.</small></div>
       <div class="selector-block"><p>Weight <b id="selectedWeight">${variant.size}</b></p><div class="variant-grid">${product.variants.map(v => `<button data-variant="${v.size}" class="variant-card ${v.size === variant.size ? 'is-selected' : ''}"><strong>${v.size}</strong><span>${money(v.price)}</span></button>`).join('')}</div></div>
       <div class="selector-block"><p>Quantity</p><div class="detail-quantity"><button data-qty="-1" aria-label="Decrease quantity">−</button><b id="detailQty">1</b><button data-qty="1" aria-label="Increase quantity">+</button></div></div>
-      <div class="product-actions"><button class="button gold full" id="buyNow">Buy now <span>→</span></button><button class="button full" id="addToCart">Add to cart <span>+</span></button></div>
-      <div class="mini-promises"><span>Raw & minimally filtered</span><span>Premium glass jar</span><span>From the hive, with love</span></div>
+      <div class="product-actions"><button class="button gold full" id="buyNow" data-buy-now>Order on WhatsApp <span>→</span></button><button class="button full" id="addToCart">Add to bag <span>+</span></button></div>
+      <div class="mini-promises"><span>Choose your size</span><span>Gift options available</span><span>Free delivery above ₹999</span></div>
     </section>
   </section>
   <section class="content-band">
     <div><p class="eyebrow">Description</p><h2>Why this honey?</h2><p>${product.description}</p></div>
     <div class="why-grid">${product.why.map(point => `<article><span>✦</span><p>${point}</p></article>`).join('')}</div>
   </section>
-  ${recipeMarkup(product)}`;
+  ${recipeMarkup(product)}<div class="mobile-buy-bar"><span><b>${product.name}</b><small>From ${money(variant.price)}</small></span><button class="button gold" type="button" data-buy-now>Order on WhatsApp <span>→</span></button></div>`;
 }
 function updateCheckoutSummary() {
   const items = cartEntries();
@@ -267,7 +271,7 @@ document.addEventListener('click', event => {
   const qty = event.target.closest('[data-qty]');
   if (qty) setQuantity(state.quantity + Number(qty.dataset.qty));
   if (event.target.closest('#addToCart')) addSelectedToCart(true);
-  if (event.target.closest('#buyNow')) buyCurrentProductOnWhatsApp();
+  if (event.target.closest('[data-buy-now]')) buyCurrentProductOnWhatsApp();
   const changeButton = event.target.closest('[data-change]');
   if (changeButton) changeCart(changeButton.dataset.change, Number(changeButton.dataset.amount));
   const remove = event.target.closest('[data-remove]');
@@ -298,6 +302,8 @@ fetch('/api/products').then(r => r.json()).then(products => {
   state.product = products.find(product => product.id === id) || products[0];
   document.title = `${state.product.name} - Nectra`;
   renderProduct();
+  const variant = firstVariant(state.product);
+  track('view_item', { currency: 'INR', value: variant.price, items: [{ item_id: state.product.id, item_name: state.product.name, item_variant: variant.size }] });
   renderCart();
 }).catch(() => {
   qs('#productRoot').innerHTML = '<p class="empty">This jar is resting. Please refresh in a moment.</p>';
