@@ -1,0 +1,103 @@
+/* The room artwork is decoration; all names, links and jars remain real HTML. */
+.honey-house-page .house-header{height:64px;grid-template-columns:44px 1fr auto;gap:20px;position:relative;z-index:8;padding:0 3vw}
+.house-header>p{display:none!important}
+.house-header>[data-toggle-house-menu]{display:grid;place-items:center;width:44px;height:44px;border:0;background:none;color:#10253f}
+.house-header svg{width:24px;height:24px;display:block}
+.house-header .house-actions button{width:44px;height:44px;transform:none}
+.house-header .house-actions{gap:2px}
+.house-header .house-logo{font-size:40px}
+.honey-house-page .house-menu{position:absolute;top:64px;left:4vw;right:auto;margin:0;min-width:260px;z-index:9;display:grid}
+.honey-house-page .house-menu[hidden]{display:none!important}
+.honey-house-page .house-hero{height:auto;min-height:0;padding:16px 0 0;display:flex;flex-direction:column;align-items:center;background:#fbf1df;gap:12px;overflow:hidden;position:relative}
+.house-intro{flex:none;padding:0!important}
+.house-intro .eyebrow{display:none}
+.house-intro h2{font:500 clamp(25px,2.5vw,39px)/1.1 var(--serif);letter-spacing:-.05em}
+.house-intro h2 br{display:none}
+.house-intro h2 br:after{content:' '}
+.house-intro>p:not(.eyebrow){font:11px var(--sans);letter-spacing:.24em;margin:8px 0 0;text-transform:none}
+.honey-house-page .house-shell{flex:none;width:100%;max-width:1600px;aspect-ratio:3/2;padding:0;margin:0;border:0;box-shadow:none;background:none;display:grid;place-items:center;container-type:inline-size;overflow:visible}
+.roof,.house-foundation,.room-furniture,.room-wall-art{display:none!important}
+.honey-house-page .house-rooms{width:100%;height:100%;padding:0;display:block;border:0;background:url('/assets/honey-house-interiors.png') center/100% 100% no-repeat;position:relative;overflow:visible}
+.honey-house-page .house-room{position:absolute;padding:0;background:none;box-shadow:none;overflow:visible;isolation:auto;display:block}
+.house-room:before,.house-room:after{display:none}
+.house-room.room-table{left:7%;top:20%;width:40%;height:30%}
+.house-room.room-rose{left:53%;top:20%;width:40%;height:30%}
+.house-room.room-ginger{left:5%;top:57%;width:28%;height:34%}
+.house-room.room-quiet{left:36%;top:57%;width:28%;height:34%}
+.house-room.room-tulasi{left:68%;top:57%;width:27%;height:34%}
+.house-room .room-copy{position:absolute;top:0;left:4%;max-width:94%;padding:7px 10px;gap:3px;border:1px solid #d2b88a;border-radius:5px;background:#fff5e2ed;box-shadow:0 3px 10px #35261224;text-align:left}
+.room-copy b{font:500 clamp(13px,1.4vw,22px)/1.05 var(--serif)}
+.room-copy small{font:9px/1.2 var(--sans)}
+.room-copy em{margin:2px 0 0;font-size:10px;min-height:20px}
+.house-room>img{height:64%;width:auto;max-width:34%;right:35%;bottom:1%;object-fit:contain;clip-path:polygon(17% 1%,83% 1%,86% 11%,84% 16%,88% 23%,92% 28%,92% 92%,86% 98%,14% 98%,8% 92%,8% 28%,12% 23%,16% 16%,14% 11%);filter:drop-shadow(0 3px 3px #0006)}
+.room-table>img{right:28%;bottom:40%}
+.room-rose>img{right:50%;bottom:40%}
+.room-ginger>img,.room-quiet>img,.room-tulasi>img{width:auto;height:59%;bottom:50%}
+.room-ginger>img{right:18%}
+.room-quiet>img{right:36%}
+.room-tulasi>img{right:60%}
+.house-room.room-tulasi .room-copy{left:auto;right:0;max-width:52%}
+.house-room:hover>img{transform:translateY(-3px)}
+.house-room:focus-visible{outline:3px solid #fff6df;outline-offset:3px}
+.honey-house-page .house-shop-link{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);margin:0;flex:none;padding:14px 30px;min-height:48px;font-size:17px;border-radius:5px;box-shadow:0 4px 0 #fff0d8,0 10px 30px #14263866;z-index:4;white-space:nowrap}
+.honey-house-page .house-shop-link:hover{transform:translateX(-50%) translateY(-2px)}
+.house-room-controls{display:none}
+@media(min-width:701px) and (max-height:700px){.house-intro h2{font-size:30px}.house-intro>p:not(.eyebrow){font-size:10px}.house-room .room-copy{padding:5px 7px}.room-copy small{font-size:8px}.room-copy b{font-size:14px}}
+@media(max-width:700px){
+ .honey-house-page .house-header{height:60px;gap:8px;padding:0 16px;grid-template-columns:40px 1fr auto}
+ .house-header>p{display:none}.house-header .house-logo{font-size:33px}.house-header .house-actions button{width:36px}.honey-house-page .house-menu{top:60px;left:16px;right:16px}
+ .honey-house-page .house-hero{height:calc(100svh - 60px);min-height:520px;padding:24px 0 16px;gap:14px}
+ .house-intro h2{font-size:clamp(29px,7.8vw,39px);max-width:350px;padding:0 20px}.house-intro h2 br{display:block}.house-intro>p:not(.eyebrow){font-size:10px}
+ .honey-house-page .house-shell{display:block;width:100%;flex:1;min-height:0;aspect-ratio:auto;container-type:normal;overflow:hidden}
+ .honey-house-page .house-rooms{width:100%;height:100%;display:flex;gap:12px;padding:0 9vw;background:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:9vw;scrollbar-width:none}
+ .honey-house-page .house-room{position:relative;left:auto;top:auto;flex:0 0 82vw;width:82vw;height:100%;scroll-snap-align:center;overflow:hidden;border-radius:12px;background-image:url('/assets/honey-house-interiors.png');background-repeat:no-repeat;background-size:300% 260%;background-position:9% 24%}
+ .house-room.room-rose{background-position:91% 24%}.house-room.room-ginger{background-position:1% 97%;background-size:340% 270%}.house-room.room-quiet{background-position:50% 97%;background-size:340% 270%}.house-room.room-tulasi{background-position:99% 97%;background-size:340% 270%}
+ .house-room .room-copy{top:15px;left:5%;padding:10px 12px;max-width:90%}.room-copy b{font-size:23px}.room-copy small{font-size:11px}.room-copy em{min-height:26px;font-size:12px}
+ .house-room.room-tulasi .room-copy{left:5%;right:auto;max-width:90%}
+ .house-room>img,.room-ginger>img,.room-quiet>img,.room-tulasi>img{height:44%;width:auto;max-width:40%;bottom:9%;right:32%}
+ .honey-house-page .house-shop-link{position:static;transform:none;box-shadow:none;font-size:15px;padding:11px 26px}.honey-house-page .house-shop-link:hover{transform:none}
+ .house-room-controls{display:flex;gap:3px;flex:none;align-items:center;justify-content:center}.house-room-controls button{width:28px;height:28px;padding:8px;border:0;background:none}.house-room-controls button:after{content:'';display:block;width:9px;height:9px;background:#c6bba6;border-radius:50%}.house-room-controls button[aria-current=true]:after{background:#10253f}
+}
+.house-room-guide{display:none}
+/* The complete illustration is always contained, never stretched or cropped. */
+@media(min-width:701px){
+ .honey-house-page .house-hero{height:calc(100svh - 64px);min-height:0;gap:8px;padding:10px 0 12px;justify-content:center}
+ .honey-house-page .house-shell{width:min(100%,1600px,calc((100svh - 204px)*1.5));height:auto;aspect-ratio:3/2;flex:none}
+ .house-intro h2{font-size:clamp(24px,2.3vw,34px)}
+ .honey-house-page .house-shop-link{position:static;transform:none;padding:10px 26px;min-height:44px;font-size:15px;box-shadow:0 3px 0 #d1b385}
+ .honey-house-page .house-shop-link:hover{transform:translateY(-2px)}
+ .room-copy b{font-size:clamp(12px,1.7cqw,21px)}
+ .room-copy small{font-size:clamp(8px,.9cqw,11px)}
+ .house-room .room-copy{padding:6px 8px}
+ .house-room.room-tulasi .room-copy{left:auto;right:0;max-width:50%}
+ .house-room.room-rose .room-copy{left:auto;right:1%;max-width:40%}
+ .house-room.room-quiet .room-copy{left:auto;right:0;max-width:35%}
+}
+@media(max-width:700px){
+ .honey-house-page .house-hero{height:auto;min-height:calc(100svh - 60px);padding:16px 0;gap:12px;justify-content:center}
+ .house-intro h2{font-size:clamp(25px,7vw,33px);line-height:1.05}
+ .house-intro>p:not(.eyebrow){font-size:9px;letter-spacing:.16em}
+ .honey-house-page .house-shell{display:grid;flex:none;width:100%;height:auto;min-height:0;aspect-ratio:3/2;overflow:visible}
+ .honey-house-page .house-rooms{display:block;width:100%;height:100%;padding:0;overflow:visible;background:url('/assets/honey-house-interiors.png') center/contain no-repeat;scroll-snap-type:none}
+ .honey-house-page .house-room{position:absolute;display:block;flex:none;background:none!important;border-radius:0;overflow:visible}
+ .house-room.room-table{left:7%;top:20%;width:40%;height:30%}
+ .house-room.room-rose{left:53%;top:20%;width:40%;height:30%}
+ .house-room.room-ginger{left:5%;top:57%;width:28%;height:34%}
+ .house-room.room-quiet{left:36%;top:57%;width:28%;height:34%}
+ .house-room.room-tulasi{left:68%;top:57%;width:27%;height:34%}
+ .house-room .room-copy{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+ .house-room>img{height:64%;width:auto;max-width:34%;bottom:40%}
+ .room-table>img{right:28%}.room-rose>img{right:50%}
+ .room-ginger>img,.room-quiet>img,.room-tulasi>img{height:59%;width:auto;max-width:34%;bottom:50%}
+ .room-ginger>img{right:18%}.room-quiet>img{right:36%}.room-tulasi>img{right:60%}
+ .house-room-guide{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;width:90%;max-width:500px}
+ .house-room-guide a{display:flex;align-items:center;gap:7px;min-height:44px;padding:5px 0;color:#173041;text-decoration:none;border-bottom:1px dashed #cbb78d}
+ .house-room-guide a>span:first-child{font-size:25px;color:#b8872e}
+ .house-room-guide a:nth-child(2)>span:first-child{color:#ad6572}.house-room-guide a:nth-child(3)>span:first-child{color:#b46932}.house-room-guide a:nth-child(4)>span:first-child{color:#7a699a}.house-room-guide a:nth-child(5)>span:first-child{color:#647a48}
+ .house-room-guide b{display:block;font:14px/1.2 var(--serif)}.house-room-guide small{display:block;font:9px/1.5 var(--sans)}
+ .house-room-guide i{margin-left:auto;font-style:normal;font-size:13px}
+ .honey-house-page .house-shop-link{margin:0;min-height:44px;padding:10px 26px;font-size:14px}
+ .house-room-controls{display:none!important}
+}
+@media(max-width:700px) and (max-height:670px){.honey-house-page .house-hero{gap:5px;padding:8px 0;min-height:0}.house-intro h2{font-size:25px}.house-room-guide a{min-height:40px}.house-intro>p:not(.eyebrow){margin-top:5px}}
+@media(prefers-reduced-motion:reduce){.house-room>img,.house-shop-link{transition:none!important}.house-room:hover>img{transform:none}}

@@ -1,0 +1,192 @@
+/* Shared readability and room chapters. House artwork geometry remains unchanged. */
+.house-header{background:#17372e!important;color:#f4dfac!important;border-bottom-color:#8c7548!important}
+.house-header button,.house-header a{color:#f4dfac!important}
+.house-logo img{display:block;width:180px;height:60px;object-fit:contain}
+.house-header .house-logo{line-height:1;font-size:0!important;padding:0}
+.experience-footer .house-logo img{width:180px;height:60px}
+.experience-footer a{overflow-wrap:anywhere}
+.house-section-heading{padding-inline:20px}
+.house-section-heading h2 br{display:none}
+.house-section-heading h2 i{color:#705126!important}
+.house-section-heading h2{letter-spacing:-.025em!important;line-height:1.2!important}
+.house-theme .content-band,.house-theme .content-band p,.house-theme .content-band h2,.house-theme .why-grid article{color:#25382c!important}
+.house-theme .story-v4 article,.house-theme .story-v4 article p,.house-theme .story-v4-promise,.house-theme .story-v4-promise blockquote{color:#25382c!important}
+.house-theme .story-v4-belief,.house-theme .story-v4-belief p,.house-theme .story-v4-belief blockquote{color:#fff4dd!important}
+.house-theme .story-v4 .eyebrow,.house-theme .content-band .eyebrow{color:#655035!important}
+.house-theme .story-v4-belief .eyebrow{color:#ead2a0!important}
+.house-theme .story-v4-title{background:linear-gradient(90deg,#fff5e9 15%,#fff5e9e8 55%,#fff5e933)!important}
+.house-theme .story-v4-title p{color:#25382c!important}
+.house-theme .room-details,.house-theme .room-related,.house-theme .jar-kitchen{color:#25382c}
+.house-theme .room-details h2,.house-theme .room-details summary,.house-theme .room-details p,.house-theme .jar-kitchen p{color:#25382c!important}
+.house-theme .buy-panel .eyebrow{color:#655035!important}
+.house-theme .buy-panel{background:#fff8ed!important;padding:24px!important;align-self:start;box-shadow:0 7px 22px #2c211719}
+.house-theme.product-luxe .product-shell{background-color:var(--room-pale);background-image:url('/assets/honey-house-interiors.png');background-size:cover;background-position:center;gap:4vw;padding:32px 6vw}
+.house-theme .main-photo-wrap{background:var(--room-pale) url('/assets/pantry-botanicals.jpg') center/cover!important;background-blend-mode:multiply;border-radius:0!important}
+.house-theme[data-room=blush] .product-shell{background-position:100% 0;background-size:200% 200%}
+.house-theme[data-room=signature] .product-shell{background-position:0 0;background-size:200% 200%}
+.house-theme[data-room=vital] .product-shell{background-position:0 100%;background-size:300% 200%}
+.house-theme[data-room=serene] .product-shell{background-position:50% 100%;background-size:300% 200%}
+.house-theme[data-room=verdant] .product-shell{background-position:100% 100%;background-size:300% 200%}
+.house-theme[data-room] .content-band{background:var(--room-pale)!important}
+.house-theme .content-band h2{font-size:clamp(26px,3vw,38px);line-height:1.2}
+.rose-care ol{padding-left:22px;line-height:1.8}.rose-care li{padding:8px 0}.rose-care a{font-size:14px;text-underline-offset:4px}
+.house-theme[data-room=blush] .rose-care{background:#f8e9e7}
+.house-theme .room-details h2{font-size:clamp(26px,3vw,38px);line-height:1.2}
+.gift-dialog .gift-selection-summary{position:sticky;top:0;z-index:4;display:flex;gap:18px;align-items:center;background:#17372e!important;color:#fff5df;padding:14px 65px 14px 20px!important;border-bottom:2px solid #be9c62;box-shadow:0 5px 12px #0002}
+.gift-selection-summary strong{display:block;font:26px var(--serif)}
+.gift-selection-summary small{display:block;font:12px/1.5 var(--sans);color:#fff0ce}
+.gift-selection-summary p{font:13px/1.5 var(--sans);margin:0;color:#fff5df}
+.gift-dialog .modal-close{position:sticky;top:12px;float:right;margin:12px 12px -56px 0;width:40px;height:40px;background:#fff4df;color:#17372e;z-index:6}
+.gift-dialog .gift-jar-choice:has(input:disabled){opacity:1;background:#eee7db;color:#5b554a}
+.gift-dialog .gift-jar-choice span{min-width:0}.gift-dialog .gift-jar-choice b{font-size:14px;line-height:1.4}.gift-dialog .gift-jar-choice small{font-size:13px;line-height:1.6;color:#394b3d}
+.gift-dialog .gift-jar-choice:focus-within{outline:2px solid #29553e;outline-offset:2px}
+.gift-dialog .gift-live-total small{font-size:12px;line-height:1.5}
+@media(max-width:700px){
+ .house-logo img{width:135px;height:45px}.house-header{gap:10px!important}
+ .house-theme.product-luxe .product-shell{padding:18px 5vw;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+ .house-theme .main-photo-wrap{height:280px!important}.house-theme .main-product-photo{padding:22px!important}.house-theme .thumb-row{margin-top:10px}.house-theme .thumb-row button{height:52px;min-width:48px;width:48px}
+ .house-theme .buy-panel{padding:18px!important}.house-theme .buy-panel h1{font-size:32px;line-height:1.15}.house-theme .buy-panel .eyebrow{margin:0 0 10px;line-height:1.6}.house-theme .selector-block{margin:14px 0}
+ .house-theme .price-row small{font-size:12px;line-height:1.6}.house-theme .product-lede{font-size:14px;line-height:1.65}
+ .house-theme .content-band{padding:24px 6vw}.house-theme .why-grid{margin-top:14px}.room-related>div{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .honey-house-page .house-origin,.honey-house-page .house-gifting,.house-kitchen-preview{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+ .house-kitchen-preview>div{grid-row:1}.house-kitchen-preview figure{grid-row:2}
+ .house-origin figure,.wrapping-art,.house-kitchen-preview figure{margin:0;transform:none;max-height:none}
+ .house-origin figure img,.wrapping-art img,.house-kitchen-preview img{height:160px!important;object-fit:cover}
+ .house-origin>div,.house-gifting>div{max-width:none}.house-theme .story-v4-opening article,.house-theme .story-v4-turn article,.house-theme .story-v4-practice article{order:-1}
+ .house-theme .story-v4 figure{margin:0;transform:none}.house-theme .story-v4 figure img{max-height:210px}
+ .gift-selection-summary{gap:10px!important;padding-left:12px!important}.gift-selection-summary p{font-size:12px}.gift-selection-summary small{font-size:11px}
+ .house-theme .mobile-buy-bar b{font-size:12px;line-height:1.4}.house-theme .mobile-buy-bar small{font-size:12px}
+}
+.honey-house-page .house-promise{background:#234434;color:#fff3d8;border-block:1px solid #b99e63;padding:15px 5vw;gap:16px;flex-wrap:wrap}
+.house-promise p{color:inherit!important;font-size:10px;letter-spacing:.09em}.house-promise i{color:#ddbb72}
+.honey-house-page .house-collection{background:linear-gradient(#f5e6c9,#fff6e5 30%,#efe0c3);padding:32px 3vw 20px;border-bottom:1px solid #cbb187}
+.house-section-heading{display:block!important;text-align:center;max-width:650px;margin:0 auto 25px!important}.house-section-heading .eyebrow:before,.house-section-heading .eyebrow:after{content:' ❧ ';color:#58734c;font-size:23px;vertical-align:middle}
+.house-section-heading>p:last-child{font-size:14px;line-height:1.65;color:#4e5546}
+.room-product-stage,.room-product[data-room] .room-product-stage{background:var(--pale) url('/assets/pantry-botanicals.jpg') center/100% 100% no-repeat;border:1px solid #bfa878;border-bottom:5px solid #795235;border-radius:5px 5px 0 0;box-shadow:0 9px 14px #573c2520;isolation:isolate;height:350px}
+.room-product-stage:before,.room-product-stage:after{display:none!important}
+.room-product[data-room=blush] .room-product-stage{background-blend-mode:multiply;background-color:#fae7e6}.room-product[data-room=serene] .room-product-stage{background-blend-mode:multiply;background-color:#efe8f5}.room-product[data-room=verdant] .room-product-stage{background-blend-mode:multiply;background-color:#eaf0df}.room-product[data-room=vital] .room-product-stage{background-blend-mode:multiply;background-color:#fae6d2}
+.room-product-stage>span{background:#fff8e9f5;border:1px solid #c4ab7c;color:#304530;font-size:11px;font-family:var(--sans);letter-spacing:.03em;padding:7px 13px;top:12px}
+.room-product-stage img{inset:50px 10% 40px!important;height:calc(100% - 90px)!important;max-height:calc(100% - 90px)!important;filter:drop-shadow(7px 10px 5px #382a2440)}
+.room-product-info{background:#fff9eede;padding:17px 18px 18px;border:1px solid #d7c19d;border-top:0;min-height:183px;box-shadow:0 7px 14px #573c250a}
+.room-product-info h3{font-size:25px;line-height:1.17;margin:7px 0;overflow-wrap:break-word}.room-product-info p{font-size:13px;line-height:1.6;color:#4c5549}.room-product-info small{font-size:10px;color:#54472f}
+.room-product-info>div{align-items:flex-start;gap:8px;flex-wrap:wrap}.room-product-info b{font-size:13px}.room-product-info em{font-size:12px}
+.room-product{transition:translate .25s}.room-product:hover{translate:0 -3px}.room-product:focus-visible{outline:3px solid #385637;outline-offset:5px}
+.house-theme .catalogue-intro{background:#faefd9 url('/assets/courtyard-border.png') center 42%/cover no-repeat;padding:32px 12vw;box-shadow:none}
+.catalogue-intro>div{background:#fff6e6ef;padding:18px 22px;border:1px solid #dbc6a1;box-shadow:4px 5px 0 #95734422}
+.catalogue-intro h1{font-size:clamp(30px,3.1vw,44px)!important}.catalogue-intro p{font-size:14px}
+.catalogue-page #shop{background:linear-gradient(#f9efdd,#f1e4cc)}
+.house-theme .catalogue-tools{background:transparent}.catalogue-count{color:#4c5043}
+.honey-house-page .house-origin{background:#e8eddb url('/assets/field-journal-border.jpg') left bottom/cover no-repeat;padding:36px 10vw;gap:5vw}
+.house-origin>div{padding:22px;background:#f4f5e9ed;border:1px solid #d0d7bb;box-shadow:5px 7px 0 #70815c22}
+.house-origin figure{padding:9px 9px 0;background:#fff6df;transform:rotate(1deg);box-shadow:8px 12px 22px #304b3033;border:1px solid #c4b48d;overflow:visible!important}
+.house-origin figure img{max-height:300px;width:100%;object-fit:cover}.house-origin figcaption{position:static!important;color:#4c4939!important;background:none!important;padding:9px!important;font:10px var(--sans)}
+.honey-house-page .house-gifting{background:linear-gradient(105deg,#f3dfcd,#f9eddf);padding:34px 9vw;gap:5vw;align-items:center}
+.house-gifting>div{max-width:460px}.house-gifting p{font-size:14px;line-height:1.7;color:#4f473d}.gift-choice-guide{padding:12px 0;border-block:1px solid #ceb291}
+.wrapping-art{margin:0;min-width:0;transform:rotate(-1deg);padding:8px;background:#fff5df;border:1px solid #c8aa7c;box-shadow:8px 12px 18px #75513b26}
+.wrapping-art img{width:100%;height:310px;object-fit:cover;display:block}.wrapping-art figcaption{font:10px/1.5 var(--sans);padding:8px;text-align:center;color:#61543e}
+.house-theme .catalogue-gift{background:#e6d2bd url('/assets/gift-wrapping-table.jpg') right center/45% auto no-repeat;display:block;padding:30px 5%;min-height:255px;margin:25px 7vw 35px;box-shadow:6px 8px 0 #d9bf9f}
+.catalogue-gift>div{width:54%;background:#fff4e5f0;padding:15px}.catalogue-gift h2{font-size:30px;line-height:1.15}.catalogue-gift>button{margin:12px 0 0}
+.house-kitchen-preview{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;padding:35px 10vw;background:#f2eacb;border-block:1px solid #c9bb83}
+.house-kitchen-preview figure{margin:0;padding:8px 8px 0;background:#fffaeb;border:1px solid #c8b791;box-shadow:7px 8px 0 #baa77e45;transform:rotate(-1deg)}
+.house-kitchen-preview img{width:100%;height:275px;object-fit:cover;display:block}.house-kitchen-preview figcaption{font:11px var(--serif);text-align:center;padding:10px;color:#635234}
+.house-kitchen-preview h2{font:clamp(29px,3vw,43px)/1.13 var(--serif);margin:10px 0 15px}.house-kitchen-preview p{font:14px/1.75 var(--sans);color:#4b5142}
+.kitchen-journal-link{display:block;margin-top:14px;color:#3d5639;font:12px var(--sans);text-underline-offset:4px}
+.house-theme .story-v4-opening{background:#e8eddb url('/assets/field-journal-border.jpg') left bottom/cover no-repeat}
+.story-v4-opening article{background:#f5f7ebee;padding:22px;border:1px solid #c7cfb4}.house-theme .story-v4-turn{background:#f2e4cd;box-shadow:inset 0 12px 25px #80664210}
+.house-theme .story-v4 figure{padding:8px;background:#fff8e8;border:1px solid #c6b38c;box-shadow:7px 9px 16px #48361e20}.house-theme .story-v4 figure img{border-radius:2px}.house-theme .story-v4 figure figcaption{font-size:10px;letter-spacing:.05em;color:#514e3f;padding:10px 4px}
+.house-theme .story-v4-practice{background:#e5e9d5}.house-theme .story-v4-belief{background:#234434;color:#fff3d8}.house-theme .story-v4-belief p{color:inherit;font-size:clamp(20px,2.5vw,32px);line-height:1.5}
+.house-theme .bloom-section{background:radial-gradient(ellipse at 50% 40%,#fff6df,#e6d7b6)}
+.home-addresses article{background:#fff6e5;border:1px solid #c4b18a;box-shadow:5px 6px 0 #a88a5d20;padding:22px!important}.home-addresses h3{font-size:26px!important;line-height:1.2}.home-addresses address{font-size:14px;line-height:1.8}
+.house-theme .product-shell{background:linear-gradient(110deg,#f1e6d0 45%,#fcf5e8 45%)}
+.house-theme .main-photo-wrap{border:8px solid #fff6e4;outline:1px solid #c2aa7d;box-shadow:8px 12px 25px #49332324;border-radius:3px!important}
+.house-theme .room-details{background:#ecebd9}.room-details details{border-bottom:1px solid #bfc6a8;padding:10px 0}.room-details summary{min-height:44px;cursor:pointer;padding:10px 0;font-size:16px}.room-details p{font-size:14px;line-height:1.75}
+.jar-kitchen{background:#f2e7cd}.jar-recipes article{background:#fff8e7;padding:18px;box-shadow:4px 5px 0 #bda37433;border:1px solid #d5be93;border-top:3px solid #b88d45}.jar-recipes small{font-size:10px;color:#635738}.jar-recipes summary{color:#234434;text-decoration:underline;text-underline-offset:4px}
+.experience-footer{background:linear-gradient(120deg,#193b2b,#142f29)!important;border-top:5px double #af925a}
+.gift-dialog>div{background:#fff3df!important}.gift-dialog .gift-visual{background:linear-gradient(#f1e2c5,#e4ccaa);border:1px solid #bb9e72;box-shadow:5px 6px 0 #a98b6025}
+.gift-size-choice button{box-shadow:4px 5px 0 #aa82522a;transition:box-shadow .2s}.gift-size-choice button:hover{box-shadow:5px 7px 0 #aa825245}
+@media(max-width:700px){
+ .honey-house-page .house-promise{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:18px}.house-promise i{display:none}.house-promise p{font-size:9px;line-height:1.5;text-align:center}
+ .honey-house-page .house-collection{padding:26px 0 12px}.room-product-stage,.room-product[data-room] .room-product-stage{height:240px}.room-product-stage img{inset:43px 7% 30px!important;width:86%!important;max-width:86%!important;height:calc(100% - 73px)!important;max-height:calc(100% - 73px)!important}
+ .room-product-stage>span{font-size:9px;padding:5px;top:9px}.room-product-info{padding:12px 10px;min-height:192px}.room-product-info h3{font-size:19px;line-height:1.18}.room-product-info p{font-size:12px}.room-product-info b{font-size:12px}.room-product-info em{font-size:12px}.room-product-info small{font-size:9px}
+ .house-theme .catalogue-intro{padding:25px 6vw;gap:14px}.catalogue-intro>div{padding:15px}.catalogue-intro>div:last-child{margin-top:12px}.house-theme .catalogue-intro h1{font-size:30px!important}
+ .honey-house-page .house-origin,.honey-house-page .house-gifting{padding:28px 6vw;gap:22px}.house-origin>div{padding:16px}.house-origin figure img{max-height:250px}.wrapping-art img{height:230px}
+ .house-kitchen-preview{grid-template-columns:1fr;padding:28px 6vw;gap:24px}.house-kitchen-preview img{height:220px}.house-kitchen-preview h2{font-size:31px}
+ .house-theme .catalogue-gift{padding:18px 6%;background-image:none;margin:15px 6vw 30px;min-height:0}.catalogue-gift>div{width:100%;padding:10px}.catalogue-gift h2{font-size:27px}
+ .story-v4-opening article{padding:16px}.home-addresses h3{font-size:24px!important}.house-theme .product-shell{background:#f7edda}.house-theme .room-details{padding:26px 6vw}
+ .gift-dialog .gift-visual{box-shadow:none}.gift-dialog #giftBuilder[data-step="2"] .gift-visual{width:100%;min-height:0;padding:14px 10px}.gift-box-stage{gap:4px;padding-inline:0}.gift-box-stage figcaption{font-size:9px;overflow-wrap:break-word}.gift-size-choice small{line-height:1.5}
+ .gift-dialog #giftBuilder[data-step="2"] .gift-visual h3{font-size:22px;margin:8px 0}.gift-dialog #giftBuilder[data-step="2"] .gift-box-stage{min-height:115px;padding:8px 0;border-bottom-width:10px}.gift-dialog #giftBuilder[data-step="2"] .gift-box-stage img{height:85px}.gift-dialog #giftBuilder[data-step="2"] .gift-preview-note{min-height:0;margin:8px 0;font-size:11px}.gift-dialog #giftBuilder[data-step="2"] .gift-live-total{font-size:24px;margin:8px 0}.gift-dialog #giftBuilder[data-step="2"] .gift-preview-ribbon{margin-top:10px}.gift-dialog>div>h2{font-size:30px!important}
+}
+@media(prefers-reduced-motion:reduce){.room-product,.gift-size-choice button{transition:none}.room-product:hover{translate:none}}
+
+/* Final cascade: keep legacy layout rules from stripping readable panel padding. */
+.house-theme.product-luxe .buy-panel{padding:24px!important;position:static}
+.house-theme .buy-panel h1{font-size:clamp(30px,3.3vw,48px);line-height:1.15;letter-spacing:-.03em}
+.house-theme .price-row small,.house-theme .mini-promises{font-size:12px;line-height:1.6}
+.house-theme .story-v4 article h2 i,.house-theme .story-v4-promise blockquote i{color:#79522d}
+.house-theme .story-v4-practice li small{color:#354c3c!important}
+.house-theme .content-band .why-grid p{color:#25382c!important}
+.house-theme .gallery-badge{bottom:8px;padding:5px 14px}
+.house-section-heading h2 i:before{content:' '}
+.house-theme .story-v4-belief strong{color:#fff4dd!important}
+@media(max-width:700px){
+ .house-theme.product-luxe .buy-panel{padding:18px!important}
+ .house-theme.product-luxe .product-shell{background-size:auto 100%;background-position:center;padding:18px 5vw!important}
+ .house-theme .thumb-row{padding:0!important}.house-theme .thumb-row button{height:52px!important}
+ .house-theme .buy-panel h1{font-size:30px;margin-bottom:12px}
+ .house-theme .buy-panel .product-lede{margin-block:10px}
+ .house-theme .content-band{padding:24px 6vw!important}
+ .house-theme .story-v4-opening,.house-theme .story-v4-turn,.house-theme .story-v4-practice{display:flex;flex-direction:column;gap:16px}
+ .house-theme .story-v4 article,.house-theme .story-v4 figure{width:100%;min-width:0}
+ .house-theme .story-v4 figure img{height:190px;max-height:190px;width:100%;object-fit:cover}
+ .house-theme .story-v4 article h2 br{display:none}
+ .house-theme .story-v4 article h2{line-height:1.25!important}
+ .house-theme .story-v4-title h1{font-size:36px!important;line-height:1.15!important}
+ .house-theme .story-v4-title{padding:26px 6vw;max-width:100%}
+ .house-theme .story-v4-lead{font-size:14px;line-height:1.65}
+ .house-section-heading>p:last-child{max-width:310px;margin:12px auto}
+ .house-origin h2,.house-gifting h2,.house-kitchen-preview h2{font-size:28px!important;line-height:1.2!important}
+ .house-origin h2 br,.house-gifting h2 br,.house-kitchen-preview h2 br{display:none}
+ .room-product-info small,.room-product-stage>span{font-size:11px}.room-product-info{min-height:0;height:auto}
+ .gift-dialog .gift-selection-summary{min-height:90px;padding:12px 56px 12px 14px!important}
+ .gift-dialog .gift-selection-summary>div{flex-shrink:0}
+}
+
+/* Compact parallel compositions on phones: product/context together, controls full width. */
+@media(max-width:700px){
+ .house-theme.product-luxe .product-shell{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:14px 12px;align-items:start;background:var(--room-pale)!important}
+ .house-theme.product-luxe .buy-panel{display:contents}
+ .house-theme .product-gallery{grid-column:1;grid-row:1;min-width:0}
+ .house-theme .buy-heading{grid-column:2;grid-row:1;min-width:0;padding:10px;background:#fff8ed}
+ .house-theme .buy-controls{grid-column:1/-1;background:#fff8ed;padding:14px}
+ .house-theme .main-photo-wrap{height:240px!important;border-width:4px}.house-theme .main-product-photo{padding:10px 4px 30px!important}
+ .house-theme .gallery-badge{font-size:9px;max-width:95%;white-space:normal;text-align:center;padding:5px 8px}
+ .house-theme .thumb-row{flex-wrap:wrap;gap:5px}.house-theme .thumb-row button{min-width:34px;width:34px;height:40px!important}
+ .house-theme .buy-panel h1{font-size:23px;line-height:1.16;letter-spacing:-.03em;margin:8px 0}
+ .house-theme .buy-heading .back-link{font-size:10px;line-height:1.5;display:block}.house-theme .buy-panel .eyebrow{font-size:9px;letter-spacing:.06em;margin:12px 0 6px}
+ .house-theme .buy-panel .product-lede{font-size:12px;line-height:1.6}.house-theme .price-row{padding:10px 0}.house-theme .price-row small{font-size:11px;line-height:1.5}.house-theme .price-row>span{font-size:25px}
+ .honey-house-page .house-origin,.honey-house-page .house-gifting,.house-kitchen-preview{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)!important;gap:12px!important;padding:24px 5vw!important;align-items:center}
+ .house-origin>div{padding:0;background:none;border:0;box-shadow:none}.house-origin figure,.wrapping-art,.house-kitchen-preview figure{grid-column:2;grid-row:1;min-width:0;padding:4px}
+ .house-kitchen-preview>div{grid-column:1;grid-row:1}.house-origin figure img,.wrapping-art img,.house-kitchen-preview img{height:230px!important;max-height:none}
+ .house-origin h2,.house-gifting h2,.house-kitchen-preview h2{font-size:24px!important}.house-origin p,.house-gifting p,.house-kitchen-preview p{font-size:12px!important;line-height:1.65!important}
+ .house-origin .eyebrow,.house-gifting .eyebrow,.house-kitchen-preview .eyebrow{font-size:9px!important;letter-spacing:.09em}
+ .house-text-link,.house-gift-button{font-size:11px;line-height:1.5;gap:6px;padding:10px 0}.house-gift-button{padding:12px;min-height:44px}
+ .house-theme .story-v4-opening,.house-theme .story-v4-turn,.house-theme .story-v4-practice{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:12px}
+ .house-theme .story-v4 article{padding:0;background:none;border:0}.house-theme .story-v4 article h2{font-size:25px!important}.house-theme .story-v4 article p{font-size:12px;line-height:1.65}
+ .house-theme .story-v4-opening figure,.house-theme .story-v4-turn figure,.house-theme .story-v4-practice figure{grid-column:2;grid-row:1;padding:4px;align-self:center}
+ .house-theme .story-v4 figure img{height:260px;max-height:none}.house-theme .story-v4 figure figcaption{font-size:10px;line-height:1.5;letter-spacing:0}
+ .house-theme .story-v4 article blockquote{font-size:21px;line-height:1.35;margin:14px 0}
+ .house-theme .story-v4-practice li{display:block!important}.house-theme .story-v4-practice li small{display:block;font-size:11px;line-height:1.5}.house-theme .story-v4-practice li span{margin-right:8px}
+ .honey-house-page .experience-footer,.house-theme .experience-footer{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px 16px!important}
+ .experience-footer>div{min-width:0}.experience-footer>div:last-child{grid-column:1/-1}
+
+ /* The fifth jar completes the mobile shelf instead of leaving a blank card beside it. */
+ .honey-house-page .house-collection .room-product:last-child{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);align-items:stretch;gap:0;border:1px solid #d7c19d;background:#fff9ee}
+ .honey-house-page .house-collection .room-product:last-child .room-product-stage{height:100%;min-height:220px;border:0;border-right:1px solid #d7c19d}
+ .honey-house-page .house-collection .room-product:last-child .room-product-info{padding:18px 16px;border:0;min-height:220px;display:flex;flex-direction:column;justify-content:center}
+
+ /* Keep story copy on a calm paper panel so the illustration never competes with it. */
+ .honey-house-page .house-origin{background:#edf0df!important}
+ .honey-house-page .house-origin>div{background:#fff8e9!important;border:1px solid #cfc5a9!important;box-shadow:4px 5px 0 #8a74431c!important;padding:18px!important;color:#263a30!important}
+ .honey-house-page .house-origin>div p,.honey-house-page .house-origin>div h2,.honey-house-page .house-origin>div a{color:#263a30!important}
+ .honey-house-page .house-origin figure{background:#fff8e9!important}
+}

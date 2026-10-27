@@ -1,0 +1,169 @@
+/* The courtyard is a shared setting; products keep their own visual identity. */
+body.honey-house-page,body.house-theme{background:#faf0dc url('/assets/courtyard-border.png') center top/100% auto repeat-y}
+.honey-house-page .house-collection,.honey-house-page .house-origin,.honey-house-page .house-gifting,.house-theme .catalogue-intro,.house-theme .catalogue-gift,.house-theme .product-page,.house-theme .story-v4,.house-theme .story-v4-opening,.house-theme .story-v4-turn,.house-theme .story-v4-practice,.house-theme .bloom-section{background:transparent}
+.honey-house-page .house-collection{padding:32px 7vw 15px}.house-section-heading{margin-bottom:22px!important}
+.honey-house-page .house-origin,.honey-house-page .house-gifting{padding:35px 12vw;gap:35px;min-height:0}
+.honey-house-page .house-origin figure,.honey-house-page .house-gifting>img{max-height:350px}
+.house-theme .catalogue-intro{padding:35px 12vw 25px}.house-theme .catalogue-tools{padding:20px 10vw}.house-theme .catalogue-count{margin-left:10vw}
+.catalogue-page .product-grid,.honey-house-page .house-collection .product-grid{padding:0 5vw 35px;gap:28px}
+.room-product-stage,.room-product[data-room] .room-product-stage{background:var(--pale);background-image:none;border-radius:3px;border:1px solid #c9ad7b;height:340px;box-shadow:0 5px 14px #5c3a151a}
+.room-product-stage:before{display:block;content:'❧';inset:auto 15px 5px auto;border:0;font-size:76px;color:var(--room-color);opacity:.25;border-radius:0}
+.room-product-stage:after{display:block;content:'✿';inset:20px auto auto 10px;height:auto;background:none;box-shadow:none;border-radius:0;font-size:55px;color:var(--room-color);opacity:.2}
+.room-product-stage img{margin:22px 0 0;height:82%;max-width:85%;width:auto}.room-product-stage>span{top:12px;font-size:10px}
+.room-product-info{padding:14px 0}.room-product-info h3{font-size:25px}.room-product-info p{margin:4px 0}
+.house-theme .catalogue-gift{margin:0 10vw 35px;padding:28px;background:#fff7e6db}
+.house-theme .story-v4-opening,.house-theme .story-v4-turn,.house-theme .story-v4-practice{padding:40px 12vw}
+.house-theme .story-v4-belief,.house-theme .story-v4-promise{padding:40px 12vw;background:#f5e7cbd9}
+.house-theme .bloom-section{padding:40px 8vw}
+.house-theme .content-band,.room-details,.room-related{padding-top:35px;padding-bottom:35px}
+.house-theme .content-band{background:#f6e9cfdb}
+.experience-footer{padding-top:38px!important;padding-bottom:38px!important}
+/* A wide two-storey desktop composition and a complete three-storey phone composition. */
+.honey-house-page .house-hero{height:calc(100svh - 64px);min-height:0;justify-content:center;gap:8px;padding:8px 0;background:#fcf2df}
+.honey-house-page .house-shell{width:100%;max-width:none;aspect-ratio:2.5;max-height:calc(100svh - 190px);height:auto;flex:none;container-type:inline-size}
+.honey-house-page .house-rooms{background-image:url('/assets/house-wide.png');background-size:contain;background-position:center}
+.house-intro h2{font-size:clamp(25px,2.3vw,34px)}.house-intro>p:not(.eyebrow){font-size:10px;margin-top:5px}
+.house-room.room-table{left:8%;top:12%;width:45%;height:34%}
+.house-room.room-rose{left:56%;top:12%;width:39%;height:34%}
+.house-room.room-ginger{left:5%;top:51%;width:30%;height:40%}
+.house-room.room-quiet{left:36%;top:51%;width:29%;height:40%}
+.house-room.room-tulasi{left:67%;top:51%;width:29%;height:40%}
+.house-room>img{height:64%;max-width:35%;bottom:41%;right:auto;left:50%;width:auto}
+.room-table>img{left:50%}.room-rose>img{left:34%}
+.room-ginger>img,.room-quiet>img,.room-tulasi>img{height:60%;bottom:42%;right:auto;left:40%;width:auto;max-width:40%}
+.room-quiet>img{left:36%}.room-tulasi>img{left:30%}
+.house-room .room-copy{top:3%;left:1%;right:auto;max-width:40%;background:#fff6e4f2}
+.house-room.room-rose .room-copy,.house-room.room-quiet .room-copy,.house-room.room-tulasi .room-copy{left:auto;right:0;max-width:37%}
+.house-room .room-copy b{font-size:clamp(13px,1.4cqw,21px)}
+.house-room-guide{display:none!important}
+.honey-house-page .house-shop-link{position:static;transform:none;box-shadow:none;padding:10px 25px;min-height:44px}
+/* Clear, sequential gifting. Existing order handling is retained. */
+.garden-map{width:100%;height:auto;display:block;border:3px solid #e4cd9f}
+.garden-zone{cursor:pointer;outline:none}.garden-zone>path{fill:#fff5e6;fill-opacity:.26;stroke:transparent;stroke-width:4;transition:fill-opacity .3s,stroke .3s}
+.garden-zone[aria-pressed="true"]>path{fill:#ffc64c;fill-opacity:.08;stroke:#fff0b1;stroke-dasharray:8 5;filter:drop-shadow(0 0 5px #693d18)}
+.garden-zone:hover>path{fill-opacity:0}.garden-zone:focus-visible>path{stroke:#122b3d;stroke-width:6}
+.garden-caption rect{fill:#fff6e5;stroke:#b89b65}.garden-caption text{font:15px Georgia,serif;fill:#183d31}
+.garden-zone[aria-pressed="true"] .garden-caption rect{fill:#183d31;stroke:#fff6e5}.garden-zone[aria-pressed="true"] text{fill:#fff6e5}
+.garden-explainer{font:11px/1.6 var(--sans);color:#53604d;margin:12px 0}.geographic-context{font:12px var(--sans);padding:10px 0}.geographic-context summary{cursor:pointer;min-height:30px}.geographic-context svg{width:100%;height:auto}
+.bloom-layout{grid-template-columns:minmax(0,1.8fr) minmax(230px,.7fr);gap:24px}
+@media(max-width:700px){.bloom-layout{display:block}.bloom-atlas{margin:0 -5vw}.garden-caption text{font-size:20px}.garden-caption rect{width:164px;x:-82px;height:40px;y:-22px}.garden-explainer,.geographic-context,.map-credit{padding-left:5vw;padding-right:5vw}}
+.gift-dialog>div{background:#fff6e4 url('/assets/courtyard-border.png') center/100% 100%;padding:30px 6%!important}
+.gift-dialog>div>h2{font-size:42px;line-height:1.05;margin:8px 0}
+.gift-builder-copy{font-size:13px;max-width:650px}
+.gift-dialog #giftBuilder{grid-template-columns:1fr 1fr;align-items:start}
+.gift-step-title{grid-column:1/-1;margin:8px 0;font:14px var(--sans)}
+.gift-size-choice{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.gift-size-choice button{min-height:230px;border:1px solid #cba56b;background:#f5d997cc;padding:25px;color:#14392e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
+.gift-size-choice button:nth-child(2){background:#efd0c6cc}.gift-size-choice b{font:44px var(--serif)}.gift-size-choice span{font-size:30px;color:#ae7f35}.gift-size-choice small{font:12px var(--sans)}.gift-size-choice em{font-style:normal;font-size:14px}
+.gift-size-icons{display:flex;gap:9px;justify-content:center;width:100%;padding:10px 0}.gift-size-icons i{display:block;width:42px;height:64px;border:1px solid #ad9e7f;border-radius:8px 8px 10px 10px;background:linear-gradient(90deg,#fff9 0%,#fff2 30%,#a89b7430 70%,#fff8);box-shadow:inset 3px 0 3px #fff8,0 3px 3px #7b5e3526;position:relative}.gift-size-icons i:before{content:'';position:absolute;left:-2px;right:-2px;top:-8px;height:12px;background:linear-gradient(#d1bb72,#8e743c,#ccb36d);border-radius:3px}
+.gift-dialog #giftBuilder[data-step="0"] .gift-builder-note{grid-column:1/-1}
+.gift-dialog .gift-visual{grid-row:2/8;border-radius:5px;min-height:300px}
+.gift-dialog #giftBuilder #giftBack{background:none;color:#173c30;border:0;padding:6px;text-align:left;min-height:36px}
+.gift-dialog #giftBuilder>button:disabled{opacity:.45;cursor:not-allowed}
+.gift-dialog .gift-size-choice button:focus-visible{outline:3px solid #173c30;outline-offset:3px}
+.gift-dialog .gift-jar-choice:has(input:disabled){opacity:.5}
+@media(max-width:700px){
+ body.honey-house-page,body.house-theme{background-size:auto 900px}
+ .honey-house-page .house-hero{height:calc(100svh - 60px);min-height:0;padding:5px 0;gap:5px}
+ .house-intro h2{font-size:25px;line-height:1.02;padding:0 10px}.house-intro h2 br{display:none}
+ .house-intro>p:not(.eyebrow){font-size:9px;margin-top:4px}
+ .honey-house-page .house-shell{width:100%;aspect-ratio:4/5;max-height:calc(100svh - 160px);height:auto;flex:none}
+ .honey-house-page .house-rooms{background-image:url('/assets/house-mobile.png');background-size:contain;background-repeat:no-repeat}
+ .house-room.room-table{left:8%;top:12%;width:40%;height:23%}
+ .house-room.room-rose{left:52%;top:12%;width:40%;height:23%}
+ .house-room.room-ginger{left:8%;top:38%;width:40%;height:24%}
+ .house-room.room-quiet{left:52%;top:38%;width:40%;height:24%}
+ .house-room.room-tulasi{left:15%;top:65%;width:70%;height:23%}
+ .house-room>img,.room-ginger>img,.room-quiet>img,.room-tulasi>img{height:70%;width:auto;max-width:50%;bottom:27%;left:40%;right:auto}
+ .room-table>img{left:35%}.room-rose>img{left:30%}.room-ginger>img{left:32%}.room-quiet>img{left:32%}.room-tulasi>img{left:39%;bottom:39%;height:72%}
+ .house-room .room-copy,.house-room.room-rose .room-copy,.house-room.room-quiet .room-copy,.house-room.room-tulasi .room-copy{clip-path:none;width:auto;height:auto;overflow:visible;white-space:normal;top:auto;bottom:-1%;left:0;right:auto;max-width:100%;padding:3px 6px;border:1px solid #d2b88a;background:#fff5e4f2}
+ .house-room .room-copy b{font-size:11px;line-height:1.1}.house-room .room-copy small,.house-room .room-copy em{display:none}
+ .house-room.room-tulasi .room-copy{left:auto;right:1%;bottom:30%;max-width:39%}
+ .honey-house-page .house-shop-link{font-size:13px;min-height:40px;padding:9px 22px}
+ .honey-house-page .house-collection{padding:24px 2vw 12px}.honey-house-page .house-origin,.honey-house-page .house-gifting{padding:25px 7vw}
+ .house-theme .catalogue-intro{padding:26px 8vw 20px}.house-theme .catalogue-tools{padding:16px 6vw}
+ .catalogue-page .product-grid,.honey-house-page .house-collection .product-grid{gap:22px 12px;padding:0 5vw 28px}
+ .room-product-stage,.room-product[data-room] .room-product-stage{height:235px;border-radius:3px}
+ .room-product-info h3{font-size:21px}.room-product-stage>span{font-size:8px;padding:6px}
+ .house-theme .story-v4-opening,.house-theme .story-v4-turn,.house-theme .story-v4-practice{padding:28px 7vw}
+ .gift-dialog>div{padding:35px 18px 20px!important}
+ .gift-dialog>div{background-image:linear-gradient(90deg,transparent,#fff5e2ed 12%,#fff5e2ed 88%,transparent),url('/assets/courtyard-border.png')}
+ .gift-size-icons{gap:5px}.gift-size-icons i{width:23px;height:44px}
+ .gift-size-choice{gap:10px}.gift-size-choice button{min-height:190px;padding:15px 8px}.gift-size-choice b{font-size:34px}.gift-size-choice span{font-size:19px}.gift-size-choice small{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+/* Each chapter has its own setting, not a tiled wallpaper. */
+body.honey-house-page,body.house-theme{background:#faf2e3;background-image:none}
+.honey-house-page .house-collection,.house-theme .catalogue-intro{background:#fbefdb url('/assets/courtyard-border.png') center top/100% auto no-repeat}
+.honey-house-page .house-origin,.house-theme .story-v4-opening{background:#edf0df;border-block:1px solid #ccd3b5}
+.honey-house-page .house-gifting,.house-theme .catalogue-gift{background:#f3e1d7;border-block:1px solid #d7baaa}
+.house-theme .story-v4-turn{background:#fff5df}.house-theme .story-v4-practice{background:#edf0df}
+.house-theme .bloom-section{background:#efe3c8}.house-theme .story-v4-promise{background:#e3e8d7}
+.house-theme .catalogue-tools{background:#faf2e3;position:relative}
+.room-product-stage,.room-product[data-room] .room-product-stage{display:block;height:350px}
+.room-product-stage img{position:absolute!important;inset:46px 10% 18px!important;width:80%!important;height:calc(100% - 64px)!important;min-height:0!important;max-height:calc(100% - 64px)!important;max-width:80%!important;margin:0!important;object-fit:contain!important;transform:none!important}
+.room-product-info small{color:#474c39}.room-product-info em{color:#173c30;font-weight:600}
+.room-product-info{min-height:160px}.room-product-stage>span{max-width:90%;text-align:center;left:50%;transform:translateX(-50%);white-space:nowrap}
+.house-theme .main-photo-wrap{background:var(--room-pale)!important}.house-theme .main-product-photo{object-fit:contain!important}
+.gift-dialog .gift-visual{position:static}
+.gift-dialog #giftBuilder[data-step="1"] .gift-visual{min-height:0}
+.garden-map{border:0;background:transparent;overflow:visible}
+.garden-zone[aria-pressed="true"]>path{fill:#ffce65;fill-opacity:.25;stroke:#fff7ce;stroke-width:6}
+.garden-caption text{font-size:19px}.garden-caption rect{width:170px;x:-85px}
+.jar-kitchen{padding:40px 8vw;background:#f3e8ce;border-block:1px solid #ccb88b;color:#173c30}
+.jar-kitchen h2{font:clamp(32px,4vw,52px)/1.1 var(--serif);margin:12px 0}.jar-kitchen>p{max-width:650px;line-height:1.7}
+.jar-recipes{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:25px}.jar-recipes article{border-top:2px solid #b7924a;padding-top:16px}.jar-recipes h3{font:27px var(--serif);margin:8px 0}.jar-recipes p{font:14px/1.7 var(--sans)}.jar-recipes summary{cursor:pointer;min-height:44px;padding:12px 0;font-size:13px;font-weight:600}.jar-recipes ol{padding-left:20px;font:14px/1.8 var(--sans)}
+@media(max-width:700px){
+ .room-product-stage,.room-product[data-room] .room-product-stage{height:235px}
+ .room-product-stage>span{font-size:8px;letter-spacing:0;white-space:normal;width:90%}
+ .gift-dialog #giftBuilder[data-step="1"] .gift-step-title{order:0}
+ .gift-dialog #giftBuilder[data-step="1"] .gift-jar-list{order:1;width:100%}
+ .gift-dialog #giftBuilder[data-step="1"] .gift-builder-note{order:2}
+ .gift-dialog #giftBuilder[data-step="1"] #giftNext{order:3}
+ .gift-dialog #giftBuilder[data-step="1"] .gift-visual{order:4;width:100%;padding:12px}
+ .gift-dialog #giftBuilder[data-step="1"] #giftBack{order:5}
+ .gift-dialog #giftBuilder[data-step="1"] .gift-box-stage{min-height:100px;padding:8px}.gift-dialog #giftBuilder[data-step="1"] .gift-box-stage img{height:85px}
+ .gift-dialog #giftBuilder[data-step="1"] .gift-visual h3{font-size:20px;margin:6px 0}
+ .jar-recipes{grid-template-columns:1fr;gap:16px}.jar-kitchen{padding:28px 7vw}
+}
+/* Immersive first screen: scene behind the copy, never cream framing. */
+@media(min-width:701px){
+ .honey-house-page .house-hero{height:calc(100svh - 64px);padding:0;gap:0;background:#7e683b url('/assets/house-immersive-desktop.png') center/cover no-repeat;isolation:isolate}
+ .honey-house-page .house-shell{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100%,calc((100svh - 64px)*1.77778));height:auto;max-height:none;aspect-ratio:16/9;margin:0}
+ .honey-house-page .house-rooms{background-image:url('/assets/house-immersive-desktop.png');background-size:100% 100%}
+ .house-intro{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:3;width:max-content;max-width:90%;padding:8px 20px!important;border-radius:4px;background:#fff4dce8;box-shadow:0 3px 18px #3a230e25}
+ .house-intro h2{font-size:clamp(22px,2vw,32px);letter-spacing:-.035em}.house-intro>p:not(.eyebrow){font-size:9px;letter-spacing:.15em}
+ .honey-house-page .house-shop-link{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);padding:12px 28px;box-shadow:0 4px 20px #1d170f55;border:1px solid #ead9b3}
+ .honey-house-page .house-shop-link:hover{transform:translateX(-50%) translateY(-2px)}
+ .house-room.room-table{left:10%;top:19%;width:38%;height:24%}.house-room.room-rose{left:54%;top:19%;width:34%;height:24%}
+ .house-room.room-ginger{left:7%;top:49%;width:29%;height:32%}.house-room.room-quiet{left:40%;top:49%;width:23%;height:32%}.house-room.room-tulasi{left:68%;top:49%;width:25%;height:32%}
+ .house-room>img{height:65%;bottom:47%;left:42%;max-width:40%}.room-rose>img{left:31%}
+ .room-ginger>img{left:44%;bottom:41%;height:62%}.room-quiet>img{left:40%;bottom:27%;height:62%}.room-tulasi>img{left:25%;bottom:23%;height:62%}
+ .house-room .room-copy,.house-room.room-rose .room-copy,.house-room.room-quiet .room-copy,.house-room.room-tulasi .room-copy{top:0;left:0;right:auto;max-width:43%;padding:6px 8px}
+ .house-room.room-rose .room-copy,.house-room.room-tulasi .room-copy{left:auto;right:0}
+ .house-room .room-copy b{font-size:clamp(13px,1.25vw,19px)}.room-copy small{font-size:10px}.room-copy em{font-size:11px}
+}
+@media(min-width:701px) and (min-aspect-ratio:2/1){
+ .honey-house-page .house-hero{background-image:url('/assets/house-wide.png')}
+ .honey-house-page .house-shell{width:100%;aspect-ratio:2.5}
+ .honey-house-page .house-rooms{background-image:url('/assets/house-wide.png')}
+ .house-room.room-table{left:8%;top:12%;width:45%;height:34%}.house-room.room-rose{left:56%;top:12%;width:39%;height:34%}
+ .house-room.room-ginger{left:5%;top:51%;width:30%;height:40%}.house-room.room-quiet{left:36%;top:51%;width:29%;height:40%}.house-room.room-tulasi{left:67%;top:51%;width:29%;height:40%}
+ .house-room>img{bottom:41%;left:50%;height:64%}.room-rose>img{left:34%}.room-ginger>img{left:40%;bottom:42%;height:60%}.room-quiet>img{left:36%;bottom:42%;height:60%}.room-tulasi>img{left:30%;bottom:42%;height:60%}
+}
+/* Smaller editorial scale and compact chapter transitions. */
+.house-section-heading h2,.house-origin h2,.house-gifting h2,.house-theme .catalogue-intro h1,.house-theme .story-v4 article h2,.bloom-heading h2{font-size:clamp(28px,3.1vw,44px)!important;line-height:1.12!important;margin:10px 0 16px!important}
+.house-theme .story-v4-title h1{font-size:clamp(38px,5vw,66px)}.house-theme .story-v4-intro{min-height:400px}
+.house-theme .story-v4-opening,.house-theme .story-v4-turn,.house-theme .story-v4-practice{padding:28px 8vw;gap:4vw}
+.house-theme .story-v4 figure img{max-height:390px}.bloom-layout{margin-top:20px}.bloom-heading p{margin:8px auto;max-width:580px}
+.house-theme .bloom-section{padding:30px 7vw}.house-theme .story-v4-belief,.house-theme .story-v4-promise{padding:30px 8vw}.house-theme .story-v4-promise blockquote{font-size:clamp(26px,3vw,38px)}
+.honey-house-page .house-collection{background:#fbefdb}.house-theme .catalogue-intro{background:#f2e7d2;box-shadow:inset 0 -12px 25px #a98c4420}
+.house-theme .catalogue-gift{box-shadow:8px 10px 0 #e1c8b7;border:1px solid #c8a588}
+@media(max-width:700px){
+ .honey-house-page .house-hero{background:#697749 url('/assets/house-mobile.png') center/cover no-repeat}
+ .house-intro{background:#fff4dced;padding:8px 12px!important;border-radius:4px;z-index:2;margin:0 12px}
+ .honey-house-page .house-shell{margin:0}
+ .honey-house-page .house-shop-link{box-shadow:0 3px 14px #19332855}
+ .house-theme .story-v4-intro{min-height:340px}.house-theme .story-v4-title{padding:35px 7vw}
+ .house-theme .story-v4 article p{font-size:14px;line-height:1.7}.house-theme .story-v4 figure img{max-height:290px}
+}

@@ -137,21 +137,72 @@ function selectedGiftJars() {
     return Array.from({ length: quantity }, () => ({ id: product.id, size: variant.size }));
   });
 }
+let giftTarget = 0;
+let giftStep = 0;
+function setGiftStep(step) {
+  giftStep=step;
+  const form=qs('#giftBuilder');
+  form.dataset.step=String(step);
+  qs('#giftSizeChoice').hidden=step!==0;
+  qs('#giftJarList').hidden=step!==1;
+  qs('#giftVisual').hidden=step===0;
+  qs('#giftNext').hidden=step!==1;
+  qs('#giftBack').hidden=step===0;
+  qs('#giftBack').textContent=step===2 && giftTarget!==5?'← Change jars':'← Change box size';
+  qs('#giftToggle').closest('label').hidden=step!==2;
+  qs('#giftDetails').hidden=step!==2 || !qs('#giftToggle').checked;
+  qs('#giftBuilder button[type="submit"]').hidden=step!==2;
+  qs('#giftStepTitle').textContent=step===2 && giftTarget===5 ? '2 · All five jars included. Make it personal.' : ['1 · Choose your box','2 · Choose your jars','3 · Make it personal'][step];
+  updateGiftBuilderStatus();
+  if(qs('#giftDialog')?.open){qs('#giftStepTitle').setAttribute('tabindex','-1');qs('#giftStepTitle').focus({preventScroll:true});qs('#giftDialog').scrollTop=0;}
+}
+function initGiftFlow() {
+  if(qs('#giftSizeChoice'))return;
+  const summary=document.createElement('div');
+  summary.id='giftSelectionSummary';summary.className='gift-selection-summary';summary.hidden=true;
+  summary.setAttribute('role','status');summary.setAttribute('aria-live','polite');
+  qs('#giftDialog').prepend(summary);
+  qs('#giftBuilder').insertAdjacentHTML('afterbegin','<p id="giftStepTitle" class="gift-step-title" role="status"></p><div id="giftSizeChoice" class="gift-size-choice"><button type="button" data-gift-size="3"><b>3 jars</b><span class="gift-size-icons" aria-hidden="true"><i></i><i></i><i></i></span><small>A thoughtful little trio · 15% off</small><em>Choose three →</em></button><button type="button" data-gift-size="5"><b>5 jars</b><span class="gift-size-icons" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><small>The whole Honey House · 20% off</small><em>Choose five →</em></button></div>');
+  qs('#giftBuilder').insertAdjacentHTML('beforeend','<button id="giftNext" type="button">Next: gift wrap &amp; note →</button><button id="giftBack" type="button">← Change box size</button>');
+  qs('[data-gift-size="5"] em').textContent='All five included →';
+  const giftIntro=qs('#giftDialog .gift-builder-copy');
+  if(giftIntro)giftIntro.textContent='Choose your own three-jar edit for 15% off, or all five jars for 20% off. Every jar is 250 g. Then add your note and ribbon.';
+  qs('#giftBuilder').addEventListener('click',e=>{
+    const size=e.target.closest('[data-gift-size]');
+    if(size){
+      giftTarget=Number(size.dataset.giftSize);
+      const includeWholeHouse=giftTarget===5 && state.products.length===5;
+      qs('#giftJarList').querySelectorAll('input').forEach(i=>i.checked=includeWholeHouse);
+      setGiftStep(includeWholeHouse?2:1);
+    }
+    if(e.target.closest('#giftNext')&&selectedGiftJars().length===giftTarget)setGiftStep(2);
+    if(e.target.closest('#giftBack'))setGiftStep(giftStep===2 && giftTarget!==5?1:0);
+  });
+}
 function updateGiftBuilderStatus() {
+  renderGiftPreview();
   const count = selectedGiftJars().length;
   const button = qs('#giftBuilder button[type="submit"]');
   const note = qs('#giftBuilderNote');
-  const valid = count === 3 || count === 5;
+  const valid = giftTarget > 0 && count === giftTarget;
+  qs('#giftJarList')?.querySelectorAll('input').forEach(input=>input.disabled=!input.checked && count>=giftTarget && giftTarget>0);
+  if(qs('#giftNext'))qs('#giftNext').disabled=!valid;
   const original = selectedGiftJars().reduce((sum, item) => sum + variantFor(cartProduct(item.id), item.size).price, 0);
-  const rate = count === 5 ? .2 : count === 3 ? .15 : 0;
+  const rate = count === giftTarget ? (count === 5 ? .2 : count === 3 ? .15 : 0) : 0;
+  const summary=qs('#giftSelectionSummary');
+  if(summary){
+    summary.hidden=giftStep===0;
+    summary.innerHTML=`<div><small>${count} of ${giftTarget} jars selected</small><strong>${money(original-Math.round(original*rate))}</strong></div><p>${valid?`${rate*100}% off · Save ${money(Math.round(original*rate))}`:`Selected jars subtotal · ${giftTarget-count} more to choose`}<small>Delivery ₹50 · Free from ₹999 after offers</small></p>`;
+  }
   if (button) button.disabled = !valid;
-  if (note) note.textContent = valid ? `${count} different jars selected - ${rate * 100}% off. You save ${money(Math.round(original * rate))}.` : count < 3 ? `Choose ${3 - count} more different jar${3 - count === 1 ? '' : 's'} to unlock 15% off.` : count === 4 ? 'Choose one more different jar for 20% off, or remove one to keep 15% off.' : '';
+  if (note) note.textContent = giftTarget ? (valid ? `${count} of ${giftTarget} jars selected · ${rate * 100}% off · Save ${money(Math.round(original * rate))}.` : `${count} of ${giftTarget} jars selected. Choose ${giftTarget-count} more.`) : 'Choose your box size to begin. All gift jars are 250 g.';
 }
 function toggleGiftFields() {
   const toggle = qs('#giftToggle');
   const details = qs('#giftDetails');
   if (!toggle || !details) return;
   details.hidden = !toggle.checked;
+  renderGiftPreview();
 }
 function toggleCheckoutGiftFields() {
   const toggle = qs('#checkoutGiftToggle');
@@ -163,17 +214,19 @@ function openGiftBuilder(makeGift = false) {
   if (!state.products.length) return;
   track('begin_gift_builder', { gift_wrap_requested: makeGift });
   renderGiftJarList();
+  initGiftFlow();
+  giftTarget=0;
   const toggle = qs('#giftToggle');
-  if (toggle) toggle.checked = makeGift;
+  if (toggle) toggle.checked = true;
   toggleGiftFields();
-  qs('#giftBuilderNote').textContent = '';
+  setGiftStep(0);
   qs('#giftDialog')?.showModal();
 }
 function saveGiftPreferences(event) {
   event.preventDefault();
   const selectedJars = selectedGiftJars();
   const note = qs('#giftBuilderNote');
-  if (selectedJars.length !== 3 && selectedJars.length !== 5) {
+  if (giftStep !== 2 || selectedJars.length !== giftTarget || ![3,5].includes(giftTarget)) {
     note.textContent = 'Choose exactly 3 different jars for 15% off or 5 different jars for 20% off.';
     return;
   }
@@ -229,34 +282,74 @@ function openWhatsAppOrder(items = cartEntries(), options = {}) {
   const message = [
     "Hi Nectra, I'd like to place an order:",
   ];
-  if (offer.ordinary.length) message.push('', 'Regular jars:', ...offer.ordinary.map(item => `• ${item.name} - ${item.size} × ${item.quantity} - ${money(item.price * item.quantity)}`));
+  if (offer.ordinary.length) message.push('', 'Regular jars:', ...offer.ordinary.map(item => `• ${item.name} · ${item.size} × ${item.quantity} · ${money(item.price * item.quantity)}`));
   offer.sections.forEach((section, index) => {
     const title = section.type === 'gift' ? `Gift box ${index + 1}` : section.type === 'combo' ? `Combo order ${index + 1}` : 'Cart offer';
-    message.push('', `${title}: ${section.count} jars - ${section.rate * 100}% off`, ...section.lines.map(item => `• ${item.name} - ${item.size} × ${item.quantity} - ${money(item.price * item.quantity)}`), `Original price: ${money(section.original)}`, `Saving: ${money(section.saving)}`, `Price after offer: ${money(section.original - section.saving)}`);
+    message.push('', `${title}: ${section.count} jars · ${section.rate * 100}% off`, ...section.lines.map(item => `• ${item.name} · ${item.size} × ${item.quantity} · ${money(item.price * item.quantity)}`), `Original price: ${money(section.original)}`, `Saving: ${money(section.saving)}`, `Price after offer: ${money(section.original - section.saving)}`);
     if (section.gift) {
       message.push('Gift wrap: Yes');
       if (section.gift.message) message.push(`Personal message: ${section.gift.message}`);
       if (section.gift.ribbon) message.push(`Satin ribbon: ${section.gift.ribbon}`);
     }
   });
-  if (!offer.ordinary.length && !offer.sections.length) message.push('', ...items.map(item => `• ${item.name} - ${item.size} × ${item.quantity} - ${money(item.price * item.quantity)}`));
+  if (!offer.ordinary.length && !offer.sections.length) message.push('', ...items.map(item => `• ${item.name} · ${item.size} × ${item.quantity} · ${money(item.price * item.quantity)}`));
   if (offer.saving) message.push('', `Total offer saving: ${money(offer.saving)}`);
   message.push('', `Subtotal after offer: ${money(orderSubtotal)}`, `Delivery: ${shipping ? money(shipping) : 'Complimentary'}`, `Order total: ${money(orderTotal)}`, 'Please help me confirm availability, delivery and payment.');
   const url = `https://wa.me/${WHATSAPP_ORDER_NUMBER}?text=${encodeURIComponent(message.join('\n'))}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 function renderProducts() {
-  qs('#products').innerHTML = state.products.map(product => {
+  const params = new URLSearchParams(location.search);
+  const room = params.get('room') || 'all';
+  const term = (qs('#catalogueSearch')?.value || params.get('q') || '').trim().toLowerCase();
+  const sort = qs('#catalogueSort')?.value || params.get('sort') || 'featured';
+  let visible = state.products.filter(p => (room === 'all' || p.id === room) && `${p.name} ${window.NectraRooms?.[p.id]?.botanical || ''} ${window.NectraRooms?.[p.id]?.room || ''}`.toLowerCase().includes(term));
+  if (sort === 'price-low') visible.sort((a,b)=>a.price-b.price);
+  if (sort === 'price-high') visible.sort((a,b)=>b.price-a.price);
+  if (qs('#catalogueCount')) qs('#catalogueCount').textContent = `${visible.length} jar${visible.length === 1 ? '' : 's'} to discover`;
+  qs('#products').innerHTML = visible.map(product => {
     const variant = firstVariant(product);
-    return `<a class="product-card" href="/product/${product.id}" data-product-select="${product.id}" aria-label="View ${product.name}">
-      <div class="product-visual" style="--card-bg:${product.color}">${jar(product)}</div>
-      <div class="product-info">
-        <small>${product.collection}</small>
-        <h3>${product.name}</h3>
-        <p><span>From</span> ${money(variant.price)} <span>·</span> ${variant.size}</p>
-      </div>
-    </a>`;
-  }).join('');
+    const room = window.NectraRooms?.[product.id] || {room:product.collection,color:product.color,pale:'#f1e4ca',line:product.note};
+    return `<a class="room-product" data-room="${product.id}" href="/product/${product.id}" data-product-select="${product.id}" aria-label="View ${product.name}" style="--pale:${room.pale};--room-color:${room.color}"><div class="room-product-stage"><span>${room.room}</span><img src="/assets/${encodeURIComponent(room.image || '')}" alt="${product.name}" loading="lazy"></div><div class="room-product-info"><small>${room.botanical || product.collection}</small><h3>${product.name}</h3><p>${room.line}</p><div><b>From ${money(variant.price)} · ${variant.size}</b><em>Meet your jar →</em></div></div></a>`;
+  }).join('') || '<div class="catalogue-empty"><h2>No jars found.</h2><p>Try a product name, rose, ginger, lavender or tulasi.</p><button type="button" data-reset-catalogue>Show all jars</button></div>';
+}
+
+function renderGiftPreview() {
+  const form = qs('#giftBuilder');
+  if (!form) return;
+  let preview = qs('#giftVisual');
+  if (!preview) {
+    preview = document.createElement('aside'); preview.id='giftVisual'; preview.className='gift-visual'; preview.setAttribute('aria-label','Your gift preview');
+    form.prepend(preview);
+  }
+  const picked = selectedGiftJars().map(item=>cartProduct(item.id));
+  const slots = giftTarget || 3;
+  const original = picked.reduce((sum,p)=>sum+firstVariant(p).price,0);
+  const rate = picked.length === giftTarget ? (giftTarget === 5 ? .2 : .15) : 0;
+  const ribbon = document.querySelector('input[name="ribbon"]:checked')?.value || 'Forest green';
+  const ribbonColors = {'Forest green':'#244a35','Blush pink':'#b97185','Gold':'#b78c38'};
+  preview.style.setProperty('--ribbon',ribbonColors[ribbon]);
+  preview.innerHTML = `<p class="eyebrow">Made personal by you</p><h3>Your little box of Nectra</h3><div class="gift-box-stage">${Array.from({length:slots},(_,i)=>{const p=picked[i];return p?`<figure><img src="/assets/${encodeURIComponent(window.NectraRooms[p.id].image)}" alt="${p.name}"><figcaption>${p.name}</figcaption></figure>`:`<figure><span class="empty-gift-jar" aria-hidden="true"></span><figcaption>Choose a jar</figcaption></figure>`;}).join('')}</div><div class="gift-preview-ribbon" ${qs('#giftToggle')?.checked?'':'hidden'}></div><p class="gift-preview-note"></p><div class="gift-live-total" aria-live="polite">${money(Math.round(original*(1-rate)))}<small>${rate?`You save ${money(Math.round(original*rate))} · `:''}${picked.length} of ${slots} jars · delivery calculated in your bag</small></div><small>Illustrative gift preview. Your selected products are shown.</small>`;
+  preview.querySelector('.gift-preview-note').textContent = qs('#giftToggle')?.checked ? (qs('#giftMessage')?.value || 'Add a note. Make it theirs.') : 'Choose three or five different jars. Watch your gift take shape.';
+}
+
+function initCatalogue() {
+  if(!qs('#catalogueSearch')) return;
+  const params = new URLSearchParams(location.search);
+  qs('#catalogueSearch').value=params.get('q')||'';
+  qs('#catalogueSort').value=params.get('sort')||'featured';
+  const filter = room => {
+    const next = new URLSearchParams(location.search);
+    next.set('room',room); next.set('q',qs('#catalogueSearch').value); next.set('sort',qs('#catalogueSort').value);
+    history.replaceState(null,'',`${location.pathname}?${next}`);
+    document.querySelectorAll('[data-room-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.roomFilter===room)));
+    renderProducts();
+  };
+  document.querySelectorAll('[data-room-filter]').forEach(b=>b.addEventListener('click',()=>filter(b.dataset.roomFilter)));
+  qs('#catalogueSearch').addEventListener('input',()=>filter(new URLSearchParams(location.search).get('room')||'all'));
+  qs('#catalogueSort').addEventListener('change',()=>filter(new URLSearchParams(location.search).get('room')||'all'));
+  document.addEventListener('click',e=>{if(e.target.closest('[data-reset-catalogue]')){qs('#catalogueSearch').value='';filter('all');}});
+  filter(params.get('room')||'all');
 }
 function renderCart() {
   const items = cartEntries();
@@ -426,6 +519,23 @@ async function updateOrder(event) {
 }
 
 document.addEventListener('click', event => {
+  const shopShortcut = event.target.closest('[data-scroll-shop]');
+  if (shopShortcut) {
+    document.querySelector('#shop')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  const houseMenuToggle = event.target.closest('[data-toggle-house-menu]');
+  if (houseMenuToggle) {
+    const menu = qs('#houseMenu');
+    if (menu) {
+      const open = menu.hidden;
+      menu.hidden = !open;
+      houseMenuToggle.setAttribute('aria-expanded', String(open));
+    }
+  } else if (!event.target.closest('#houseMenu')) {
+    const menu = qs('#houseMenu');
+    const toggle = qs('[data-toggle-house-menu]');
+    if (menu && !menu.hidden) { menu.hidden = true; toggle?.setAttribute('aria-expanded', 'false'); }
+  }
   const selectedProduct = event.target.closest('[data-product-select]');
   if (selectedProduct) {
     sessionStorage.setItem('nectra-selected-product', selectedProduct.dataset.productSelect);
@@ -462,6 +572,7 @@ qs('#giftBuilder')?.addEventListener('submit', saveGiftPreferences);
 qs('#giftJarList')?.addEventListener('input', updateGiftBuilderStatus);
 qs('#giftJarList')?.addEventListener('change', updateGiftBuilderStatus);
 qs('#giftToggle')?.addEventListener('change', toggleGiftFields);
+qs('#giftDetails')?.addEventListener('input', renderGiftPreview);
 qs('#checkoutGiftToggle')?.addEventListener('change', toggleCheckoutGiftFields);
 
 fetch('/api/products').then(r => r.json()).then(async products => {
@@ -472,6 +583,9 @@ fetch('/api/products').then(r => r.json()).then(async products => {
   renderProducts();
   renderGiftJarList();
   renderCart();
+  initCatalogue();
+  if(new URLSearchParams(location.search).get('gift') === '1') openGiftBuilder(true);
+  if(new URLSearchParams(location.search).get('bag') === '1') openCart();
   const returningOrder = new URLSearchParams(location.search).get('order_id');
   if (location.pathname === '/payment/return' && returningOrder) {
     const response = await fetch(`/api/orders/${returningOrder}/status`);
@@ -479,7 +593,7 @@ fetch('/api/products').then(r => r.json()).then(async products => {
     if (result.order?.payment_status === 'paid') {
       state.cart = [];
       saveBag();
-      alert(`Thank you - order ${returningOrder} is confirmed.`);
+      alert(`Thank you, order ${returningOrder} is confirmed.`);
     } else {
       alert('Your payment is still being confirmed. Please contact us if it does not update shortly.');
     }

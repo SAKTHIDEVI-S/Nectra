@@ -62,13 +62,13 @@ function openWhatsAppOrder(items, { fromBag = false } = {}) {
   const orderSubtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0) - offer.saving;
   const shipping = shippingFor(orderSubtotal);
   const message = ["Hi Nectra, I'd like to place an order:"];
-  if (offer.ordinary.length) message.push('', 'Regular jars:', ...offer.ordinary.map(item => `• ${item.name} - ${item.size} × ${item.quantity} - ${money(item.price * item.quantity)}`));
+  if (offer.ordinary.length) message.push('', 'Regular jars:', ...offer.ordinary.map(item => `• ${item.name} · ${item.size} × ${item.quantity} · ${money(item.price * item.quantity)}`));
   offer.sections.forEach((section, index) => {
     const title = section.type === 'gift' ? `Gift box ${index + 1}` : section.type === 'combo' ? `Combo order ${index + 1}` : 'Cart offer';
-    message.push('', `${title}: ${section.count} jars - ${section.rate * 100}% off`, ...section.lines.map(item => `• ${item.name} - ${item.size} × ${item.quantity} - ${money(item.price * item.quantity)}`), `Original price: ${money(section.original)}`, `Saving: ${money(section.saving)}`, `Price after offer: ${money(section.original - section.saving)}`);
+    message.push('', `${title}: ${section.count} jars · ${section.rate * 100}% off`, ...section.lines.map(item => `• ${item.name} · ${item.size} × ${item.quantity} · ${money(item.price * item.quantity)}`), `Original price: ${money(section.original)}`, `Saving: ${money(section.saving)}`, `Price after offer: ${money(section.original - section.saving)}`);
     if (section.gift) { message.push('Gift wrap: Yes'); if (section.gift.message) message.push(`Personal message: ${section.gift.message}`); if (section.gift.ribbon) message.push(`Satin ribbon: ${section.gift.ribbon}`); }
   });
-  if (!offer.ordinary.length && !offer.sections.length) message.push('', ...items.map(item => `• ${item.name} - ${item.size} × ${item.quantity} - ${money(item.price * item.quantity)}`));
+  if (!offer.ordinary.length && !offer.sections.length) message.push('', ...items.map(item => `• ${item.name} · ${item.size} × ${item.quantity} · ${money(item.price * item.quantity)}`));
   if (offer.saving) message.push('', `Total offer saving: ${money(offer.saving)}`);
   message.push('', `Subtotal after offer: ${money(orderSubtotal)}`, `Delivery: ${shipping ? money(shipping) : 'Complimentary'}`, `Order total: ${money(orderSubtotal + shipping)}`, 'Please help me confirm availability, delivery and payment.');
   window.open(`https://wa.me/${WHATSAPP_ORDER_NUMBER}?text=${encodeURIComponent(message.join('\n'))}`, '_blank', 'noopener,noreferrer');
@@ -127,6 +127,8 @@ function selectVariant(size) {
   const variant = currentVariant();
   qs('#detailPrice').textContent = money(variant.price);
   qs('#selectedWeight').textContent = variant.size;
+  if (qs('#mobilePrice')) qs('#mobilePrice').textContent = money(variant.price) + ' · ' + variant.size;
+  document.querySelectorAll('[data-variant]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.variant === size)));
   document.querySelectorAll('[data-variant]').forEach(button => button.classList.toggle('is-selected', button.dataset.variant === size));
 }
 function setMainPhoto(src) {
@@ -153,31 +155,42 @@ function recipeMarkup(product) {
 }
 function renderProduct() {
   const product = state.product;
+  const room = window.NectraRooms?.[product.id] || {room:product.collection,pale:product.color,color:'#193345',line:product.name,use:product.description};
+  document.body.style.setProperty('--room-pale',room.pale);
+  document.body.style.setProperty('--room-color',room.color);
+  document.body.dataset.room=product.id;
   const variant = firstVariant(product);
   state.selectedSize = variant.size;
   const gallery = [...new Set([...(product.gallery || []), product.image])];
   qs('#productRoot').innerHTML = `<section class="product-shell">
     <div class="product-gallery">
-      <div class="main-photo-wrap" style="--photo-bg:${product.color}"><img id="mainProductPhoto" class="main-product-photo" src="${gallery[0]}" alt="${product.name}"><span class="gallery-badge">${product.collection}</span></div>
+      <div class="main-photo-wrap" style="--photo-bg:${product.color}"><img id="mainProductPhoto" class="main-product-photo" src="${gallery[0]}" alt="${product.name}"><span class="gallery-badge">${room.room}</span></div>
       <div class="thumb-row">${gallery.map(src => `<button data-photo="${src}" class="${src === gallery[0] ? 'is-selected' : ''}" aria-label="View product photo">${image(src, `${product.name} view`, '')}</button>`).join('')}</div>
     </div>
     <section class="buy-panel">
-      <a class="back-link" href="/#shop">← Back to collection</a>
-      <p class="eyebrow">${product.collection}</p>
+      <div class="buy-heading">
+      <a class="back-link" href="/shop.html">← Back to the five jars</a>
+      <p class="eyebrow">Welcome to the ${room.room} · ${room.botanical || ''}</p>
       <h1>${product.name}</h1>
-      <p class="product-lede">${product.description}</p>
+      <p class="product-lede">${room.intro || room.use}</p>
       <div class="price-row"><span id="detailPrice">${money(variant.price)}</span><small>We’re taking orders via WhatsApp. Free delivery above ₹999.</small></div>
+      </div><div class="buy-controls">
       <div class="selector-block"><p>Weight <b id="selectedWeight">${variant.size}</b></p><div class="variant-grid">${product.variants.map(v => `<button data-variant="${v.size}" class="variant-card ${v.size === variant.size ? 'is-selected' : ''}"><strong>${v.size}</strong><span>${money(v.price)}</span></button>`).join('')}</div></div>
       <div class="selector-block"><p>Quantity</p><div class="detail-quantity"><button data-qty="-1" aria-label="Decrease quantity">−</button><b id="detailQty">1</b><button data-qty="1" aria-label="Increase quantity">+</button></div></div>
       <div class="product-actions"><button class="button gold full" id="buyNow" data-buy-now>Order on WhatsApp <span>→</span></button><button class="button full" id="addToCart">Add to bag <span>+</span></button></div>
       <div class="mini-promises"><span>Choose your size</span><span>Gift options available</span><span>Free delivery above ₹999</span></div>
+      </div>
     </section>
   </section>
   <section class="content-band">
-    <div><p class="eyebrow">Description</p><h2>Why this honey?</h2><p>${product.description}</p></div>
-    <div class="why-grid">${product.why.map(point => `<article><span>✦</span><p>${point}</p></article>`).join('')}</div>
+    <div><p class="eyebrow">Inside the ${room.room}</p><h2>${room.title || room.line}</h2><p>${room.story || product.description}</p></div>
+    <div class="why-grid">${(room.details || product.why).map(point => `<article><span aria-hidden="true">❧</span><p>${point}</p></article>`).join('')}</div>
   </section>
-  ${recipeMarkup(product)}<div class="mobile-buy-bar"><span><b>${product.name}</b><small>From ${money(variant.price)}</small></span><button class="button gold" type="button" data-buy-now>Order on WhatsApp <span>→</span></button></div>`;
+  ${product.id==='blush'?`<section class="rose-care room-details"><p class="eyebrow">At the rose dressing table</p><h2>A little love, reflected back.</h2><p>Make this your corner. A soft towel beside the mirror, a favourite song in the background, and a few unhurried minutes for yourself.</p><ol><li><b>Set the scene.</b> Clear a little space and bring your Rose Honey to the dressing table.</li><li><b>Keep it gentle.</b> With a clean spoon and the jar’s directions to hand, settle into your usual skincare routine.</li><li><b>Enjoy your own company.</b> There is no occasion to dress for. This lovely little pause is for you.</li></ol><details><summary>Before applying: care &amp; skin sensitivity</summary><p>Check that the label supports topical use and follow its directions. Test a small area before wider use; testing cannot rule out every reaction. Avoid known allergens, eyes, and broken or irritated skin. Rinse off and stop if irritation occurs. For sensitive skin or an existing condition, ask a dermatologist first. This is not a treatment for acne, pigmentation or other skin conditions.</p><a href="https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/test-skin-care-products/" target="_blank" rel="noreferrer">Dermatologist guide to testing skincare →</a></details></section>`:''}
+  <section class="room-details"><p class="eyebrow">Make yourself at home</p><h2>A little more about your jar.</h2><details open><summary>A moment to try</summary><p>${room.use}</p></details><details><summary>From hive to home</summary><p>We tend our own hives and pack Nectra in Virudhunagar, Tamil Nadu. For ingredient or batch questions, ask us before ordering. The label on your jar is the reference for product-specific information.</p></details><details><summary>Ordering &amp; delivery</summary><p>Add your jars to the bag, then send your order through WhatsApp. We will confirm availability, delivery and payment with you. Delivery is ₹50, complimentary for orders of ₹999 or more.</p></details><details><summary>Giving this jar?</summary><p>Build a gift with three or five different jars, a personal message and your choice of ribbon.</p><a href="/shop.html?gift=1">Create a personal gift →</a></details></section>
+  ${product.id === 'signature' ? `<section class="jar-kitchen" aria-labelledby="kitchenTitle"><p class="eyebrow">From the everyday table</p><h2 id="kitchenTitle">One jar. Three little rituals.</h2><p>Simple kitchen ideas for your Multiflora Honey. Each makes one serving; adjust the honey to your taste.</p><div class="jar-recipes"><article><small>5 MINUTES · BREAKFAST</small><h3>Banana &amp; honey bowl</h3><p>Plain yoghurt, a ripe banana and a small golden drizzle.</p><details><summary>Make this bowl →</summary><ol><li>Spoon 150 g plain yoghurt into a bowl.</li><li>Slice one small banana over it.</li><li>Add 1 tsp Multiflora Honey and 1 tbsp oats. Serve straight away.</li></ol><p>Contains milk; use a suitable dairy-free yoghurt if needed.</p></details></article><article><small>5 MINUTES · SNACK</small><h3>Honey toast, your way</h3><p>Warm toast with peanut butter and a finishing swirl of honey.</p><details><summary>Make this toast →</summary><ol><li>Toast one slice of bread.</li><li>Spread with 1 tbsp peanut butter.</li><li>Drizzle with 1 tsp Multiflora Honey. Add a pinch of cinnamon if you like.</li></ol><p>Contains peanuts and, depending on your bread, wheat.</p></details></article><article><small>3 MINUTES · AT THE TABLE</small><h3>Lemon-honey dressing</h3><p>A bright little dressing for cucumber, carrot or a mixed salad.</p><details><summary>Mix this dressing →</summary><ol><li>Stir together 1 tsp honey and 2 tsp lemon juice.</li><li>Whisk in 1 tbsp olive oil and a pinch of pepper.</li><li>Toss with your salad just before serving.</li></ol></details></article></div><p><small>Original Nectra serving ideas, not nutrition or health advice.</small></p></section>` : ''}
+  <section class="room-related"><p class="eyebrow">Another room, another moment</p><h2>Meet the rest of the house.</h2><div>${state.products.filter(p=>p.id!==product.id).map(p=>`<a href="/product/${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy"><small>${window.NectraRooms?.[p.id]?.room || p.collection}</small><h3>${p.name}</h3><p>From ${money(firstVariant(p).price)} →</p></a>`).join('')}</div></section>
+  <div class="mobile-buy-bar"><span><b>${product.name}</b><small id="mobilePrice">${money(variant.price)} · ${variant.size}</small></span><button class="button gold" type="button" data-buy-now>Order on WhatsApp <span>→</span></button></div>`;
 }
 function updateCheckoutSummary() {
   const items = cartEntries();
@@ -303,8 +316,9 @@ fetch('/api/products').then(r => r.json()).then(products => {
   const requestedId = new URLSearchParams(location.search).get('product') || pathId;
   state.product = products.find(product => product.id === requestedId) || products.find(product => product.id === savedId) || products[0];
   sessionStorage.setItem('nectra-selected-product', state.product.id);
-  document.title = `${state.product.name} - Nectra`;
+  document.title = `${state.product.name} | Nectra`;
   renderProduct();
+  if(location.hash==='#kitchenTitle')qs('#kitchenTitle')?.scrollIntoView({block:'start'});
   const variant = firstVariant(state.product);
   track('view_item', { currency: 'INR', value: variant.price, items: [{ item_id: state.product.id, item_name: state.product.name, item_variant: variant.size }] });
   renderCart();
