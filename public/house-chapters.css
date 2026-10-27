@@ -189,4 +189,10 @@
  .honey-house-page .house-origin>div{background:#fff8e9!important;border:1px solid #cfc5a9!important;box-shadow:4px 5px 0 #8a74431c!important;padding:18px!important;color:#263a30!important}
  .honey-house-page .house-origin>div p,.honey-house-page .house-origin>div h2,.honey-house-page .house-origin>div a{color:#263a30!important}
  .honey-house-page .house-origin figure{background:#fff8e9!important}
+
+ /* The founder note keeps its own solid paper surface on narrow screens. */
+ .house-theme .story-v4-opening article{background:#fff8e9!important;border:1px solid #c6b38c!important;box-shadow:4px 5px 0 #7b65421c!important;padding:18px!important;color:#17372e!important}
+ .house-theme .story-v4-opening article .eyebrow{color:#8a5a25!important;font-weight:800!important}
+ .house-theme .story-v4-opening article h2,.house-theme .story-v4-opening article p{color:#17372e!important;font-weight:600!important;text-shadow:none!important}
+ .house-theme .story-v4-opening article h2{font-weight:800!important}
 }
