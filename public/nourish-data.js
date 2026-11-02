@@ -3,7 +3,7 @@ const recipeImage = {
 };
 
 const makeRecipe = (id, title, tags, image, minutes, ingredients, steps, description, honey = 'Multiflora Honey') => ({
-  id, slug: id, title, description, image, imageAlt: `${title} made with simple everyday ingredients`, prepTime: minutes, cookTime: minutes > 15 ? 15 : 0, totalTime: minutes, servings: 2, difficulty: minutes <= 10 ? 'Easy' : 'Simple', mealType: tags[0], tags, ingredients, instructions: steps, honeyVariety: honey, featured: ['honey-banana-oats','honey-ginger-smoothie','honey-nut-energy-bites','honey-pancakes','quinoa-honey-salad'].includes(id), nutrition: { note: 'A practical recipe built around familiar whole foods. Nutrition values can vary with ingredients and portion size.' }, source: { name: 'Nectra Kitchen', url: 'https://www.nectrahoney.in/nourish/recipes' }
+  id, slug: id, title, description, image, imageAlt: `${title} made with simple everyday ingredients`, prepTime: minutes, cookTime: minutes > 15 ? 15 : 0, totalTime: minutes, servings: 2, difficulty: minutes <= 10 ? 'Easy' : 'Simple', mealType: tags[0], tags, ingredients, instructions: steps, honeyVariety: honey, featured: ['honey-banana-oats','honey-ginger-smoothie','honey-nut-energy-bites','honey-pancakes','quinoa-honey-salad'].includes(id), nutrition: { note: 'A practical recipe built around familiar whole foods. Nutrition values can vary with ingredients and portion size.' }, source: { name: 'Nectra Kitchen', url: 'https://nectrahoney.in/nourish/recipes' }
 });
 
 export const recipes = [

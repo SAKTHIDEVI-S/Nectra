@@ -173,6 +173,7 @@ function renderProduct() {
       <p class="eyebrow">Welcome to the ${room.room} · ${room.botanical || ''}</p>
       <h1>${product.name}</h1>
       <p class="product-lede">${room.intro || room.use}</p>
+      ${product.id === 'signature' ? '<p>From our own hives in Virudhunagar. No added sugar or additives. Available in 250 g, 500 g and 1 kg jars.</p>' : ''}
       <div class="price-row"><span id="detailPrice">${money(variant.price)}</span><small>We’re taking orders via WhatsApp. Free delivery above ₹999.</small></div>
       </div><div class="buy-controls">
       <div class="selector-block"><p>Weight <b id="selectedWeight">${variant.size}</b></p><div class="variant-grid">${product.variants.map(v => `<button data-variant="${v.size}" class="variant-card ${v.size === variant.size ? 'is-selected' : ''}"><strong>${v.size}</strong><span>${money(v.price)}</span></button>`).join('')}</div></div>
@@ -316,7 +317,7 @@ fetch('/api/products').then(r => r.json()).then(products => {
   const requestedId = new URLSearchParams(location.search).get('product') || pathId;
   state.product = products.find(product => product.id === requestedId) || products.find(product => product.id === savedId) || products[0];
   sessionStorage.setItem('nectra-selected-product', state.product.id);
-  document.title = `${state.product.name} | Nectra`;
+  document.title = state.product.id === 'signature' ? 'Multiflora Honey 250 g, 500 g & 1 kg | Nectra Honey' : `${state.product.name} | Nectra Honey`;
   renderProduct();
   if(location.hash==='#kitchenTitle')qs('#kitchenTitle')?.scrollIntoView({block:'start'});
   const variant = firstVariant(state.product);

@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { journalArticles, journalArticleBySlug } from './public/journal-data.js';
+import { productPage } from './worker/seo.js';
 import { recipes, bodyTopics, nourishNotes, habitOptions, plateFoods, weeklyNourishWeeks, getCurrentNourishWeek } from './public/nourish-data.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -12,13 +13,13 @@ loadEnv(path.join(__dirname, '.env'));
 const port = Number(process.env.PORT || 3000);
 const appSecret = process.env.APP_SECRET || 'change-me-before-production';
 const adminPassword = process.env.ADMIN_PASSWORD || 'nectra-admin-change-me';
-const siteUrl = 'https://www.nectrahoney.in';
+const siteUrl = 'https://nectrahoney.in';
 const products = [
   {
     id: 'signature', name: 'Multiflora Honey', collection: 'Our Bestseller', price: 249, size: '250 g', color: '#113c2e', accent: '#d7ad45', note: 'Raw multiflora honey', image: '/assets/Multiflora%20honey.png',
     gallery: ['/assets/multiflora%20honey%20png.png', '/assets/multiflora%20honey%202.png', '/assets/multiflora%20honey%203.png', '/assets/multiflora%20honey%204.png'],
     variants: [{ size: '250 g', price: 249 }, { size: '500 g', price: 499 }, { size: '1 kg', price: 899 }],
-    description: 'A nuanced, golden harvest with a rounded floral finish. Made for slow breakfasts, cheese boards, warm toast and everyday rituals.',
+    description: 'Multiflora honey from our own hives in Virudhunagar, packed locally with no added sugar or additives. Spoon it over toast, curd or oats. Choose 250 g, 500 g or 1 kg.',
     details: ['Unheated & minimally filtered', 'Multi-floral nectar', 'Premium glass jar'],
     why: ['Balanced floral taste that works with almost everything', 'Perfect first jar for new Nectra customers', 'Raw-style texture with a naturally rich aroma']
   },
@@ -206,8 +207,8 @@ function journalArticleHead(article) {
   const canonical = `${siteUrl}/journal/${article.slug}`;
   const description = `${article.description} From Nectra Honey.`;
   const title = `${article.title} | Nectra Honey Journal`;
-  const schema = { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description, image: [`${siteUrl}${article.image}`], datePublished: article.dateISO, dateModified: '2026-09-28', author: { '@type': 'Organization', name: 'Nectra Honey' }, publisher: { '@type': 'Organization', name: 'Nectra Honey', url: siteUrl, logo: { '@type': 'ImageObject', url: `${siteUrl}/assets/logo.png` } }, isPartOf: { '@type': 'Blog', name: 'Nectra Honey Journal', url: `${siteUrl}/journal` }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical } };
-  return `<meta name="description" content="${escapeHtml(description)}">\n  <link rel="canonical" href="${canonical}">\n  <meta name="robots" content="index,follow">\n  <title>${escapeHtml(title)}</title>\n  <meta property="og:type" content="article">\n  <meta property="og:title" content="${escapeHtml(title)}">\n  <meta property="og:description" content="${escapeHtml(description)}">\n  <meta property="og:url" content="${canonical}">\n  <meta property="og:image" content="${siteUrl}${article.image}">\n  <meta property="article:published_time" content="${article.dateISO}">\n  <meta property="article:modified_time" content="2026-09-28">\n  <meta name="twitter:card" content="summary_large_image">\n  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`;
+  const schema = { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description, image: [`${siteUrl}${article.image}`], datePublished: article.dateISO, dateModified: article.modifiedISO || article.dateISO, author: { '@type': 'Organization', name: 'Nectra Honey' }, publisher: { '@type': 'Organization', name: 'Nectra Honey', url: siteUrl, logo: { '@type': 'ImageObject', url: `${siteUrl}/assets/logo.png` } }, isPartOf: { '@type': 'Blog', name: 'Nectra Honey Journal', url: `${siteUrl}/journal` }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical } };
+  return `<meta name="description" content="${escapeHtml(description)}">\n  <link rel="canonical" href="${canonical}">\n  <meta name="robots" content="index,follow">\n  <title>${escapeHtml(title)}</title>\n  <meta property="og:type" content="article">\n  <meta property="og:title" content="${escapeHtml(title)}">\n  <meta property="og:description" content="${escapeHtml(description)}">\n  <meta property="og:url" content="${canonical}">\n  <meta property="og:image" content="${siteUrl}${article.image}">\n  <meta property="article:published_time" content="${article.dateISO}">\n  <meta property="article:modified_time" content="${article.modifiedISO || article.dateISO}">\n  <meta name="twitter:card" content="summary_large_image">\n  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`;
 }
 function renderJournalIndex() {
   const [featured, ...articles] = journalArticles;
@@ -252,13 +253,9 @@ function serveStatic(req, res, pathname) {
   const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8' };
   if (cleanPath.startsWith('/product/')) {
     const id = cleanPath.split('/').filter(Boolean).pop();
-    const product = products.find(entry => entry.id === id) || products[0];
-    const title = `${product.name} | Nectra Honey`;
-    const description = `${product.description} Shop ${product.name} from Nectra Honey and order through WhatsApp.`;
-    const page = fs.readFileSync(file, 'utf8')
-      .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapeHtml(description)}">`)
-      .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
-      .replace('</head>', `${productSeoTags(product)}\n</head>`);
+    const product = products.find(entry => entry.id === id);
+    if (!product) { res.writeHead(404, { 'Content-Type': 'text/plain' }); res.end('Product not found'); return true; }
+    const page = productPage(fs.readFileSync(file, 'utf8'), product);
     res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
     res.end(page);
     return true;

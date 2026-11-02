@@ -5,6 +5,7 @@
   "description": "Nectra premium honey storefront and order console",
   "type": "module",
   "scripts": {
+    "test": "node --test tests/*.test.js",
     "start": "node server.js",
     "dev": "node --watch server.js",
     "deploy:cloudflare": "npx wrangler deploy"

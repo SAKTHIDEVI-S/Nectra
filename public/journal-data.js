@@ -1,5 +1,44 @@
 export const journalArticles = [
   {
+    slug: 'how-to-store-honey',
+    category: 'Jar care',
+    title: 'How to Store Honey at Home',
+    subtitle: 'A closed lid, a dry spoon and a place away from the stove.',
+    description: 'How to store your honey jar, keep moisture out and understand crystallisation. Practical jar care from Nectra Honey in Virudhunagar.',
+    date: 'November 2026', dateISO: '2026-11-02', readTime: '3 minute read',
+    image: '/assets/journal-label-checklist.svg',
+    imageAlt: 'Illustrated honey jar and label care checklist',
+    product: { href: '/product/signature', name: 'Choose your Multiflora Honey jar' },
+    body: `<p class="article-intro">A honey jar often lives beside the tea tin or breakfast bowls. Pick a spot that stays dry and is away from direct sunlight and the heat of cooking. Then follow the storage instructions and use by date on your jar.</p>
+      <h2>Keep the lid closed between spoonfuls</h2>
+      <p>Use a clean, dry spoon and close the lid after serving. Avoid dipping a spoon from your tea or curd back into the jar. It is a small habit that keeps water and food out of your honey.</p>
+      <h2>Does honey need to go in the fridge?</h2>
+      <p>For Nectra Honey, follow our label: store in a cool, dry place and do not refrigerate. Keep the jar out of a sunny window and away from the hob. Check the label on other products, especially honey blends, rather than assuming every jar has the same instructions.</p>
+      <h2>Why has my honey become grainy?</h2>
+      <p>Honey can naturally form crystals. A change from liquid to a grainy texture does not, by itself, mean the honey has spoiled. It also is not a home test that proves purity. Read our guide to <a href="/journal/why-honey-crystallises">why honey crystallises</a> before deciding what to do with your jar.</p>
+      <h2>A jar that fits your kitchen</h2>
+      <p>Our <a href="/product/signature">Multiflora Honey comes in 250 g, 500 g and 1 kg sizes</a>. Choose what you will use comfortably within the labelled date, rather than buying a large jar simply because it looks better value. For serving ideas, try <a href="/journal/three-ways-to-use-honey-with-curd-fruit-and-oats">honey with curd, fruit and oats</a>.</p>
+      <p><small>General reference: <a href="https://extension.purdue.edu/foodlink/includes/pubs/Print2perpaper/2Herbsandhoneyprint/2HONEYprint.pdf" target="_blank" rel="noopener noreferrer">Purdue Extension FoodLink: Honey</a>. Product specific storage advice follows the Nectra label.</small></p>`
+  },
+  {
+    slug: 'why-honey-crystallises', category: 'Good to know',
+    title: 'Why Does Honey Crystallise?',
+    subtitle: 'Those little grains are a change in texture, not a verdict on your jar.',
+    description: 'Why honey crystallises, what a grainy texture means and why crystallisation alone cannot prove honey purity. A practical Nectra Honey guide.',
+    date: 'November 2026', dateISO: '2026-11-02', readTime: '3 minute read',
+    image: '/assets/journal-multiflora-botanical.png', imageAlt: 'Illustration of flowers, a bee and honeycomb',
+    product: { href: '/product/signature', name: 'Explore Nectra Multiflora Honey' },
+    body: `<p class="article-intro">You open a jar that used to pour easily and notice small grains. Honey can crystallise naturally as some of its sugars form crystals. The jar may turn cloudy or become thicker and easier to spread.</p>
+      <h2>Is crystallised honey fake?</h2>
+      <p>No. Crystallisation can happen in honey naturally. But the reverse claim is not reliable either: crystals alone cannot prove that a honey is pure. Avoid judging a jar by a single kitchen test. Look for clear ingredients, batch information and a producer you can contact.</p>
+      <h2>Do I need to make it liquid again?</h2>
+      <p>Not necessarily. If the jar is otherwise sound, properly stored and within its labelled date, you may prefer its thicker texture on toast. If you want it runnier, use gentle warmth appropriate for the container and follow the producer's advice. Do not put an unsuitable container into hot water or heat a sealed jar.</p>
+      <h2>What should I check first?</h2>
+      <p>Check the lid, storage history and date. If the jar smells unusual, is leaking or you are uncertain about its condition, ask the producer rather than assuming every change is harmless. Nectra customers can contact us with the batch details and a photograph of the jar.</p>
+      <p>Next: <a href="/journal/how-to-store-honey">how to store honey at home</a> and <a href="/journal/honey-label-checklist">what to look for on a honey label</a>.</p>
+      <p><small>Reference: <a href="https://extension.purdue.edu/foodlink/includes/pubs/Print2perpaper/2Herbsandhoneyprint/2HONEYprint.pdf" target="_blank" rel="noopener noreferrer">Purdue Extension FoodLink: Honey</a>, for the natural crystallisation process.</small></p>`
+  },
+  {
     slug: 'does-every-honey-taste-the-same',
     category: 'Taste notes',
     title: 'Does Every Honey Taste the Same?',
@@ -130,16 +169,19 @@ export const journalArticles = [
   {
     slug: 'what-is-multiflora-honey',
     category: 'Good to know',
-    title: 'What Does Multiflora Honey Actually Mean?',
+    title: 'What Is Multiflora Honey? Taste, Uses and Choosing a Jar',
+    modifiedISO: '2026-11-02',
     subtitle: 'A simple answer to one of the most common questions around a honey jar.',
-    description: 'Learn what multiflora honey means, why its flavour can feel layered and how to enjoy it at the table.',
+    description: 'Multiflora honey comes from the nectar of several flowers. Learn how it differs from single flower honey and how to use it in everyday food.',
     date: 'September 2026',
     dateISO: '2026-09-17',
     readTime: '7 minute read',
     image: '/assets/journal-multiflora-botanical.png',
     imageAlt: 'Botanical illustration of a bee visiting several flowers around honeycomb',
     product: { href: '/product/signature', name: 'Shop Multiflora Honey' },
-    body: `<p class="article-intro">Multiflora honey is less mysterious than it sounds. It begins when bees visit more than one kind of flower while gathering nectar. The word simply describes a broad floral source rather than one named blossom.</p>
+    body: `<p class="article-intro">Multiflora honey comes from bees gathering nectar from more than one kind of flower. You may also see it called multifloral honey. The name describes the floral source, not a blend of honey with artificial flavours.</p>
+      <h2>Our Multiflora Honey in Virudhunagar</h2>
+      <p>At Nectra, we tend our own hives in Virudhunagar and pack our jars at 18C, Malaipettai Street. Our Multiflora Honey has no added sugar or additives. If you are choosing a <a href="/product/signature">500 g multiflora honey jar</a>, you can compare it with our 250 g and 1 kg options on the same product page.</p>
       <h2>More than one blossom, one rounded jar</h2>
       <p>A honey named after a particular flower usually points to a dominant botanical source. Multiflora honey reflects a wider mix of blossoms available in the landscape. That mix can make the flavour feel gentle, floral, warm, or slightly deeper depending on the season and source.</p>
       <p>Imagine a garden after rain. There may be jasmine, clover, wildflowers, flowering trees, and herbs growing in the same area. Bees do not read a menu and choose one blossom for the whole day. They work with what is available. Multiflora honey carries some of that natural variety into the jar.</p>

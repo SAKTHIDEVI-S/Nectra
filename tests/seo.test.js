@@ -1,0 +1,104 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import worker from '../worker/index.js';
+import { products } from '../worker/catalog.js';
+import { journalArticles } from '../public/journal-data.js';
+
+const env = { ASSETS: { async fetch(request) {
+  const pathname = new URL(request.url).pathname;
+  try {
+    return new Response(await fs.readFile(new URL(`../public${pathname}`, import.meta.url)), {
+      headers: { 'content-type': pathname.endsWith('.html') ? 'text/html' : 'text/plain' }
+    });
+  } catch { return new Response('Not found', { status: 404 }); }
+} } };
+const get = (path, method = 'GET') => worker.fetch(new Request(`https://nectrahoney.in${path}`, { method }), env);
+
+test('all Journal articles have unique slugs, local images and sitemap entries', async () => {
+  const sitemap = await fs.readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
+  assert.equal(new Set(journalArticles.map(a => a.slug)).size, journalArticles.length);
+  for (const article of journalArticles) {
+    assert.ok(sitemap.includes(`/journal/${article.slug}</loc>`));
+    await fs.access(new URL(`../public${decodeURIComponent(article.image)}`, import.meta.url));
+    for (const [, href] of article.body.matchAll(/href="(\/[^"#]*)"/g)) {
+      assert.equal((await get(href)).status, 200, href);
+    }
+  }
+});
+
+test('Multiflora search copy is specific and product catalogue stays in sync', async () => {
+  const html = await (await get('/product/signature')).text();
+  assert.match(html, /Multiflora Honey 250 g, 500 g &amp; 1 kg/);
+  assert.match(html, /own hives in Virudhunagar/);
+  assert.match(html, /no added sugar or additives/);
+  const server = await fs.readFile(new URL('../server.js', import.meta.url), 'utf8');
+  assert.ok(server.includes(products.find(p => p.id === 'signature').description));
+});
+
+test('homepage has one HTTPS apex canonical and a branded title', async () => {
+  const response = await get('/');
+  const html = await response.text();
+  assert.equal(response.status, 200);
+  assert.match(html, /<title>Nectra Honey \| Multiflora Honey from Virudhunagar<\/title>/);
+  assert.match(html, /rel="canonical" href="https:\/\/nectrahoney.in\/"/);
+  assert.doesNotMatch(html, /https:\/\/www.nectrahoney.in/);
+});
+
+test('www and HTTP redirect directly to HTTPS apex, preserving path and query', async () => {
+  for (const origin of ['https://www.nectrahoney.in', 'http://nectrahoney.in']) {
+    const response = await worker.fetch(new Request(`${origin}/product/signature?size=500`), env);
+    assert.equal(response.status, 301);
+    assert.equal(response.headers.get('location'), 'https://nectrahoney.in/product/signature?size=500');
+  }
+});
+
+test('every product retains its URL and has its own metadata and initial HTML', async () => {
+  for (const product of products) {
+    const response = await get(`/product/${product.id}`);
+    const html = await response.text();
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('location'), null);
+    assert.ok(html.includes(`href="https://nectrahoney.in/product/${product.id}"`));
+    assert.ok(html.includes(`<h1>${product.name}</h1>`));
+    assert.equal((html.match(/<title>/g) || []).length, 1);
+    for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) JSON.parse(match[1]);
+  }
+});
+
+test('journal index and all articles render actual content, not placeholders', async () => {
+  for (const path of ['/journal', ...journalArticles.map(article => `/journal/${article.slug}`)]) {
+    const response = await get(path);
+    const html = await response.text();
+    assert.equal(response.status, 200);
+    assert.doesNotMatch(html, /\{\{HEAD\}\}|\{\{CONTENT\}\}/);
+    assert.match(html, /<h1>/);
+    assert.ok(html.includes(`href="https://nectrahoney.in${path}"`));
+  }
+});
+
+test('unknown products and articles return real 404 responses', async () => {
+  for (const path of ['/product/not-a-jar', '/journal/not-an-article']) assert.equal((await get(path)).status, 404);
+});
+
+test('sitemap URLs resolve successfully and use the chosen domain', async () => {
+  const sitemap = await fs.readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
+  for (const [, location] of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)) {
+    assert.equal(new URL(location).origin, 'https://nectrahoney.in');
+    assert.equal((await get(new URL(location).pathname)).status, 200, location);
+  }
+  const robots = await fs.readFile(new URL('../public/robots.txt', import.meta.url), 'utf8');
+  assert.match(robots, /Sitemap: https:\/\/nectrahoney.in\/sitemap.xml/);
+});
+
+test('HEAD returns headers without a response body', async () => {
+  const response = await get('/product/signature', 'HEAD');
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), '');
+});
+
+test('Cloudflare lets the Worker handle HTML without stripping product slugs', async () => {
+  const config = JSON.parse(await fs.readFile(new URL('../wrangler.jsonc', import.meta.url), 'utf8'));
+  assert.equal(config.assets.html_handling, 'none');
+  assert.equal(config.assets.run_worker_first, true);
+});

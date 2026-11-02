@@ -1,4 +1,6 @@
 import { products } from './catalog.js';
+import { journalArticles } from '../public/journal-data.js';
+import { productPage, journalPage } from './seo.js';
 import { recipes, bodyTopics, nourishNotes, habitOptions, plateFoods, weeklyNourishWeeks, getCurrentNourishWeek } from '../public/nourish-data.js';
 
 const json = (value, status = 200) => new Response(JSON.stringify(value), {
@@ -68,13 +70,39 @@ function pageFor(pathname) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (request.method === 'GET') {
+    if (url.hostname === 'www.nectrahoney.in' || (url.hostname === 'nectrahoney.in' && url.protocol === 'http:')) {
+      url.hostname = 'nectrahoney.in';
+      url.protocol = 'https:';
+      return Response.redirect(url.href, 301);
+    }
+    if (request.method === 'GET' || request.method === 'HEAD') {
+      const aliases = { '/index.html': '/', '/story.html': '/story', '/bulk-orders.html': '/bulk-orders', '/journal.html': '/journal' };
+      if (aliases[url.pathname] || (url.pathname.length > 1 && url.pathname.endsWith('/'))) {
+        url.pathname = aliases[url.pathname] || url.pathname.replace(/\/+$/, '');
+        return Response.redirect(url.href, 301);
+      }
       const response = apiResponse(url);
       if (response) return response;
 
+      const product = products.find(item => url.pathname === `/product/${item.id}`);
+      const article = journalArticles.find(item => url.pathname === `/journal/${item.slug}`);
+      if ((url.pathname.startsWith('/product/') && !product) || (url.pathname.startsWith('/journal/') && !article)) {
+        return new Response('Page not found', { status: 404 });
+      }
+
       const target = new URL(pageFor(url.pathname), url);
-      const assetRequest = new Request(target, request);
+      const assetRequest = new Request(target, { method: 'GET', headers: request.headers });
       const asset = await env.ASSETS.fetch(assetRequest);
+      if (asset.ok && (product || article || url.pathname === '/journal')) {
+        const source = await asset.text();
+        const html = product ? productPage(source, product) : journalPage(source, article);
+        const headers = new Headers(asset.headers);
+        headers.delete('etag');
+        headers.delete('content-length');
+        headers.set('content-type', 'text/html; charset=utf-8');
+        return new Response(request.method === 'HEAD' ? null : html, { status: 200, headers });
+      }
+      if (request.method === 'HEAD') return new Response(null, { status: asset.status, headers: asset.headers });
       if (asset.status !== 404) return asset;
     }
     return new Response('Not found', { status: 404 });
