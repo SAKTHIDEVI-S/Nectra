@@ -27,7 +27,7 @@
 
   rail.setAttribute('aria-label', 'The complete Nectra Honey House. Choose a room to explore its jar.');
   const rooms = [...rail.querySelectorAll('.house-room')];
-  const sources = ['multiflora honey png.png','skincare and beauty honey png.png','energy honey png.png','calm honey png.png','health and immunity honey png.png'];
+  const sources = ['multiflora-hive-jar.png','skincare and beauty honey png.png','energy honey png.png','calm honey png.png','health and immunity honey png.png'];
   rooms.forEach((room, i) => { room.querySelector('img').src = '/assets/' + encodeURIComponent(sources[i]); });
   const guide=document.createElement('nav');
   guide.className='house-room-guide';

@@ -1,0 +1,17 @@
+/* A quiet, readable editorial moment for the scan-to-listen label. */
+.product-page .hive-listen{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,60px);align-items:center;background:#f3f2e7;color:#183f30;padding:clamp(24px,4vw,56px);margin:24px auto;max-width:1280px;border-block:1px solid #cbb784}
+.hive-listen-visual{margin:0;min-width:0;text-align:center}
+.hive-listen-visual img{display:block;width:100%;height:auto;max-height:540px;object-fit:contain;background:white;border:1px solid #e5ddca}
+.hive-listen-visual figcaption{font-family:var(--serif,Georgia,serif);font-style:italic;color:#66532e;padding:14px 0 0}
+.hive-listen-copy{min-width:0}
+.product-page .hive-listen-copy h2{font-family:var(--serif,Georgia,serif);font-size:clamp(28px,3.3vw,44px);line-height:1.14;color:#183f30;margin:12px 0 20px}
+.product-page .hive-listen-copy p{font-size:16px;line-height:1.7;color:#294638;max-width:60ch}
+.product-page .hive-listen-copy .eyebrow{color:#74531c;font-size:11px;letter-spacing:.14em}
+.hive-listen-steps{list-style:none;margin:24px 0;padding:0;display:grid;gap:16px}
+.hive-listen-steps li{display:flex;gap:14px;align-items:baseline}
+.hive-listen-steps li>span{color:#8b651e;font-family:Georgia,serif;font-size:20px}
+.product-page .hive-listen-steps h3{font-size:16px;color:#183f30;margin:0 0 3px;font-family:inherit;font-weight:700}
+.product-page .hive-listen-steps p{font-size:14px;margin:0}
+.product-page .hive-listen-copy .hive-listen-signoff{font-family:var(--serif,Georgia,serif);font-style:italic;color:#74531c}
+.hive-listen-copy>small{display:block;color:#53604e;font-size:12px;line-height:1.6}
+@media(max-width:600px){.product-page .hive-listen{grid-template-columns:1fr;gap:20px;padding:24px 18px;margin:16px 0}.hive-listen-visual img{max-height:290px}.hive-listen-copy h2 br{display:none}.product-page .hive-listen-copy p{font-size:15px}.hive-listen-steps{gap:14px}}

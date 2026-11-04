@@ -183,6 +183,12 @@ function renderProduct() {
       </div>
     </section>
   </section>
+  ${product.id === 'signature' ? `<section class="hive-listen" aria-labelledby="hiveListenTitle">
+    <figure class="hive-listen-visual"><img src="/assets/multiflora-hive-front.png" alt="The updated Nectra Multiflora jar with its hive, heart-shaped sound wave and scan-to-listen QR label" loading="lazy" width="1254" height="1254"><figcaption>A little of our hive, carried home.</figcaption></figure>
+    <div class="hive-listen-copy"><p class="eyebrow">A jar with a story you can hear</p><h2 id="hiveListenTitle">Meet the little workers<br>behind your honey.</h2><p>Before the breakfast table, before the golden drizzle, there is a hive full of life. Your Nectra jar brings you a little closer.</p><p>Scan the QR code on your Multiflora Honey label to hear a recording of our bees. Take a quiet moment to listen to the tiny wings behind something you enjoy every day.</p>
+    <ol class="hive-listen-steps"><li><span>01</span><div><h3>Find the little hive</h3><p>Follow the golden wave on your jar to the QR code.</p></div></li><li><span>02</span><div><h3>Point your camera</h3><p>Open your phone camera, hold it over the code and tap the link that appears.</p></div></li><li><span>03</span><div><h3>Pause. Press play. Come closer.</h3><p>Turn up your sound and spend a moment with our bees.</p></div></li></ol>
+    <p class="hive-listen-signoff">From the hive, with love. Now, with a little hello.</p><small>Scan the code on your physical jar. An internet connection is needed to open the recording.</small></div>
+  </section>` : ''}
   <section class="content-band">
     <div><p class="eyebrow">Inside the ${room.room}</p><h2>${room.title || room.line}</h2><p>${room.story || product.description}</p></div>
     <div class="why-grid">${(room.details || product.why).map(point => `<article><span aria-hidden="true">❧</span><p>${point}</p></article>`).join('')}</div>

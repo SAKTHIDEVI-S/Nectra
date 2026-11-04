@@ -1,6 +1,6 @@
 /* Shared presentation only. Prices, stock choices and ordering use the existing catalogue. */
 window.NectraRooms = {
-  signature: {room:'Everyday Table', botanical:'Multiflora', moment:'Breakfast', color:'#d9a336', pale:'#f4e8c6', line:'A little golden, every day.', use:'Drizzle over toast, stir into curd, or finish a bowl of oats.', image:'multiflora honey png.png'},
+  signature: {room:'Everyday Table', botanical:'Multiflora', moment:'Breakfast', color:'#d9a336', pale:'#f4e8c6', line:'A little golden, every day.', use:'Drizzle over toast, stir into curd, or finish a bowl of oats.', image:'multiflora-hive-jar.png'},
   blush: {room:'Rose Room', botanical:'Rose', moment:'Self care', color:'#b96976', pale:'#f3dfe1', line:'A little time for yourself.', use:'Explore a gentle skincare ritual with Rose Honey. Check the jar’s directions before applying, test a small area first, and stop if irritation occurs. Natural ingredients can still cause reactions.', image:'skincare and beauty honey png.png'},
   vital: {room:'Ginger Kitchen', botanical:'Ginger', moment:'Morning', color:'#b8632e', pale:'#f5dfc8', line:'For a brighter kind of morning.', use:'Stir into a warm drink or pair with lemon in a simple dressing.', image:'energy honey png.png'},
   serene: {room:'Quiet Room', botanical:'Lavender', moment:'Evening', color:'#7c6699', pale:'#e9e1ef', line:'The softer side of your day.', use:'Try a small drizzle with dessert or stir into an evening cup.', image:'calm honey png.png'},

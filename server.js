@@ -16,8 +16,8 @@ const adminPassword = process.env.ADMIN_PASSWORD || 'nectra-admin-change-me';
 const siteUrl = 'https://nectrahoney.in';
 const products = [
   {
-    id: 'signature', name: 'Multiflora Honey', collection: 'Our Bestseller', price: 249, size: '250 g', color: '#113c2e', accent: '#d7ad45', note: 'Raw multiflora honey', image: '/assets/Multiflora%20honey.png',
-    gallery: ['/assets/multiflora%20honey%20png.png', '/assets/multiflora%20honey%202.png', '/assets/multiflora%20honey%203.png', '/assets/multiflora%20honey%204.png'],
+    id: 'signature', name: 'Multiflora Honey', collection: 'Our Bestseller', price: 249, size: '250 g', color: '#113c2e', accent: '#d7ad45', note: 'Raw multiflora honey', image: '/assets/multiflora-hive-jar.png',
+    gallery: ['/assets/multiflora-hive-front.png'],
     variants: [{ size: '250 g', price: 249 }, { size: '500 g', price: 499 }, { size: '1 kg', price: 899 }],
     description: 'Multiflora honey from our own hives in Virudhunagar, packed locally with no added sugar or additives. Spoon it over toast, curd or oats. Choose 250 g, 500 g or 1 kg.',
     details: ['Unheated & minimally filtered', 'Multi-floral nectar', 'Premium glass jar'],
