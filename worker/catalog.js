@@ -3,7 +3,7 @@
 export const products = [
   {
     id: 'signature', name: 'Multiflora Honey', collection: 'Our Bestseller', price: 249, size: '250 g', color: '#113c2e', accent: '#d7ad45', note: 'Raw multiflora honey', image: '/assets/multiflora-hive-jar.png',
-    gallery: ['/assets/multiflora-hive-front.png'],
+    gallery: ['/assets/multiflora-hive-jar.png', '/assets/multiflora-choosing-guide.png', '/assets/multiflora-serving-ideas.png', '/assets/multiflora-our-hives.png'],
     variants: [{ size: '250 g', price: 249 }, { size: '500 g', price: 499 }, { size: '1 kg', price: 899 }],
     description: 'Multiflora honey from our own hives in Virudhunagar, packed locally with no added sugar or additives. Spoon it over toast, curd or oats. Choose 250 g, 500 g or 1 kg.',
     details: ['Unheated & minimally filtered', 'Multi-floral nectar', 'Premium glass jar'],

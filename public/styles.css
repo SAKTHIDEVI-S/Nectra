@@ -319,3 +319,19 @@ select{width:100%;border:1px solid #c9c0ac;background:#fffdf7;color:var(--ink);p
 
 /* Keep the article title and image in one clear, balanced composition. */
 .journal-article .article-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.92fr);max-width:none;height:auto;gap:clamp(30px,5vw,82px);align-items:center;justify-content:normal;border:0;position:static;z-index:auto;padding:clamp(42px,6vw,82px) 0 clamp(38px,5vw,66px)}.article-title-block{max-width:650px}.journal-article .article-image{height:auto;min-height:0;margin:0;aspect-ratio:3 / 2}.article-callout{margin:34px 0;padding:23px 25px 25px;border-left:3px solid #bd8a2e;background:#efe6d5;color:#294136}.article-callout b{display:block;margin-bottom:7px;font-family:var(--serif,Georgia,serif);font-size:25px;font-weight:400}.article-callout p{margin:0;font-size:15px;line-height:1.6}.article-table{display:grid;gap:1px;margin:28px 0 32px;border:1px solid rgba(22,58,45,.25);background:rgba(22,58,45,.25)}.article-table>div{display:grid;grid-template-columns:160px 1fr;gap:18px;padding:17px;background:#f8f3e9}.article-table b{font-family:var(--serif,Georgia,serif);font-size:21px;font-weight:400;line-height:1.05}.article-table span{color:#536058;font-size:14px;line-height:1.55}@media(max-width:800px){.journal-article .article-hero{grid-template-columns:1fr;padding-top:38px;gap:27px}.journal-article .article-image{height:auto;min-height:0;aspect-ratio:3 / 2}.article-table>div{grid-template-columns:1fr;gap:6px}}@media(max-width:520px){.journal-article .article-hero{padding-top:30px}.journal-article .article-image{aspect-ratio:3 / 2}.article-callout{padding:20px}.article-callout b{font-size:23px}.article-table>div{padding:15px}}
+/* Quiet, shared motion language. Never hide content waiting for JavaScript. */
+@media(prefers-reduced-motion:no-preference){
+ html{scroll-behavior:smooth}
+ button,a,input,select,summary{transition:color .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease}
+ .main-product-photo{animation:nectra-arrive .45s ease both}
+ dialog[open]{animation:nectra-arrive .25s ease both}
+ .product-shell,.room-related,.hive-listen{animation:nectra-arrive .5s ease both}
+ @keyframes nectra-arrive{from{opacity:.7;translate:0 8px}to{opacity:1;translate:0 0}}
+ @media(hover:hover){
+  .product-card img,.journal-card img,.room-related img{transition:transform .35s ease}
+  .product-card:hover img,.journal-card:hover img,.room-related a:hover img{transform:scale(1.025)}
+  button:hover,.button:hover{box-shadow:0 3px 12px #173e3014}
+ }
+ @supports(view-transition-name:root){@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:.2s}}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

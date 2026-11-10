@@ -1,17 +1,49 @@
-/* A quiet, readable editorial moment for the scan-to-listen label. */
-.product-page .hive-listen{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,60px);align-items:center;background:#f3f2e7;color:#183f30;padding:clamp(24px,4vw,56px);margin:24px auto;max-width:1280px;border-block:1px solid #cbb784}
-.hive-listen-visual{margin:0;min-width:0;text-align:center}
-.hive-listen-visual img{display:block;width:100%;height:auto;max-height:540px;object-fit:contain;background:white;border:1px solid #e5ddca}
-.hive-listen-visual figcaption{font-family:var(--serif,Georgia,serif);font-style:italic;color:#66532e;padding:14px 0 0}
-.hive-listen-copy{min-width:0}
-.product-page .hive-listen-copy h2{font-family:var(--serif,Georgia,serif);font-size:clamp(28px,3.3vw,44px);line-height:1.14;color:#183f30;margin:12px 0 20px}
-.product-page .hive-listen-copy p{font-size:16px;line-height:1.7;color:#294638;max-width:60ch}
-.product-page .hive-listen-copy .eyebrow{color:#74531c;font-size:11px;letter-spacing:.14em}
-.hive-listen-steps{list-style:none;margin:24px 0;padding:0;display:grid;gap:16px}
-.hive-listen-steps li{display:flex;gap:14px;align-items:baseline}
-.hive-listen-steps li>span{color:#8b651e;font-family:Georgia,serif;font-size:20px}
-.product-page .hive-listen-steps h3{font-size:16px;color:#183f30;margin:0 0 3px;font-family:inherit;font-weight:700}
-.product-page .hive-listen-steps p{font-size:14px;margin:0}
-.product-page .hive-listen-copy .hive-listen-signoff{font-family:var(--serif,Georgia,serif);font-style:italic;color:#74531c}
-.hive-listen-copy>small{display:block;color:#53604e;font-size:12px;line-height:1.6}
-@media(max-width:600px){.product-page .hive-listen{grid-template-columns:1fr;gap:20px;padding:24px 18px;margin:16px 0}.hive-listen-visual img{max-height:290px}.hive-listen-copy h2 br{display:none}.product-page .hive-listen-copy p{font-size:15px}.hive-listen-steps{gap:14px}}
+.product-page .hive-listen{display:block;max-width:1280px;margin:24px auto;padding:0;background:#fbf1de;color:#173e30;overflow:hidden;border-block:1px solid #c9b67f}
+.hive-story-rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#a58b49 #f5e9d0;position:relative}
+.hive-story-scene{flex:0 0 88%;position:relative;scroll-snap-align:start;isolation:isolate;min-width:0;aspect-ratio:3/2;margin:0}
+.hive-story-scene:last-child{flex-basis:100%}
+.hive-story-scene>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+.hive-story-words{padding:clamp(20px,3vw,42px) 6%;text-align:center;max-width:860px;margin:auto}
+.product-page .hive-story-words h2,.product-page .hive-story-words h3{font-family:var(--serif,Georgia,serif);font-size:clamp(26px,3vw,42px);font-weight:500;line-height:1.08;color:#173e30;margin:10px auto;max-width:24ch;text-shadow:none}
+.product-page .hive-story-words p{color:#254737;font-size:clamp(14px,1.2vw,17px);line-height:1.5;margin:8px auto;max-width:52ch}
+.product-page .hive-story-words .eyebrow{font-size:10px;font-weight:700;letter-spacing:.16em;color:#795617;margin:0}
+.hive-story-controls{display:flex;align-items:center;justify-content:center;gap:16px;padding:14px 16px 4px}
+.hive-story-controls button{min-width:44px;min-height:44px;border:1px solid #b89a5c;background:transparent;color:#173e30;font-size:20px;cursor:pointer;border-radius:50%}
+.hive-story-controls button:disabled{opacity:.35;cursor:default}
+.hive-story-dots{display:flex;gap:4px}
+.hive-story-dots button{border-color:transparent;font-family:Georgia,serif;font-size:16px}
+.hive-story-dots button[aria-current=step]{background:#173e30;color:#fff8e9}
+.hive-story-controls button:focus-visible,.hive-story-rail:focus-visible{outline:3px solid #986b15;outline-offset:-3px}
+.hive-story-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.product-page .hive-story-note{font-size:12px;line-height:1.5;text-align:center;color:#56604d;padding:8px 20px 16px;margin:0}
+.house-theme[data-room=signature] .main-product-photo{object-fit:contain!important;clip-path:none!important}
+.house-theme[data-room=signature] .main-photo-wrap:has(img:not([src$="multiflora-hive-jar.png"])) .gallery-badge{display:none}
+.house-theme[data-room=signature] .main-photo-wrap:has(img:not([src$="multiflora-hive-jar.png"])) .main-product-photo{padding:0!important}
+@media(max-width:600px){
+ .product-page .hive-listen{margin:18px 0}
+ .hive-story-scene,.hive-story-scene:last-child{flex-basis:94%;aspect-ratio:auto;height:500px}
+ .hive-story-scene>img{object-fit:contain;object-position:center bottom;background:#fbefd8}
+ .hive-story-words{padding:26px 20px 0}
+ .product-page .hive-story-words h2,.product-page .hive-story-words h3{font-size:29px;margin:12px auto}
+ .product-page .hive-story-words p{font-size:15px;line-height:1.55}
+ .hive-story-controls{gap:8px}
+ .house-theme[data-room=signature] .main-photo-wrap:has(img:not([src$="multiflora-hive-jar.png"])) {height:auto!important;aspect-ratio:1}
+}
+@media(prefers-reduced-motion:reduce){.hive-story-rail{scroll-behavior:auto}}
+
+/* Copy and illustration share a slide, without covering one another. */
+.hive-story-scene,.hive-story-scene:last-child{flex-basis:92%;aspect-ratio:auto;height:auto;display:flex;flex-direction:column;background:#fbf1de}
+.hive-story-words{box-sizing:border-box;width:100%;padding:28px 6% 18px;min-height:190px}
+.hive-story-scene>img{position:static;z-index:auto;display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;margin-top:auto}
+.hive-story-dots button{font-size:0;position:relative}
+.hive-story-dots button::after{content:'';display:block;width:7px;height:7px;border-radius:50%;background:currentColor;margin:auto}
+.hive-story-dots button[aria-current=step]{background:transparent;color:#173e30}
+.hive-story-dots button[aria-current=step]::after{width:22px;border-radius:6px;background:#9b752a}
+.hive-story-rail{scroll-padding-inline:0;cursor:grab}
+.hive-story-rail:active{cursor:grabbing}
+@media(max-width:600px){
+ .hive-story-scene,.hive-story-scene:last-child{flex-basis:96%;height:auto}
+ .hive-story-words{min-height:220px;padding:22px 20px 16px}
+ .product-page .hive-story-words h2,.product-page .hive-story-words h3{font-size:26px}
+ .hive-story-scene>img{height:auto;object-position:center}
+}

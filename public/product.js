@@ -184,10 +184,16 @@ function renderProduct() {
     </section>
   </section>
   ${product.id === 'signature' ? `<section class="hive-listen" aria-labelledby="hiveListenTitle">
-    <figure class="hive-listen-visual"><img src="/assets/multiflora-hive-front.png" alt="The updated Nectra Multiflora jar with its hive, heart-shaped sound wave and scan-to-listen QR label" loading="lazy" width="1254" height="1254"><figcaption>A little of our hive, carried home.</figcaption></figure>
-    <div class="hive-listen-copy"><p class="eyebrow">A jar with a story you can hear</p><h2 id="hiveListenTitle">Meet the little workers<br>behind your honey.</h2><p>Before the breakfast table, before the golden drizzle, there is a hive full of life. Your Nectra jar brings you a little closer.</p><p>Scan the QR code on your Multiflora Honey label to hear a recording of our bees. Take a quiet moment to listen to the tiny wings behind something you enjoy every day.</p>
-    <ol class="hive-listen-steps"><li><span>01</span><div><h3>Find the little hive</h3><p>Follow the golden wave on your jar to the QR code.</p></div></li><li><span>02</span><div><h3>Point your camera</h3><p>Open your phone camera, hold it over the code and tap the link that appears.</p></div></li><li><span>03</span><div><h3>Pause. Press play. Come closer.</h3><p>Turn up your sound and spend a moment with our bees.</p></div></li></ol>
-    <p class="hive-listen-signoff">From the hive, with love. Now, with a little hello.</p><small>Scan the code on your physical jar. An internet connection is needed to open the recording.</small></div>
+    <div class="hive-story-rail" tabindex="0" role="region" aria-roledescription="carousel" aria-label="How to listen to our hive" id="hiveStoryRail">
+      ${[
+        ['Meet the little workers behind your honey.', 'Before your first golden drizzle, a little hello from our bees. Follow the story to hear the hive.', 'An illustrated Tamil courtyard with bees and wooden hives'],
+        ['A little secret on your jar.', 'Find the little hive on your Multiflora label. Follow its golden wave to the QR code.', 'An illustrated honey jar on a traditional breakfast table'],
+        ['Point. Scan. Come closer.', 'Open your phone camera and point it at the code on your jar. Tap the link that appears.', 'An illustrated phone scanning a jar on a verandah table'],
+        ['Their little world. Your quiet moment.', 'Press play on the page that opens. Turn up the sound and listen to a recording of our bees. From the hive, with love.', 'An illustrated phone playing hive audio beside a peaceful garden']
+      ].map(([title, copy, alt], i) => `<article class="hive-story-scene" role="group" aria-roledescription="slide" aria-label="${title}" id="hiveStep${i}"><div class="hive-story-words"><${i === 0 ? 'h2 id="hiveListenTitle"' : 'h3'}>${title}</${i === 0 ? 'h2' : 'h3'}><p>${copy}</p></div><img src="/assets/hive-story-${i}.png" alt="${alt}" loading="lazy" decoding="async" width="1536" height="1024"></article>`).join('')}
+    </div>
+    <div class="hive-story-controls"><button type="button" data-hive-move="-1" aria-label="Previous hive step" aria-controls="hiveStoryRail">←</button><div class="hive-story-dots">${[0,1,2,3].map(i=>`<button type="button" data-hive-step="${i}" aria-label="Show step ${i}" aria-controls="hiveStoryRail" aria-current="${i===0?'step':'false'}">${i}</button>`).join('')}</div><button type="button" data-hive-move="1" aria-label="Next hive step" aria-controls="hiveStoryRail">→</button><span class="hive-story-status" aria-live="polite">Step 0 of 3</span></div>
+    <p class="hive-story-note">Swipe or use the arrows to follow the story. Scan the code on your physical jar. An internet connection is needed to open the recording. Scenes are illustrations.</p>
   </section>` : ''}
   <section class="content-band">
     <div><p class="eyebrow">Inside the ${room.room}</p><h2>${room.title || room.line}</h2><p>${room.story || product.description}</p></div>
@@ -198,6 +204,34 @@ function renderProduct() {
   ${product.id === 'signature' ? `<section class="jar-kitchen" aria-labelledby="kitchenTitle"><p class="eyebrow">From the everyday table</p><h2 id="kitchenTitle">One jar. Three little rituals.</h2><p>Simple kitchen ideas for your Multiflora Honey. Each makes one serving; adjust the honey to your taste.</p><div class="jar-recipes"><article><small>5 MINUTES · BREAKFAST</small><h3>Banana &amp; honey bowl</h3><p>Plain yoghurt, a ripe banana and a small golden drizzle.</p><details><summary>Make this bowl →</summary><ol><li>Spoon 150 g plain yoghurt into a bowl.</li><li>Slice one small banana over it.</li><li>Add 1 tsp Multiflora Honey and 1 tbsp oats. Serve straight away.</li></ol><p>Contains milk; use a suitable dairy-free yoghurt if needed.</p></details></article><article><small>5 MINUTES · SNACK</small><h3>Honey toast, your way</h3><p>Warm toast with peanut butter and a finishing swirl of honey.</p><details><summary>Make this toast →</summary><ol><li>Toast one slice of bread.</li><li>Spread with 1 tbsp peanut butter.</li><li>Drizzle with 1 tsp Multiflora Honey. Add a pinch of cinnamon if you like.</li></ol><p>Contains peanuts and, depending on your bread, wheat.</p></details></article><article><small>3 MINUTES · AT THE TABLE</small><h3>Lemon-honey dressing</h3><p>A bright little dressing for cucumber, carrot or a mixed salad.</p><details><summary>Mix this dressing →</summary><ol><li>Stir together 1 tsp honey and 2 tsp lemon juice.</li><li>Whisk in 1 tbsp olive oil and a pinch of pepper.</li><li>Toss with your salad just before serving.</li></ol></details></article></div><p><small>Original Nectra serving ideas, not nutrition or health advice.</small></p></section>` : ''}
   <section class="room-related"><p class="eyebrow">Another room, another moment</p><h2>Meet the rest of the house.</h2><div>${state.products.filter(p=>p.id!==product.id).map(p=>`<a href="/product/${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy"><small>${window.NectraRooms?.[p.id]?.room || p.collection}</small><h3>${p.name}</h3><p>From ${money(firstVariant(p).price)} →</p></a>`).join('')}</div></section>
   <div class="mobile-buy-bar"><span><b>${product.name}</b><small id="mobilePrice">${money(variant.price)} · ${variant.size}</small></span><button class="button gold" type="button" data-buy-now>Order on WhatsApp <span>→</span></button></div>`;
+}
+function initHiveStory() {
+  const rail = qs('#hiveStoryRail');
+  if (!rail) return;
+  const slides = [...rail.children];
+  let current = 0;
+  const sync = () => {
+    current = slides.reduce((best, slide, index) => Math.abs(slide.getBoundingClientRect().left - rail.getBoundingClientRect().left) < Math.abs(slides[best].getBoundingClientRect().left - rail.getBoundingClientRect().left) ? index : best, 0);
+    document.querySelectorAll('[data-hive-step]').forEach(button => button.setAttribute('aria-current', Number(button.dataset.hiveStep) === current ? 'step' : 'false'));
+    qs('[data-hive-move="-1"]').disabled = current === 0;
+    qs('[data-hive-move="1"]').disabled = current === slides.length - 1;
+    qs('.hive-story-status').textContent = `Story ${current + 1} of ${slides.length}`;
+  };
+  const go = index => {
+    const target = slides[Math.max(0, Math.min(slides.length - 1, index))];
+    rail.scrollTo({left: rail.scrollLeft + target.getBoundingClientRect().left - rail.getBoundingClientRect().left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+  };
+  document.querySelectorAll('[data-hive-step]').forEach(button => button.addEventListener('click', () => go(Number(button.dataset.hiveStep))));
+  document.querySelectorAll('[data-hive-move]').forEach(button => button.addEventListener('click', () => go(current + Number(button.dataset.hiveMove))));
+  rail.addEventListener('keydown', event => {
+    if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+    event.preventDefault();
+    go(event.key === 'Home' ? 0 : event.key === 'End' ? 3 : current + (event.key === 'ArrowRight' ? 1 : -1));
+  });
+  let frame;
+  rail.addEventListener('scroll', () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(sync); }, {passive:true});
+  new ResizeObserver(sync).observe(rail);
+  sync();
 }
 function updateCheckoutSummary() {
   const items = cartEntries();
@@ -325,6 +359,7 @@ fetch('/api/products').then(r => r.json()).then(products => {
   sessionStorage.setItem('nectra-selected-product', state.product.id);
   document.title = state.product.id === 'signature' ? 'Multiflora Honey 250 g, 500 g & 1 kg | Nectra Honey' : `${state.product.name} | Nectra Honey`;
   renderProduct();
+  initHiveStory();
   if(location.hash==='#kitchenTitle')qs('#kitchenTitle')?.scrollIntoView({block:'start'});
   const variant = firstVariant(state.product);
   track('view_item', { currency: 'INR', value: variant.price, items: [{ item_id: state.product.id, item_name: state.product.name, item_variant: variant.size }] });
