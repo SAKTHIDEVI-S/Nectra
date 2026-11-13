@@ -57,6 +57,8 @@ function apiResponse(url) {
 }
 
 function pageFor(pathname) {
+  if (pathname === '/shop-honey') return '/shop.html';
+  if (pathname.startsWith('/shop-honey/')) return '/product.html';
   if (pathname === '/' || pathname === '/payment/return') return '/index.html';
   if (pathname === '/story') return '/story.html';
   if (pathname === '/bulk-orders') return '/bulk-orders.html';
@@ -76,7 +78,7 @@ export default {
       return Response.redirect(url.href, 301);
     }
     if (request.method === 'GET' || request.method === 'HEAD') {
-      const aliases = { '/index.html': '/', '/story.html': '/story', '/bulk-orders.html': '/bulk-orders', '/journal.html': '/journal' };
+      const aliases = { '/index.html': '/', '/story.html': '/story', '/bulk-orders.html': '/bulk-orders', '/journal.html': '/journal', '/shop.html': '/shop-honey', ...Object.fromEntries(Object.entries(globalThis.NectraPaths).map(([id, path]) => [`/product/${id}`, path])) };
       if (aliases[url.pathname] || (url.pathname.length > 1 && url.pathname.endsWith('/'))) {
         url.pathname = aliases[url.pathname] || url.pathname.replace(/\/+$/, '');
         return Response.redirect(url.href, 301);
@@ -84,16 +86,16 @@ export default {
       const response = apiResponse(url);
       if (response) return response;
 
-      const product = products.find(item => url.pathname === `/product/${item.id}`);
+      const product = products.find(item => url.pathname === globalThis.NectraPaths[item.id]);
       const article = journalArticles.find(item => url.pathname === `/journal/${item.slug}`);
-      if ((url.pathname.startsWith('/product/') && !product) || (url.pathname.startsWith('/journal/') && !article)) {
+      if (((url.pathname.startsWith('/product/') || url.pathname.startsWith('/shop-honey/')) && !product) || (url.pathname.startsWith('/journal/') && !article)) {
         return new Response('Page not found', { status: 404 });
       }
 
       const target = new URL(pageFor(url.pathname), url);
       const assetRequest = new Request(target, { method: 'GET', headers: request.headers });
       const asset = await env.ASSETS.fetch(assetRequest);
-      const catalogue = url.pathname === '/' || url.pathname === '/shop.html';
+      const catalogue = url.pathname === '/' || url.pathname === '/shop-honey';
       if (asset.ok && (product || article || url.pathname === '/journal' || catalogue)) {
         const source = await asset.text();
         const html = catalogue ? cataloguePage(source, products) : product ? productPage(source, product) : journalPage(source, article);

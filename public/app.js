@@ -310,7 +310,7 @@ function renderProducts() {
   qs('#products').innerHTML = visible.map(product => {
     const variant = firstVariant(product);
     const room = window.NectraRooms?.[product.id] || {room:product.collection,color:product.color,pale:'#f1e4ca',line:product.note};
-    return `<a class="room-product" data-room="${product.id}" href="/product/${product.id}" data-product-select="${product.id}" aria-label="View ${product.name}" style="--pale:${room.pale};--room-color:${room.color}"><div class="room-product-stage"><span>${room.room}</span><img src="/assets/${encodeURIComponent(room.image || '')}" alt="${product.name}" loading="lazy"></div><div class="room-product-info"><small>${room.botanical || product.collection}</small><h3>${product.name}</h3><p>${room.line}</p><div><b>From ${money(variant.price)} · ${variant.size}</b><em>Meet your jar →</em></div></div></a>`;
+    return `<a class="room-product" data-room="${product.id}" href="${globalThis.NectraPaths[product.id]}" data-product-select="${product.id}" aria-label="View ${product.name}" style="--pale:${room.pale};--room-color:${room.color}"><div class="room-product-stage"><span>${room.room}</span><img src="/assets/${encodeURIComponent(room.image || '')}" alt="${product.name}" loading="lazy"></div><div class="room-product-info"><small>${room.botanical || product.collection}</small><h3>${product.name}</h3><p>${room.line}</p><div><b>From ${money(variant.price)} · ${variant.size}</b><em>Meet your jar →</em></div></div></a>`;
   }).join('') || '<div class="catalogue-empty"><h2>No jars found.</h2><p>Try a product name, rose, ginger, lavender or tulasi.</p><button type="button" data-reset-catalogue>Show all jars</button></div>';
 }
 

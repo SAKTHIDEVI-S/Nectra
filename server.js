@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { journalArticles, journalArticleBySlug } from './public/journal-data.js';
-import { productPage, cataloguePage } from './worker/seo.js';
+import { productPage, cataloguePage, journalPage } from './worker/seo.js';
 import { recipes, bodyTopics, nourishNotes, habitOptions, plateFoods, weeklyNourishWeeks, getCurrentNourishWeek } from './public/nourish-data.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -172,7 +172,7 @@ function escapeHtml(value) {
   return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 function productSeoTags(product) {
-  const canonical = `${siteUrl}/product/${product.id}`;
+  const canonical = `${siteUrl}${globalThis.NectraPaths[product.id]}`;
   const image = `${siteUrl}${product.image}`;
   const price = Math.min(...product.variants.map(variant => variant.price));
   const description = `${product.description} Shop ${product.name} from Nectra Honey and order through WhatsApp.`;
@@ -222,10 +222,15 @@ function renderJournalArticle(article) {
 }
 function serveStatic(req, res, pathname) {
   const cleanPath = decodeURIComponent(pathname);
+  const aliases = { '/shop.html': '/shop-honey', ...Object.fromEntries(Object.entries(globalThis.NectraPaths).map(([id, path]) => [`/product/${id}`, path])) };
+  if (aliases[cleanPath]) {
+    res.writeHead(301, { Location: aliases[cleanPath] + (req.url.includes('?') ? '?' + req.url.split('?')[1] : '') });
+    res.end(); return true;
+  }
   if (['/admin', '/admin.html', '/admin.js', '/orders', '/orders.html', '/orders.js'].includes(cleanPath)) return false;
   if (cleanPath === '/journal') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
-    res.end(renderJournalIndex());
+    res.end(journalPage(fs.readFileSync(path.join(__dirname, 'public/journal.html'), 'utf8')));
     return true;
   }
   const journalMatch = cleanPath.match(/^\/journal\/([a-z0-9-]+)$/);
@@ -233,7 +238,7 @@ function serveStatic(req, res, pathname) {
     const article = journalArticleBySlug(journalMatch[1]);
     if (!article) return false;
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
-    res.end(renderJournalArticle(article));
+    res.end(journalPage(fs.readFileSync(path.join(__dirname, 'public/journal-article.html'), 'utf8'), article));
     return true;
   }
   const nourishRoute = cleanPath === '/nourish' || cleanPath === '/nourish/recipes' || /^\/nourish\/recipes\/[a-z0-9-]+$/.test(cleanPath) || cleanPath === '/nourish/notes' || /^\/nourish\/notes\/[a-z0-9-]+$/.test(cleanPath) || /^\/nourish\/body\/[a-z0-9-]+$/.test(cleanPath);
@@ -243,16 +248,18 @@ function serveStatic(req, res, pathname) {
       ? '/public/bulk-orders.html'
     : cleanPath === '/story'
       ? '/public/story.html'
-    : cleanPath.startsWith('/product/')
+    : cleanPath.startsWith('/product/') || cleanPath.startsWith('/shop-honey/')
       ? '/public/product.html'
+    : cleanPath === '/shop-honey'
+      ? '/public/shop.html'
     : cleanPath === '/' || cleanPath === '/payment/return'
       ? '/public/index.html'
       : `/public${cleanPath}`;
   const file = path.normalize(path.join(__dirname, requested));
   if (!file.startsWith(path.join(__dirname, 'public')) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return false;
   const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8' };
-  if (cleanPath.startsWith('/product/')) {
-    const id = cleanPath.split('/').filter(Boolean).pop();
+  if (cleanPath.startsWith('/product/') || cleanPath.startsWith('/shop-honey/')) {
+    const id = Object.keys(globalThis.NectraPaths).find(id => globalThis.NectraPaths[id] === cleanPath);
     const product = products.find(entry => entry.id === id);
     if (!product) { res.writeHead(404, { 'Content-Type': 'text/plain' }); res.end('Product not found'); return true; }
     const page = productPage(fs.readFileSync(file, 'utf8'), product);
@@ -260,7 +267,7 @@ function serveStatic(req, res, pathname) {
     res.end(page);
     return true;
   }
-  if (cleanPath === '/' || cleanPath === '/shop.html') {
+  if (cleanPath === '/' || cleanPath === '/shop-honey') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
     res.end(cataloguePage(fs.readFileSync(file, 'utf8'), products));
     return true;

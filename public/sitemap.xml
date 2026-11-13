@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://nectrahoney.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://nectrahoney.in/shop.html</loc></url>
+  <url><loc>https://nectrahoney.in/shop-honey</loc></url>
   <url><loc>https://nectrahoney.in/story</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://nectrahoney.in/bulk-orders</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://nectrahoney.in/product/signature</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nectrahoney.in/product/blush</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nectrahoney.in/product/vital</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nectrahoney.in/product/verdant</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nectrahoney.in/product/serene</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nectrahoney.in/shop-honey/multiflora-honey</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nectrahoney.in/shop-honey/skincare-and-beauty-honey</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nectrahoney.in/shop-honey/energy-honey</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nectrahoney.in/shop-honey/health-and-immunity-honey</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nectrahoney.in/shop-honey/calm-honey</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://nectrahoney.in/journal</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://nectrahoney.in/journal/how-to-store-honey</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://nectrahoney.in/journal/why-honey-crystallises</loc><lastmod>2026-11-02</lastmod></url>
@@ -21,4 +21,5 @@
   <url><loc>https://nectrahoney.in/journal/why-honey-colour-changes</loc><lastmod>2026-09-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://nectrahoney.in/journal/can-honey-replace-sugar-in-baking</loc><lastmod>2026-09-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://nectrahoney.in/journal/honey-in-coffee</loc><lastmod>2026-09-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://nectrahoney.in/journal/how-to-check-pure-honey</loc><lastmod>2026-11-13</lastmod></url>
 </urlset>

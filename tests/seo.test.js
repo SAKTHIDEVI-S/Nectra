@@ -15,6 +15,25 @@ const env = { ASSETS: { async fetch(request) {
 } } };
 const get = (path, method = 'GET') => worker.fetch(new Request(`https://nectrahoney.in${path}`, { method }), env);
 
+test('legacy product links redirect permanently without losing query parameters', async () => {
+  for (const product of products) {
+    const response = await get(`/product/${product.id}?size=500`);
+    assert.equal(response.status, 301);
+    assert.equal(response.headers.get('location'), `https://nectrahoney.in${globalThis.NectraPaths[product.id]}?size=500`);
+  }
+  assert.equal((await get('/shop.html')).headers.get('location'), 'https://nectrahoney.in/shop-honey');
+});
+
+test('journal renders search, topic filters, anchored answers and explanatory illustrations', async () => {
+  const index = await (await get('/journal')).text();
+  assert.match(index, /id="journalSearch"/);
+  assert.match(index, /id="journalCategory"/);
+  const article = await (await get('/journal/what-is-multiflora-honey')).text();
+  assert.match(article, /Find your answer/);
+  assert.match(article, /honey-journey-guide\.svg/);
+  assert.match(article, /BreadcrumbList/);
+});
+
 test('all Journal articles have unique slugs, local images and sitemap entries', async () => {
   const sitemap = await fs.readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
   assert.equal(new Set(journalArticles.map(a => a.slug)).size, journalArticles.length);
@@ -28,7 +47,7 @@ test('all Journal articles have unique slugs, local images and sitemap entries',
 });
 
 test('Multiflora search copy is specific and product catalogue stays in sync', async () => {
-  const html = await (await get('/product/signature')).text();
+  const html = await (await get('/shop-honey/multiflora-honey')).text();
   assert.match(html, /Multiflora Honey 250 g, 500 g &amp; 1 kg/);
   assert.match(html, /own hives in Virudhunagar/);
   assert.match(html, /no added sugar or additives/);
@@ -47,19 +66,19 @@ test('homepage has one HTTPS apex canonical and a branded title', async () => {
 
 test('www and HTTP redirect directly to HTTPS apex, preserving path and query', async () => {
   for (const origin of ['https://www.nectrahoney.in', 'http://nectrahoney.in']) {
-    const response = await worker.fetch(new Request(`${origin}/product/signature?size=500`), env);
+    const response = await worker.fetch(new Request(`${origin}/shop-honey/multiflora-honey?size=500`), env);
     assert.equal(response.status, 301);
-    assert.equal(response.headers.get('location'), 'https://nectrahoney.in/product/signature?size=500');
+    assert.equal(response.headers.get('location'), 'https://nectrahoney.in/shop-honey/multiflora-honey?size=500');
   }
 });
 
-test('every product retains its URL and has its own metadata and initial HTML', async () => {
+test('every product has a descriptive URL and has its own metadata and initial HTML', async () => {
   for (const product of products) {
-    const response = await get(`/product/${product.id}`);
+    const response = await get(`${globalThis.NectraPaths[product.id]}`);
     const html = await response.text();
     assert.equal(response.status, 200);
     assert.equal(response.headers.get('location'), null);
-    assert.ok(html.includes(`href="https://nectrahoney.in/product/${product.id}"`));
+    assert.ok(html.includes(`href="https://nectrahoney.in${globalThis.NectraPaths[product.id]}"`));
     assert.ok(html.includes(`<h1>${product.name}</h1>`));
     assert.equal((html.match(/<title>/g) || []).length, 1);
     for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) JSON.parse(match[1]);
@@ -92,7 +111,7 @@ test('sitemap URLs resolve successfully and use the chosen domain', async () => 
 });
 
 test('HEAD returns headers without a response body', async () => {
-  const response = await get('/product/signature', 'HEAD');
+  const response = await get('/shop-honey/multiflora-honey', 'HEAD');
   assert.equal(response.status, 200);
   assert.equal(await response.text(), '');
 });
@@ -104,18 +123,18 @@ test('Cloudflare lets the Worker handle HTML without stripping product slugs', a
 });
 
 test('both catalogues provide all five product links without JavaScript', async () => {
-  for (const path of ['/', '/shop.html']) {
+  for (const path of ['/', '/shop-honey']) {
     const html = await (await get(path)).text();
     const catalogue = html.match(/<div[^>]*id="products"[^>]*>([\s\S]*?)<\/div>/)?.[1];
     assert.ok(catalogue, path);
-    for (const product of products) assert.ok(catalogue.includes(`href="/product/${product.id}"`), product.id);
+    for (const product of products) assert.ok(catalogue.includes(`href="${globalThis.NectraPaths[product.id]}"`), product.id);
     assert.doesNotMatch(catalogue, /Loading your jars/);
   }
 });
 
 test('product offer ranges match actual visible variant prices without invented reviews', async () => {
   for (const product of products) {
-    const html = await (await get(`/product/${product.id}`)).text();
+    const html = await (await get(`${globalThis.NectraPaths[product.id]}`)).text();
     const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
     assert.equal(schema.offers.priceCurrency, 'INR');
     assert.equal(schema.offers.lowPrice, Math.min(...product.variants.map(v => v.price)));
@@ -133,7 +152,7 @@ test('draft and utility pages are not indexable; sitemap contains only release p
   assert.match(response.headers.get('content-type'), /application\/xml/);
   const sitemap = await response.text();
   assert.doesNotMatch(sitemap, /nourish|immersive|house-journey/);
-  assert.ok(sitemap.includes('/shop.html</loc>'));
+  assert.ok(sitemap.includes('/shop-honey</loc>'));
 });
 
 test('all sitemap pages have one title, canonical and H1', async () => {

@@ -34,7 +34,7 @@ document.addEventListener('click',event=>{
   detail.querySelector('.eyebrow').textContent=room.room;
   detail.querySelector('h3').textContent=room.botanical;
   detail.querySelector('p:not(.eyebrow)').textContent=room.intro || room.line+' '+room.use;
-  detail.querySelector('a').href='/product/'+button.dataset.bloom;
+  detail.querySelector('a').href=globalThis.NectraPaths[button.dataset.bloom];
 });
 document.addEventListener('keydown',event=>{
  if(event.target.matches('.garden-zone') && ['Enter',' '].includes(event.key)){event.preventDefault();event.target.dispatchEvent(new MouseEvent('click',{bubbles:true}));}
