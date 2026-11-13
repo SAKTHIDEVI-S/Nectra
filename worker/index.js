@@ -1,6 +1,6 @@
 import { products } from './catalog.js';
 import { journalArticles } from '../public/journal-data.js';
-import { productPage, journalPage } from './seo.js';
+import { productPage, journalPage, cataloguePage } from './seo.js';
 import { recipes, bodyTopics, nourishNotes, habitOptions, plateFoods, weeklyNourishWeeks, getCurrentNourishWeek } from '../public/nourish-data.js';
 
 const json = (value, status = 200) => new Response(JSON.stringify(value), {
@@ -93,17 +93,24 @@ export default {
       const target = new URL(pageFor(url.pathname), url);
       const assetRequest = new Request(target, { method: 'GET', headers: request.headers });
       const asset = await env.ASSETS.fetch(assetRequest);
-      if (asset.ok && (product || article || url.pathname === '/journal')) {
+      const catalogue = url.pathname === '/' || url.pathname === '/shop.html';
+      if (asset.ok && (product || article || url.pathname === '/journal' || catalogue)) {
         const source = await asset.text();
-        const html = product ? productPage(source, product) : journalPage(source, article);
+        const html = catalogue ? cataloguePage(source, products) : product ? productPage(source, product) : journalPage(source, article);
         const headers = new Headers(asset.headers);
         headers.delete('etag');
         headers.delete('content-length');
         headers.set('content-type', 'text/html; charset=utf-8');
         return new Response(request.method === 'HEAD' ? null : html, { status: 200, headers });
       }
-      if (request.method === 'HEAD') return new Response(null, { status: asset.status, headers: asset.headers });
-      if (asset.status !== 404) return asset;
+      const headers = new Headers(asset.headers);
+      // Allow crawling so search engines can see noindex; robots.txt blocking would hide it.
+      if (/^\/(?:admin(?:\.html)?|orders(?:\.html)?|product\.html|journal-article\.html|payment\/return|nourish(?:[/.]|$)|house-journey\.html|immersive\.html)/.test(url.pathname)) {
+        headers.set('X-Robots-Tag', 'noindex, follow');
+      }
+      if (url.pathname === '/sitemap.xml') headers.set('content-type', 'application/xml; charset=utf-8');
+      if (request.method === 'HEAD') return new Response(null, { status: asset.status, headers });
+      if (asset.status !== 404) return new Response(asset.body, { status: asset.status, headers });
     }
     return new Response('Not found', { status: 404 });
   }

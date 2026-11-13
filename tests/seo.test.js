@@ -102,3 +102,47 @@ test('Cloudflare lets the Worker handle HTML without stripping product slugs', a
   assert.equal(config.assets.html_handling, 'none');
   assert.equal(config.assets.run_worker_first, true);
 });
+
+test('both catalogues provide all five product links without JavaScript', async () => {
+  for (const path of ['/', '/shop.html']) {
+    const html = await (await get(path)).text();
+    const catalogue = html.match(/<div[^>]*id="products"[^>]*>([\s\S]*?)<\/div>/)?.[1];
+    assert.ok(catalogue, path);
+    for (const product of products) assert.ok(catalogue.includes(`href="/product/${product.id}"`), product.id);
+    assert.doesNotMatch(catalogue, /Loading your jars/);
+  }
+});
+
+test('product offer ranges match actual visible variant prices without invented reviews', async () => {
+  for (const product of products) {
+    const html = await (await get(`/product/${product.id}`)).text();
+    const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    assert.equal(schema.offers.priceCurrency, 'INR');
+    assert.equal(schema.offers.lowPrice, Math.min(...product.variants.map(v => v.price)));
+    assert.equal(schema.offers.highPrice, Math.max(...product.variants.map(v => v.price)));
+    assert.equal(schema.aggregateRating, undefined);
+    for (const variant of product.variants) assert.ok(html.includes(`${variant.size}: ₹${variant.price}`));
+  }
+});
+
+test('draft and utility pages are not indexable; sitemap contains only release pages', async () => {
+  for (const path of ['/product.html', '/journal-article.html', '/payment/return', '/nourish', '/nourish/recipes', '/admin.html', '/orders.html']) {
+    assert.equal((await get(path)).headers.get('x-robots-tag'), 'noindex, follow', path);
+  }
+  const response = await get('/sitemap.xml');
+  assert.match(response.headers.get('content-type'), /application\/xml/);
+  const sitemap = await response.text();
+  assert.doesNotMatch(sitemap, /nourish|immersive|house-journey/);
+  assert.ok(sitemap.includes('/shop.html</loc>'));
+});
+
+test('all sitemap pages have one title, canonical and H1', async () => {
+  const sitemap = await (await get('/sitemap.xml')).text();
+  for (const [, location] of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)) {
+    const html = await (await get(new URL(location).pathname)).text();
+    assert.equal((html.match(/<title>/g) || []).length, 1, location);
+    assert.equal((html.match(/rel="canonical"/g) || []).length, 1, location);
+    assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, location);
+    assert.ok(html.includes(`rel="canonical" href="${location}"`), location);
+  }
+});

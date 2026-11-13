@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { journalArticles, journalArticleBySlug } from './public/journal-data.js';
-import { productPage } from './worker/seo.js';
+import { productPage, cataloguePage } from './worker/seo.js';
 import { recipes, bodyTopics, nourishNotes, habitOptions, plateFoods, weeklyNourishWeeks, getCurrentNourishWeek } from './public/nourish-data.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -258,6 +258,11 @@ function serveStatic(req, res, pathname) {
     const page = productPage(fs.readFileSync(file, 'utf8'), product);
     res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
     res.end(page);
+    return true;
+  }
+  if (cleanPath === '/' || cleanPath === '/shop.html') {
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+    res.end(cataloguePage(fs.readFileSync(file, 'utf8'), products));
     return true;
   }
   res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' }); fs.createReadStream(file).pipe(res); return true;

@@ -169,7 +169,7 @@ function renderProduct() {
     </div>
     <section class="buy-panel">
       <div class="buy-heading">
-      <a class="back-link" href="/shop.html">← Back to the five jars</a>
+      <nav class="back-link" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/shop.html">Shop honey</a> / ${product.name}</nav>
       <p class="eyebrow">Welcome to the ${room.room} · ${room.botanical || ''}</p>
       <h1>${product.name}</h1>
       <p class="product-lede">${room.intro || room.use}</p>
