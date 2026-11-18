@@ -8,4 +8,4 @@ for(const dir of ['', 'art', 'assets']){
     copyFileSync(join(src,dir,name),join('public',dir,name));
   }
 }
-writeFileSync('public/garden-home.html',readFileSync(join(src,'index.html'),'utf8').replace('<meta name="robots" content="noindex,nofollow">','<link rel="canonical" href="https://nectrahoney.in/"><meta name="description" content="Explore eight Nectra honey varieties, choose your jars and build a honey gift box.">').replace('LOCAL CONCEPT','NECTRA HONEY'));
+writeFileSync('public/index.html',readFileSync(join(src,'index.html'),'utf8').replace('<meta name="robots" content="noindex,nofollow">','<link rel="canonical" href="https://nectrahoney.in/"><meta name="description" content="Explore eight Nectra honey varieties, choose your jars and build a honey gift box.">').replace('LOCAL CONCEPT','NECTRA HONEY'));

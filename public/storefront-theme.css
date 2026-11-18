@@ -1,0 +1,172 @@
+/* Nectra garden storefront: quiet motion, layered landscape, clear shopping */
+:root{color-scheme:light;--ink:#18382d;--leaf:#244c38;--moss:#82906a;--gold:#b58a42;--paper:#fbf6e9;--line:#d8c9a6;--serif:Georgia,'Times New Roman',serif;--sans:Arial,sans-serif}
+/* Keep the opening landscape continuous and proportionate on every screen. */
+.landscape{object-fit:cover!important;object-position:center 54%!important}
+#particles{display:none!important}
+.garden .region{z-index:3}
+.botanical-motion{z-index:2!important}
+.botanical-part.mist{width:112px;height:35px;filter:blur(9px);opacity:0;animation:hillMist 8s ease-in-out infinite}
+.botanical-part.mist:before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,#fff7e6c9 0%,#fff7e681 40%,transparent 74%)}
+@keyframes hillMist{0%,100%{opacity:0;transform:translateX(-18px) scale(.82)}28%,76%{opacity:.65}52%{opacity:.78;transform:translateX(25px) scale(1.06)}}
+@media(max-width:700px){.landscape{object-position:center 53%!important}.botanical-motion{transform:scale(.72);transform-origin:center}.botanical-part.mist{width:90px}}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+body{font-family:var(--sans);color:var(--ink);background:#f4efdf}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cpath d='M15 120c20-16 29-16 46 0m-23-24c9-16 9-25 0-40m101 82c-15-18-15-27 0-44m-25 22c-17-7-25-7-40 0' fill='none' stroke='%238c8a60' stroke-opacity='.4' stroke-width='1'/%3E%3Ccircle cx='38' cy='96' r='2' fill='%23b58a42'/%3E%3Ccircle cx='139' cy='112' r='2' fill='%23b58a42'/%3E%3C/svg%3E")}
+header{box-shadow:0 6px 22px #102d2218}
+header nav{align-items:center;gap:clamp(.7rem,2vw,1.8rem)}
+header nav a{font-size:.78rem;letter-spacing:.035em;opacity:.88;transition:color .25s,opacity .25s}
+header nav a:hover{color:#e6c87d;opacity:1}
+header nav button{color:inherit;border-bottom:1px solid transparent;transition:border-color .25s,color .25s}
+header nav button:hover{color:#e6c87d;border-color:#c9a75e}
+#bagButton,#pageBag{border:1px solid #c9a75e;border-radius:999px;padding:.55rem .9rem;background:#ffffff12}
+#bagCount,#pageBagCount{display:inline-grid;place-items:center;min-width:1.4rem;height:1.4rem;border-radius:50%;background:#c9a75e;color:#18382d;margin-left:.35rem}
+.section{padding:clamp(2.4rem,5vw,4.8rem) clamp(1.2rem,6.5vw,6.4rem)}
+.section h1,.section h2{font-family:var(--serif);font-weight:400;letter-spacing:-.035em;line-height:1.02;font-size:clamp(2.05rem,4.2vw,3.9rem);margin:.4rem 0 1.1rem}
+.section h2 em,.section h1 em{color:var(--gold);font-style:italic}
+.section p{max-width:62ch;color:#43594a}
+.eyebrow,.section small{color:#816c42;letter-spacing:.16em;font-size:.66rem;font-weight:700}
+.section-heading{max-width:1120px;margin:0 auto 1.6rem;align-items:end}
+.section-heading>p{max-width:35ch;margin-bottom:.45rem}
+.intro-strip{position:relative;isolation:isolate;overflow:hidden;padding:2.1rem 1.3rem 2.25rem;background:#173b2e;color:#fff7e6;background-image:linear-gradient(90deg,#173b2eed,#173b2eb5 52%,#173b2eed),url("https://cdn.creativeclaw.co/u/a7f8f0ca/images/a0db64ce-5c0e-42ab-818c-0f0ef1dfc9d5.jpg");background-size:cover;background-position:center 54%;border-bottom:1px solid #c5a967}
+.intro-strip:after{content:"";position:absolute;inset:auto 0 0;height:14px;z-index:-1;background:linear-gradient(90deg,#b58a42,#ead9a7,#b58a42);opacity:.7}
+.intro-strip .eyebrow{color:#e5ce98}
+.intro-strip h2{font-size:clamp(1.8rem,3.4vw,2.8rem);margin:.25rem 0 1.1rem}
+.intro-strip a{color:#fff7e6;text-decoration:none;border-bottom:1px solid #d4bd7f;padding-bottom:.2rem}
+.intro-strip a:hover{color:#f2d584}
+.intro-links{display:flex;justify-content:center;gap:clamp(1rem,4vw,3rem);flex-wrap:wrap;margin:.2rem 0 1.15rem}
+.intro-strip small{color:#ebdbb4;letter-spacing:.05em}
+.collection{position:relative;isolation:isolate;background:#e9eddf url('/assets/pantry-botanicals.jpg') center/cover no-repeat;background-blend-mode:soft-light}
+.collection:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,#edf0e5f5,#f5f0e1e8 53%,#edf0e5f5)}
+.catalogue-grid{max-width:1240px;margin:auto;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.shop-jar{position:relative;overflow:hidden;border:1px solid #c8c7a8;background:#fffaf0eb;padding:.8rem .8rem .95rem;box-shadow:0 10px 25px #203c2b0c;transition:transform .5s cubic-bezier(.2,.75,.2,1),box-shadow .4s,border-color .35s;view-transition-name:none}
+.shop-jar:after{content:"";position:absolute;pointer-events:none;inset:auto -10% -36px;height:80px;background:radial-gradient(ellipse,#b88c4d22,transparent 70%);transition:transform .5s}
+.shop-jar:hover{transform:translateY(-7px);box-shadow:0 20px 42px #203c2b20;border-color:#b58a42}
+.shop-jar .jar-stage{height:clamp(185px,21vw,270px);background:linear-gradient(145deg,#f8f1df,var(--tone),#f7f2e4);border:1px solid #ffffffa8;position:relative}
+.shop-jar .jar-stage:before{content:"";position:absolute;inset:8% 13%;background:radial-gradient(ellipse at 50% 80%,#fff8 0,transparent 62%);pointer-events:none}
+.shop-jar .jar{width:clamp(90px,12vw,145px);height:clamp(150px,18vw,220px);filter:drop-shadow(0 15px 10px #3427152a);transition:transform .65s cubic-bezier(.2,.75,.2,1),filter .55s}
+.shop-jar:hover .jar{transform:translateY(-6px) scale(1.035) rotate(-1deg);filter:drop-shadow(0 22px 13px #34271536)}
+.shop-jar>small{display:block;margin:.8rem .25rem .35rem;color:#86734c;font-size:.62rem}
+.shop-jar h3{margin:.15rem .25rem .55rem;font-size:1.35rem;color:#1d3f30}
+.card-weight{position:absolute;bottom:.45rem;right:.55rem;font-size:.62rem;color:#47604c;background:#fff9;padding:.28rem .45rem;border-radius:99px}
+.card-price{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin:0 .2rem;color:#395242;font-size:.85rem}
+.card-price b{font-size:.73rem;color:#214934;white-space:nowrap}
+.story-invitation{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(105deg,#dfe8d8f5,#edf0e0eb 50%,#efe2c9e8),url('/assets/walking%20in%20apiary.png') center/cover no-repeat;gap:clamp(2rem,6vw,5rem)}
+.story-invitation-copy{max-width:580px}
+.story-invitation figure,.story-feature{position:relative;margin:0}
+.story-invitation figure:after,.story-feature img{box-shadow:0 20px 52px #243c2b24}
+.story-invitation figure img{display:block;width:100%;height:clamp(280px,39vw,460px);object-fit:cover;object-position:center 42%;border:8px solid #fff9ed;border-bottom-width:22px}
+.story-invitation figcaption{position:absolute;bottom:3px;left:1rem;color:#776645;font:italic .88rem var(--serif)}
+.story-invitation .primary,.product-hero .primary{box-shadow:0 7px 17px #173b2e22;transition:transform .25s,box-shadow .25s,background .25s}
+.primary{border-radius:999px;padding:13px 21px;background:#173e30;border-color:#173e30;transition:transform .25s,box-shadow .25s,background .25s}
+.primary:hover{background:#28573e;transform:translateY(-2px);box-shadow:0 9px 21px #173b2e29}
+.customer-section{position:relative;isolation:isolate;overflow:hidden;background:#f4ead1 url('/assets/bloom-gardens.png') center/cover no-repeat;background-blend-mode:soft-light}
+.customer-section:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,#f6eddcf2,#f4ead1e6 48%,#f6eddcf5)}
+.testimonial-shell{position:relative;max-width:1160px;margin:auto;display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:.75rem}
+.testimonial-track{display:flex;gap:1rem;overflow:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:1rem 2px 1.4rem;overscroll-behavior-x:contain}
+.testimonial-track::-webkit-scrollbar{display:none}
+.testimonial-card{scroll-snap-align:center;flex:0 0 min(82%,760px);display:grid;grid-template-columns:minmax(200px,.92fr) 1.08fr;min-height:320px;overflow:hidden;background:#fffaf0;border:1px solid #d6c7a2;box-shadow:0 13px 34px #49392118;transition:transform .55s cubic-bezier(.2,.75,.2,1),box-shadow .4s}
+.testimonial-card:hover{transform:translateY(-4px);box-shadow:0 22px 46px #49392125}
+.testimonial-media{position:relative;min-height:300px;overflow:hidden;background:#dde4d4}
+.testimonial-media img,.testimonial-media video{width:100%;height:100%;min-height:300px;display:block;object-fit:cover}
+.testimonial-video .testimonial-media video{object-position:center 32%}
+.media-label{position:absolute;left:.8rem;bottom:.8rem;background:#fff8e9ed;color:#244531;padding:.5rem .75rem;border-radius:99px;font:italic .92rem var(--serif);box-shadow:0 3px 12px #10281d20}
+.testimonial-copy{padding:clamp(1.2rem,3vw,2rem);display:flex;flex-direction:column;justify-content:center}
+.testimonial-copy small{color:#987442;font-size:.61rem;line-height:1.5}
+.testimonial-copy h3{font:clamp(1.45rem,2.7vw,2rem)/1.12 var(--serif);color:#1b4331;margin:.7rem 0}
+.testimonial-copy p{line-height:1.7;color:#526251}
+.carousel-arrow{border:1px solid #b89d66;background:#fff9ed;color:#274734;width:42px;height:42px;border-radius:50%;font-size:1.2rem;transition:transform .25s,background .25s}
+.carousel-arrow:hover{transform:scale(1.07);background:#e5d5ad}
+.carousel-controls{display:flex;justify-content:center;align-items:center;gap:1.3rem;margin:.3rem auto 0}
+.carousel-dots{display:flex;gap:.45rem}
+.carousel-dot{height:9px;width:9px;padding:0;border:0;border-radius:50%;background:#b8b49f;transition:transform .25s,background .25s}
+.carousel-dot[aria-current=true]{background:#315d41;transform:scale(1.3)}
+.carousel-toggle,.text-button{border:0;background:transparent;color:#31563b;text-decoration:underline;text-underline-offset:3px;font-size:.78rem}
+.customer-section>.small-note{max-width:1160px;margin:1rem auto 0;color:#77735f}
+.gift-section{position:relative;isolation:isolate;background:#dfe8d6 url('/assets/gift-wrapping-table.jpg') center/cover no-repeat;background-blend-mode:soft-light}
+.gift-section:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,#e8ecdef3,#edf0e7ed 48%,#e8ecdef3)}
+.gift-layout{max-width:1200px;margin:auto;align-items:stretch;gap:clamp(1.3rem,4vw,3.2rem)}
+.gift-scene-wrap{position:relative;margin:0;min-height:100%;background:#f8f0df;border:9px solid #fff9ec;box-shadow:0 15px 40px #263d2b1c}
+.gift-scene{display:block;height:100%;min-height:400px;max-height:620px;object-fit:cover}
+.gift-scene-wrap figcaption{position:absolute;bottom:0;left:0;right:0;background:#fff8e9df;padding:.8rem 1rem;color:#725e3b;font:italic .95rem var(--serif)}
+.gift-builder{align-self:start;padding:clamp(1.2rem,3vw,2rem);background:#fffaf0;border:1px solid #d4c59f;box-shadow:0 14px 35px #283d2b16}
+.bundle-tabs button{border-radius:4px;color:#284734;transition:background .25s,color .25s,transform .2s}
+.bundle-tabs button:hover{transform:translateY(-2px)}
+.bundle-tabs button[aria-pressed=true]{background:#244c38;border-color:#244c38}
+.bundle-slot{border-color:#e4dbc5}.bundle-slot select{border:1px solid #c9bd9d;background:#fffdf7;color:#254331;border-radius:3px}
+.bundle-summary{border-top:1px solid #e0d4b8;margin-top:.8rem;color:#334c39}
+.gift-check input{accent-color:#315b3e}
+.table-note{position:relative;isolation:isolate;overflow:hidden;color:#fff8e8;background:#183b2d url('/assets/pantry-botanicals.jpg') center 46%/cover no-repeat}
+.table-note:before{content:"";position:absolute;inset:0;z-index:-1;background:#173b2edb}
+.table-note .eyebrow{color:#e2c986}.table-note p{margin:.6rem auto 1.2rem;color:#f4ecd9}.table-note h2{font-size:clamp(2rem,4vw,3.3rem)}
+.site-footer{background:#132f25 url('/assets/bee real 2.jpg') right 40%/auto 100% no-repeat;color:#fff5df;position:relative;isolation:isolate}
+.site-footer:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#132f25 0%,#173b2ef7 58%,#173b2ec9)}
+.site-footer>div{min-width:150px}.footer-title{display:block;color:#e5ce98;letter-spacing:.14em;font-size:.66rem;margin-bottom:.8rem}.site-footer a{font-size:.88rem;text-decoration:none;opacity:.88}.site-footer a:hover{opacity:1;color:#f1d486}.footer-brand img{max-width:140px;max-height:70px;object-fit:contain}
+#pageNav{position:sticky;top:0;z-index:10;background:#173b2ef7;backdrop-filter:blur(12px);align-items:center}#pageNav button{background:transparent;border:1px solid #c9a75e;border-radius:99px;padding:.5rem .9rem}
+.product-hero{position:relative;isolation:isolate;background:linear-gradient(110deg,#fbf6e9ed,#f5eddaea),var(--product-scene) center/cover no-repeat;gap:clamp(1.5rem,5vw,4rem)}
+.product-photo{position:relative;min-height:480px;background:radial-gradient(ellipse at 50% 72%,#c29c5433,transparent 58%)}
+.product-photo .jar{filter:drop-shadow(0 28px 24px #33251435);transition:transform .8s cubic-bezier(.2,.75,.2,1),filter .6s;view-transition-name:nectra-jar}
+.product-photo:hover .jar{transform:translateY(-7px) rotate(-1deg);filter:drop-shadow(0 34px 28px #33251440)}
+.product-copy h1{font:clamp(2.4rem,4.4vw,4.2rem)/.98 var(--serif);letter-spacing:-.04em;color:#1c3b2e}
+.product-copy .eyebrow{color:#8b7143}
+.product-copy>p{line-height:1.75;color:#455b4c}
+.buy-box{border:1px solid #d4c39c;box-shadow:0 15px 35px #243c2b12}
+.buy-box strong{font:2rem var(--serif);color:#1d4733}.weight-picker{display:flex;gap:.6rem;flex-wrap:wrap}.weight-picker button{border:1px solid #cbbb96;background:#fffdf8;padding:.65rem .9rem;border-radius:999px}.weight-picker button[aria-pressed=true]{background:#1d4733;color:#fff7e6;border-color:#1d4733}
+.product-details{background:#e6ebdf}.product-details>div,.product-details>section{background:#fdf9ed;padding:1.1rem 1.3rem;border:1px solid #d9d0b7}
+.product-details details{padding:.9rem 0;border-color:#e4d9c0}.product-details summary{cursor:pointer;font-family:var(--serif);font-size:1.1rem}
+.listen-section{background:#f4ead1 url('/assets/bloom-gardens.png') center/cover no-repeat;background-blend-mode:soft-light;position:relative;isolation:isolate}
+.listen-section:before{content:"";position:absolute;inset:0;z-index:-1;background:#f5eddded}
+.listen-reel figure{background:#fffaf0;border:1px solid #d5c7a5;padding:.5rem;box-shadow:0 9px 24px #243c2b16}.listen-reel img{height:230px;object-fit:cover}
+.story-page{position:relative;isolation:isolate;overflow:hidden;background-image:linear-gradient(100deg,#f8f0ddf2,#f8f0ddd9 55%,#f8f0ddc9),var(--section-art);background-size:cover;background-position:center}
+.story-page>.eyebrow{margin-top:1rem}.story-page>h1{max-width:780px;font-size:clamp(3rem,7vw,6rem)}
+.story-feature{max-width:1160px;margin:2.3rem auto;grid-template-columns:minmax(240px,.85fr) 1.15fr;gap:clamp(1.5rem,4vw,4rem)}
+.story-feature img{width:100%;height:clamp(310px,42vw,520px);object-fit:cover;border:10px solid #fffaf0}
+.story-feature>div{background:#fffaf0d9;padding:clamp(1.2rem,3vw,2.4rem);border-left:2px solid #b58a42}
+.story-feature p{line-height:1.8}.story-close{text-align:center;max-width:850px;margin:3rem auto;padding:2rem;background:#e5eadb}
+.related{background:#f0e4c9}.related .catalogue-grid{margin-top:1.5rem}
+dialog#storeDialog{border:1px solid #c7ad74;box-shadow:0 28px 90px #10281d55;border-radius:8px;background:#fbf6e9}
+dialog#storeDialog::backdrop{background:#10281d99;backdrop-filter:blur(7px)}
+.bag-line{align-items:center;padding:.75rem 0;border-color:#ded3ba}.bag-line-copy{flex:1}.bag-line select{max-width:150px;border:1px solid #c9bd9d;padding:.45rem;background:#fffdf7}
+.order-preview{border-left:3px solid #b58a42;background:#f1e8d5;color:#304a38}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.75,.25,1)}
+.reveal.is-visible{opacity:1;transform:translateY(0)}
+::view-transition-old(root){animation:page-away .28s ease both}
+::view-transition-new(root){animation:page-arrive .5s cubic-bezier(.2,.75,.25,1) both}
+::view-transition-old(nectra-jar){animation:jar-away .24s ease both}
+::view-transition-new(nectra-jar){animation:jar-arrive .55s cubic-bezier(.2,.75,.25,1) both}
+@keyframes page-away{to{opacity:0;filter:blur(4px)}}
+@keyframes page-arrive{from{opacity:0;filter:blur(5px);clip-path:inset(3% 0 0 round 1.5rem)}to{opacity:1;filter:blur(0);clip-path:inset(0 round 0)}}
+@keyframes jar-away{to{opacity:0;transform:scale(.92) rotate(-2deg);filter:blur(7px)}}
+@keyframes jar-arrive{from{opacity:0;transform:scale(.86) translateY(16px);filter:blur(5px)}to{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}}
+@media(max-width:900px){.catalogue-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.testimonial-card{flex-basis:min(91%,700px)}}
+@media(max-width:700px){
+ header nav{gap:.55rem}header nav a{display:none}header nav button{font-size:.69rem;padding:.5rem 0}#bagButton{padding:.48rem .65rem}
+ .section{padding:2.6rem 1rem}.section-heading{display:block;margin-bottom:1rem}.section-heading>p{margin:.2rem 0 0}.intro-strip{padding:1.8rem 1rem 2rem;background-position:58% center}.intro-links{gap:.8rem 1.2rem}.intro-links a{font-size:.85rem}
+ .catalogue-grid{gap:.6rem}.shop-jar{padding:.55rem}.shop-jar .jar-stage{height:clamp(150px,48vw,205px)}.shop-jar .jar{width:clamp(76px,24vw,106px);height:clamp(128px,40vw,166px)}.shop-jar h3{font-size:1.15rem}.card-price{align-items:flex-start;flex-direction:column;gap:.35rem;font-size:.78rem}.card-price b{font-size:.72rem}.card-weight{font-size:.55rem}
+ .story-invitation,.story-feature,.gift-layout,.product-hero,.product-details{grid-template-columns:1fr;gap:1.25rem}.story-invitation figure img{height:300px}.testimonial-shell{grid-template-columns:30px minmax(0,1fr) 30px;gap:.25rem}.carousel-arrow{width:30px;height:30px;font-size:1rem}.testimonial-track{gap:.7rem;padding:.6rem 1px 1rem}.testimonial-card{flex:0 0 86%;grid-template-columns:1fr;min-height:0}.testimonial-media,.testimonial-media img,.testimonial-media video{min-height:0;height:clamp(190px,59vw,280px)}.testimonial-copy{padding:1rem 1.1rem 1.25rem}.testimonial-copy h3{font-size:1.55rem}.testimonial-copy p{font-size:.9rem;margin:.3rem 0}
+ .gift-scene{min-height:240px;max-height:300px}.gift-builder{padding:1rem}.bundle-tabs{gap:.35rem}.bundle-tabs button{font-size:.76rem;padding:.65rem .3rem}.bundle-slot{gap:.6rem}.table-note{background-position:60% center}.site-footer{background-position:right center;background-size:auto 85%}.site-footer>div{min-width:calc(50% - 1.5rem)}
+ .product-photo{min-height:340px}.product-photo .jar{width:205px;height:310px}.product-hero{padding-top:1.5rem}.product-details{gap:.75rem}.story-feature{margin:1.6rem auto}.story-feature img{height:330px}.story-feature>div{padding:1.1rem;border-left-width:2px}.listen-reel figure{min-width:78vw}.listen-reel img{height:190px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal,.reveal.is-visible{opacity:1;transform:none;transition:none}::view-transition-old(root),::view-transition-new(root),::view-transition-old(nectra-jar),::view-transition-new(nectra-jar){animation:none}}
+
+/* Nectra unified palette: forest green, golden beige, paper and a single electric-purple action colour. */
+:root{--nectra-forest:#174434;--nectra-gold:#C99B53;--nectra-paper:#F2E9D8;--nectra-purple:#8B5CF6;--nectra-purple-dark:#7444E8}
+body{background:var(--nectra-paper);color:var(--nectra-forest)}
+.section{border-color:#c99b5344}.section h1,.section h2,.section h3{color:var(--nectra-forest)}.section h2 em,.section h1 em{color:var(--nectra-gold)}.section p{color:#365747}.eyebrow,.section small{color:#9a7437}
+.intro-strip,.table-note,.site-footer{background-color:var(--nectra-forest)!important;color:#fff8e8}.intro-strip:after{background:linear-gradient(90deg,#C99B53,#F2E9D8,#C99B53)}
+.collection,.customer-section,.gift-section,.story-invitation,.listen-section,.related,.product-details,.story-page{background-color:var(--nectra-paper)!important}
+.collection:before,.customer-section:before,.gift-section:before,.listen-section:before{background:linear-gradient(110deg,#f2e9d8f3,#f7efdde8 53%,#f2e9d8f3)!important}
+.shop-jar,.testimonial-card,.gift-builder,.product-details>div,.product-details>section,.listen-reel figure{background:#fffaf0;border-color:#c99b5388}
+.shop-jar:hover{border-color:var(--nectra-purple);box-shadow:0 20px 42px #8b5cf625}.shop-jar .jar-stage{border-color:#c99b5366}.card-price b{color:var(--nectra-purple)}
+.primary,.bundle-tabs button[aria-pressed=true],.weight-picker button[aria-pressed=true]{background:var(--nectra-purple)!important;border-color:var(--nectra-purple)!important;color:#fff!important}.primary:hover{background:var(--nectra-purple-dark)!important;box-shadow:0 9px 21px #8b5cf640}.gift-check input{accent-color:var(--nectra-purple)}
+.carousel-dot[aria-current=true]{background:var(--nectra-purple)}.carousel-arrow:hover{background:#ede9fe;border-color:var(--nectra-purple);color:var(--nectra-purple)}.video-sound{background:var(--nectra-purple);border-color:#c4b5fd}.video-sound:hover{background:var(--nectra-purple-dark)}
+.gift-builder,.buy-box,dialog#storeDialog{box-shadow:0 14px 35px #17443416}.bundle-tabs button{border-color:#c99b5388;color:var(--nectra-forest)}.bundle-tabs button[aria-pressed=true]{color:#fff}.order-preview{border-left-color:var(--nectra-purple)}
+.site-footer:before{background:linear-gradient(90deg,#174434 0%,#174434f7 58%,#174434c9)}.site-footer a:hover,.intro-strip a:hover{color:#e9d5ff}.footer-title{color:#f1d287}
+
+/* Slim moving trust ribbon directly after the hero. */
+.trust-marquee{overflow:hidden;display:flex;align-items:center;min-height:56px;background:#174434;color:#F2E9D8;border-bottom:2px solid #C99B53;white-space:nowrap}
+.trust-marquee-track{display:flex;align-items:center;width:max-content;gap:1.5rem;padding:0 .75rem;animation:nectra-marquee 24s linear infinite;will-change:transform}
+.trust-marquee-track span{font:400 clamp(.72rem,1.1vw,.9rem)/1.1 var(--sans);letter-spacing:.09em;text-transform:uppercase}
+.trust-marquee-track b{color:#C99B53;font-size:.9rem;font-weight:400}
+@keyframes nectra-marquee{to{transform:translateX(-50%)}}
+@media(max-width:700px){.trust-marquee{min-height:48px}.trust-marquee-track{gap:1rem;animation-duration:19s}.trust-marquee-track span{font-size:.67rem;letter-spacing:.08em}}
+@media(prefers-reduced-motion:reduce){.trust-marquee-track{animation:none;transform:none}}

@@ -1,0 +1,8 @@
+.nectra-welcome{position:fixed;inset:0;z-index:2147483646;display:grid;align-content:center;justify-items:center;background:#f2e9d8;color:#174434;pointer-events:none;transition:opacity .2s}
+.nectra-welcome.depart{opacity:0}
+.welcome-mark{position:relative;width:min(44vw,190px)}
+.welcome-mark img{display:block;width:100%;height:auto}
+.welcome-mark i{position:absolute;left:-16%;top:12%;width:29px;animation:nectra-flight 1s ease-in-out infinite alternate}
+.welcome-mark i:last-child{left:98%;top:53%;animation-delay:-.65s}
+.nectra-welcome p{font:italic clamp(17px,3vw,23px)/1.3 Georgia,serif;text-align:center}
+@keyframes nectra-flight{from{transform:translate(-7px,6px) rotate(-14deg)}to{transform:translate(8px,-10px) rotate(12deg)}}

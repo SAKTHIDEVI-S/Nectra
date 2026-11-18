@@ -59,8 +59,8 @@ function apiResponse(url) {
 function pageFor(pathname) {
   if (pathname === '/shop-honey') return '/shop.html';
   if (pathname.startsWith('/shop-honey/')) return '/product.html';
-  if (pathname === '/') return '/garden-home.html';
-  if (pathname === '/payment/return') return '/index.html';
+  if (pathname === '/') return '/index.html';
+  if (pathname === '/payment/return') return '/legacy-home.html';
   if (pathname === '/story') return '/story.html';
   if (pathname === '/bulk-orders') return '/bulk-orders.html';
   if (pathname === '/journal') return '/journal.html';

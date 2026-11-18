@@ -1,0 +1,69 @@
+:root{--branch-h:64px;--branch-gold:#f1d59a}
+/* Bag only: retain native focus containment and Escape handling, without a centred popup. */
+html body #storeDialog[open]:has(#bagLines){position:fixed;inset:0 auto 0 0;margin:0;box-sizing:border-box;width:clamp(300px,25vw,100vw);max-width:100vw;height:100dvh;max-height:100dvh;padding:64px clamp(16px,1.5vw,30px) 28px;overflow-y:auto;overscroll-behavior:contain;border:0;border-right:1px solid #baa16d;border-radius:0;background:#faf4e8;color:#174434;transform:none;box-shadow:7px 0 28px #123b2e20;animation:nectra-bag-in .32s cubic-bezier(.22,.74,.22,1) both}
+#storeDialog:has(#bagLines)::backdrop{background:#102e242e;backdrop-filter:none}
+#storeDialog:has(#bagLines) .close{position:absolute;inset:14px 14px auto auto}
+#storeDialog:has(#bagLines) h2{font:clamp(25px,2vw,36px)/1.1 Georgia,serif;margin:0 0 18px}
+#storeDialog #bagLines .bag-line{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px 12px}
+#storeDialog #bagLines .bag-line>.jar{width:48px;height:76px}
+#storeDialog #bagLines .bag-line>strong{grid-column:2}
+#storeDialog #bagLines select{max-width:100%}
+html body #storeDialog[open]:has(#bagLines){inset:0 0 0 auto;border:0;border-left:1px solid #baa16d;padding:54px clamp(14px,1.4vw,26px) 24px;box-shadow:-7px 0 28px #123b2e20}
+@keyframes nectra-bag-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
+#storeDialog #bagLines{display:grid;gap:12px;margin:20px 0}
+#storeDialog #bagLines .bag-line{background:#fffcf5;border:1px solid #ded2b8;border-radius:10px;padding:14px;align-items:start;row-gap:10px}
+#storeDialog #bagLines .bag-line-copy{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;min-width:0}
+#storeDialog #bagLines .bag-line-copy>b{font:600 18px/1.25 Georgia,serif;margin-bottom:2px}
+#storeDialog #bagLines .bag-line-copy label,#gifting .bundle-slot label{display:grid;gap:4px;font-size:12px;font-weight:500}
+#storeDialog #bagLines :is(select,input),#gifting .bundle-slot select,#routePage.product-editorial #productQty{box-sizing:border-box;min-height:40px;border:1px solid #c5b99b;border-radius:6px;color:#173e30;background:#fffdf7;padding:7px 9px;font:14px/1.3 system-ui}
+#storeDialog #bagLines select,#gifting .bundle-slot select{width:100%;min-width:0}
+#storeDialog #bagLines input{width:74px}
+#storeDialog #bagLines .text-button{justify-self:start;color:#61594b;font-size:12px;padding:5px 0}
+#storeDialog #bagLines .bag-line>strong{border-top:1px solid #e5d9be;padding-top:8px;font-variant-numeric:tabular-nums}
+#storeDialog #bagTotal:not(:empty){display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:9px;background:#eee6d5;border-radius:8px;padding:14px;margin:12px 0}
+#storeDialog #bagTotal small{grid-column:1/-1;font-size:12px;line-height:1.5}
+#storeDialog #sendBag{width:100%;justify-content:space-between}
+#bagWhatsAppNote{font-size:13px;line-height:1.5;color:#475c50;margin:10px 0 0}
+#gifting .gift-builder #bundleSlots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px}
+#gifting #bundleSlots .bundle-slot{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:10px;border:1px solid #dfd2b8;border-radius:8px;background:#fffaf0;padding:10px}
+#gifting #bundleSlots .bundle-slot .jar{width:38px;height:56px}
+#gifting #bundleSlots .empty-jar{font-size:0;border:1px dashed #bfaf90;border-radius:5px;height:46px}
+#gifting .gift-check{display:flex;align-items:center;gap:9px}
+#routePage.product-editorial .buy-box{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;border-radius:12px;padding:18px;background:#fffaf1}
+#routePage.product-editorial .buy-box>label{display:grid;justify-items:start;gap:4px;font-size:13px}
+#routePage.product-editorial #productQty{margin:0}
+#routePage.product-editorial .weight-picker{gap:8px;margin:5px 0}
+#routePage.product-editorial .weight-picker button{min-width:0;flex:1;min-height:48px;border-radius:6px}
+@media(max-width:700px){html body #storeDialog[open]:has(#bagLines){width:min(90vw,410px)}}
+@media(prefers-reduced-motion:reduce){html body #storeDialog[open]:has(#bagLines){animation:none}}
+body:has(#branchNav) .experience>header,body:has(#branchNav) #pageNav{display:none!important}
+body:has(#branchNav) .experience{height:calc(100svh - var(--branch-h))!important}
+#branchNav{position:relative;z-index:20;box-sizing:border-box;height:var(--branch-h);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;color:var(--branch-gold);background:#153f33;isolation:isolate;border-bottom:1px solid #b7985e}
+#branchNav:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:#d5b36d;opacity:.13;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 60' fill='none' stroke='black'%3E%3Cpath d='M0 58Q50 12 160 10M32 34Q16 9 4 13Q12 31 32 34ZM54 24Q57 4 73 1Q69 17 54 24ZM87 16Q100 33 123 32Q108 16 87 16Z'/%3E%3C/svg%3E") repeat-x center/160px 60px}
+#branchNav a,#branchNav button{color:inherit;background:none;border:none;box-shadow:none;text-decoration:none;font:inherit;cursor:pointer}
+#branchNav button{min-width:44px;min-height:44px;padding:8px;display:grid;place-items:center}
+#branchNav .wordmark img{width:126px;height:45px;object-fit:contain;filter:brightness(0) saturate(100%) invert(88%) sepia(41%) saturate(480%) hue-rotate(332deg)}
+#branchNav nav{display:flex;align-items:center;gap:12px}
+#branchNav .menu,#branchMenu[hidden]{display:none}
+#branchMenu{position:absolute;top:100%;left:0;right:0;display:grid;background:#153f33;padding:12px 5vw 18px}
+#branchMenu a,#branchMenu button{padding:12px;text-align:left;display:block}
+#bulk-orders{padding:clamp(26px,5vw,70px) 6vw;background:linear-gradient(90deg,#133c30f5,#133c30ad),url('/assets/gift-wrapping-table.jpg') center/cover;color:#fff4db}
+#bulk-orders h2{font:clamp(32px,4vw,56px)/1 Georgia;margin:10px 0}#bulk-orders p{max-width:54ch;line-height:1.55}#bulk-orders a{display:inline-flex;align-items:center;gap:9px;color:#f3d694}
+#customers .carousel-toggle{font-size:0!important}#customers .carousel-toggle:before{content:attr(data-icon);font-size:16px}
+#gifting .gift-step{font:20px Georgia;color:#174434;margin:16px 0 8px}#gifting .gift-journey{display:none}
+#routePage.product-editorial :is(.product-photo,.jar-stage) .jar{display:block;position:relative;overflow:visible;clip-path:none;transform:none}
+#routePage.product-editorial :is(.product-photo,.jar-stage) .jar img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:100%!important;object-fit:contain!important;clip-path:none!important;transform:none!important}
+.garden .panorama-stage .botanical-jar:before{opacity:.95;background:linear-gradient(176deg,transparent,#9866ef2b 32%,#9954f353 74%,#ceb3ff44 92%,transparent)}
+@media(min-width:701px){.garden .panorama-stage .botanical-jar{height:17%;width:7%}}
+@media(max-width:700px){:root{--branch-h:56px}#branchNav{justify-content:center}#branchNav .menu{display:grid;position:absolute;left:12px}#branchNav nav{display:none}#branchNav .wordmark img{width:108px}}
+#gifting .gift-layout .gift-scene-wrap{position:relative;inset:auto;align-self:stretch;display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;height:auto;margin:0;padding:0}
+#gifting .gift-layout .gift-scene-wrap .gift-scene{grid-area:1/1;position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover;transform:none}
+#gifting .gift-layout .gift-scene-wrap figcaption{position:relative;inset:auto;grid-area:2/1;margin:0}
+@media(max-width:700px){#gifting .gift-layout .gift-scene-wrap{grid-template-rows:clamp(185px,56vw,300px) auto}}
+body .garden .panorama-stage button.botanical-jar:before{content:none}
+.garden .panorama-stage .botanical-jar :is(.jar,.jar-outline){filter:none}
+.garden .panorama-stage:after{content:"";position:absolute;inset:9px;border:1px solid #17443440;outline:1px solid #b69a6655;outline-offset:3px;pointer-events:none;z-index:3}
+.garden .panorama-stage .botanical-name{top:auto;bottom:4%;border:1px solid #bd9e62;color:#fcf2d9;background:#174434;padding:7px 13px;border-radius:1px;font:italic 16px/1.1 Georgia,serif}
+.garden .panorama-stage .botanical-name small{color:#eddaaa;font:9px/1.4 sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.hero-cycle-toggle[hidden]{display:none!important}
+@media(min-width:701px){.garden .panorama-stage .colour-landscape{mask-image:radial-gradient(ellipse clamp(145px,14vw,280px) clamp(110px,15vh,195px) at var(--reveal-x,50%) var(--reveal-y,50%),black 30%,#000e 47%,#0008 68%,transparent 100%)}}

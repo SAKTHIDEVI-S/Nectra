@@ -252,9 +252,9 @@ function serveStatic(req, res, pathname) {
       ? '/public/product.html'
     : cleanPath === '/shop-honey'
       ? '/public/shop.html'
-    : cleanPath === '/' ? '/public/garden-home.html'
+    : cleanPath === '/' ? '/public/index.html'
     : cleanPath === '/payment/return'
-      ? '/public/index.html'
+      ? '/public/legacy-home.html'
       : `/public${cleanPath}`;
   const file = path.normalize(path.join(__dirname, requested));
   if (!file.startsWith(path.join(__dirname, 'public')) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return false;
