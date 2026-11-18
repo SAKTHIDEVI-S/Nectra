@@ -13,7 +13,13 @@
   let closed = false;
   function finish() { if (closed) return; closed = true; veil.classList.add('depart'); setTimeout(() => veil.remove(), 220); }
   const start = performance.now();
-  addEventListener('load', () => setTimeout(finish, Math.max(0, 850 - (performance.now()-start))), { once: true });
-  setTimeout(finish, 1650);
+  document.addEventListener('DOMContentLoaded', async () => {
+    const images = document.querySelectorAll('.garden .landscape, .botanical-jar img, #branchNav .wordmark img');
+    await Promise.allSettled([...images].filter(img => img.currentSrc || img.src).map(img => img.decode()));
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    setTimeout(finish, Math.max(0, 450 - (performance.now()-start)));
+  }, {once:true});
+  // A missing image or stalled connection must not lock visitors out.
+  setTimeout(finish, 12000);
   addEventListener('pagehide', finish, {once:true});
 })();
