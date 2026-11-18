@@ -1,0 +1,118 @@
+:root{--paper:#f2e9d8;--forest:#174434;--electric:#255cff}body{background:var(--paper);color:var(--forest)}.experience{height:auto;min-height:0;display:block;background:var(--paper)}.experience header{background:var(--paper);color:var(--forest);border-bottom:1px solid #17443425;height:76px;padding:10px 4%}.experience header .brand{width:140px}.experience header nav{gap:24px}.experience header .preview,#motion,#browse,.experience>.selection,.experience>footer{display:none!important}.hero-copy{text-align:center;padding:26px 20px 20px}.hero-copy h1{font:clamp(30px,3.4vw,54px)/1.08 Georgia,serif;margin:10px 0}.hero-copy h1 em{font-weight:normal}.hero-copy>p:not(.eyebrow){font-size:14px;margin:10px 0 18px}.hero-cta{display:inline-flex;align-items:center;background:var(--electric);color:white;border-radius:5px;padding:14px 24px;font-size:11px;letter-spacing:1.4px;text-decoration:none;transition:transform .25s,background .25s}.hero-cta:hover{background:#1547d5;transform:translateY(-2px)}.landscape-viewport{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#17443455 var(--paper)}.garden{width:100%;aspect-ratio:3/1;min-height:0;background:var(--paper);position:relative;overflow:hidden;isolation:isolate}.garden:after{display:none}.garden .landscape,.colour-landscape{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:0}.colour-landscape{z-index:1;pointer-events:none;opacity:0;mask-image:radial-gradient(ellipse 145px 155px at var(--reveal-x,50%) var(--reveal-y,50%),#000 45%,transparent 100%);transition:opacity .65s}.garden.revealing .colour-landscape{opacity:1}.botanical-jar{position:absolute;left:var(--place-x);top:var(--place-y);transform:translate(-50%,-100%);z-index:2;background:none;border:0;padding:0;width:8%;height:32%;display:flex;justify-content:flex-end;align-items:center;flex-direction:column}.botanical-jar .jar{height:100%;width:auto;aspect-ratio:.57;filter:none;transition:transform .5s}.botanical-jar .jar img,.botanical-jar .jar canvas{position:absolute;width:181.8%;max-width:none;height:auto;left:-40%;top:-19%;clip-path:polygon(29% 14%,70% 14%,72% 15%,72% 22%,70% 24%,70% 26%,75% 28%,77% 32%,77% 83%,75% 86%,69% 88%,30% 88%,25% 86%,22% 83%,22% 32%,24% 29%,29% 26%,29% 24%,27% 22%,27% 15%);transition:opacity .6s}.botanical-jar .jar.clean img,.botanical-jar .jar.clean canvas{width:100%;height:100%;left:0;top:0;object-fit:contain;clip-path:none}.botanical-jar .original-jar{opacity:0}.botanical-jar .jar-outline{opacity:1}.botanical-jar.is-colour .original-jar{opacity:1}.botanical-jar.is-colour .jar-outline{opacity:0}.botanical-jar.is-colour .jar{transform:translateY(-5px) scale(1.05)}.botanical-name{position:absolute;top:103%;left:50%;transform:translateX(-50%);white-space:nowrap;font:16px Georgia;background:var(--paper);padding:7px 12px;border:1px solid #17443440;opacity:0;pointer-events:none;transition:opacity .4s}.botanical-name small{display:block;font:10px Arial;margin-top:4px}.botanical-jar.is-colour{z-index:4}.botanical-jar.is-colour .botanical-name{opacity:1}.explore-hint{text-align:center;font-size:11px;letter-spacing:.5px;margin:0;padding:14px}.honey-search input{width:100%;padding:14px;margin:12px 0;border:1px solid var(--forest);background:var(--paper);font:inherit}.search-results{display:grid;gap:5px}.search-results button{padding:12px;text-align:left;background:none;border:0;border-bottom:1px solid #17443425}.video-sound{position:absolute!important;bottom:14px;right:14px;z-index:5;border:1px solid #ffffff70;border-radius:24px;background:#174434;color:white;padding:10px 16px;font-size:12px}.testimonial-media{position:relative}.collection{background:var(--paper)!important;border-top:1px solid #17443430}.collection .section-heading{border-bottom:1px solid #17443430;padding-bottom:30px}.catalogue-grid{gap:32px!important}.shop-jar{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}.shop-jar .jar-stage{background:linear-gradient(#f2e9d8df,#f2e9d8ef),url('art/outline.png') center/auto 100%!important;border:1px solid #17443430;border-radius:48% 48% 3px 3px!important}.shop-jar h3{font-family:Georgia,serif}.shop-jar .card-price{border-top:1px solid #17443430;padding-top:15px}.customer-section{background:#e6e6d6!important}.testimonial-card{border-radius:12px!important;border:1px solid #17443420!important}.primary{background:var(--electric);border-color:var(--electric)}
+@media(max-width:700px){.experience header{height:64px;padding:8px 18px}.experience header .brand{width:116px}.experience header nav{gap:16px}.hero-copy{padding:26px 18px 24px}.hero-copy h1{font-size:34px;max-width:330px;margin:10px auto}.hero-copy h1 em{display:block}.garden{width:1100px;max-width:none;height:367px;aspect-ratio:auto}.botanical-jar{height:32%}.botanical-name{font-size:14px}.explore-hint{font-size:10px;padding:14px 8px}.catalogue-grid{gap:22px 12px!important}.hero-cta{padding:13px 20px}}
+@media(max-width:700px){
+ .landscape-viewport{overflow:hidden;width:100%}
+ .garden{width:100%;height:clamp(320px,52svh,480px);aspect-ratio:auto}
+ .garden .landscape,.garden .colour-landscape{object-fit:fill!important;object-position:center!important}
+ .botanical-jar{width:12%;height:20%}
+ .botanical-name{font-size:11px;padding:5px 7px}
+ .botanical-name small{font-size:9px}
+ .colour-landscape{mask-image:radial-gradient(ellipse 70px 100px at var(--reveal-x,50%) var(--reveal-y,50%),#000 40%,transparent 100%)}
+ .hero-copy{padding:18px 16px}
+ .hero-copy h1{font-size:30px}
+ .hero-copy>p:not(.eyebrow){margin:8px 0 12px}
+ .explore-hint{padding:10px}
+}
+
+/* Full-bleed framing keeps the original artwork proportionate; jars remain independently visible. */
+.panorama-stage{position:absolute;inset:0;width:auto;height:auto;max-height:none;aspect-ratio:auto}
+.panorama-stage .landscape,.panorama-stage .colour-landscape{object-fit:cover!important;object-position:center center!important}
+.botanical-jar{height:22%;width:8%}
+@media(max-width:700px){.panorama-stage{position:absolute;inset:0}.botanical-jar{height:11.5%;width:7%}.botanical-jar .jar{max-width:100%}}
+@media(max-width:700px){
+ .experience{position:relative}
+ .hero-copy{position:absolute;top:74px;left:0;right:0;z-index:6;padding:0;pointer-events:none}
+ .hero-copy .eyebrow,.hero-copy h1,.hero-copy>p{display:none}
+ .hero-copy .hero-cta{pointer-events:auto;font-size:10px;padding:10px 15px}
+ .landscape-viewport{padding-top:0;background:var(--paper)}
+ .garden{width:100%;height:auto;aspect-ratio:3/1}
+ .garden .landscape,.garden .colour-landscape{object-fit:contain!important}
+ .botanical-jar{height:32%;width:8%}
+ .botanical-name{font-size:9px;padding:3px 5px}
+ .botanical-name small{display:none}
+ .colour-landscape{mask-image:radial-gradient(ellipse 48px 60px at var(--reveal-x,50%) var(--reveal-y,50%),#000 40%,transparent 100%)}
+}
+.hero-cycle-toggle{display:block;margin:0 auto 12px;background:transparent;border:1px solid #17443450;border-radius:20px;padding:7px 14px;font-size:11px}.hero-cycle-toggle[hidden]{display:none}
+/* Phone hero is deliberately one complete screen: the catalogue begins only after a scroll. */
+@media(max-width:700px){
+ .experience{height:100svh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
+ .landscape-viewport{flex:1;min-height:0;display:block;overflow:hidden}
+ .garden{width:100%;height:100%;aspect-ratio:auto}
+ .garden .landscape,.garden .colour-landscape{object-fit:cover!important;object-position:center center!important}
+ .botanical-jar{height:11.5%;width:7%}
+ .botanical-jar .jar{max-width:100%}
+ .explore-hint{padding:8px 8px 3px;flex:none;min-height:30px}
+ .hero-cycle-toggle{margin:0 auto 9px;flex:none}
+}
+@media(prefers-reduced-motion:reduce){.botanical-jar .jar,.colour-landscape,.botanical-jar .jar img,.botanical-jar .jar canvas{transition:none}}
+
+/* The home screen is an art installation first: the full panorama is never stretched. */
+.experience{height:100svh;min-height:640px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.experience header{height:76px;flex:none;background-color:#174434;color:#f2e9d8;border-color:#f2e9d833;box-shadow:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='76' viewBox='0 0 260 76'%3E%3Cg fill='none' stroke='%23f2e9d8' stroke-opacity='.23' stroke-width='1'%3E%3Cpath d='M12 76C35 54 40 29 31 0M57 76C75 53 76 25 65 0M223 76c-23-22-28-47-19-76M180 76c-18-22-20-49-9-76'/%3E%3Cellipse cx='22' cy='38' rx='4' ry='11' transform='rotate(-35 22 38)'/%3E%3Cellipse cx='42' cy='24' rx='4' ry='11' transform='rotate(40 42 24)'/%3E%3Cellipse cx='217' cy='36' rx='4' ry='11' transform='rotate(35 217 36)'/%3E%3Cellipse cx='196' cy='21' rx='4' ry='11' transform='rotate(-40 196 21)'/%3E%3C/g%3E%3C/svg%3E")}
+.experience header .brand{filter:brightness(0) invert(1) sepia(.18) saturate(.7)}
+.experience header nav button,.experience header nav a{color:#f2e9d8!important}
+.experience header nav button:hover,.experience header nav a:hover{color:#f3d990!important}
+.landscape-viewport{flex:1;min-height:0;width:100%;overflow:hidden;display:flex;align-items:center;background:#f2e9d8}
+.garden{width:100%;height:100%;aspect-ratio:auto;display:flex;align-items:center;justify-content:center;background:#f2e9d8}
+.panorama-stage{position:relative;width:100%;aspect-ratio:3/1;max-height:100%;flex:none;background:#f2e9d8}
+.panorama-stage .landscape,.panorama-stage .colour-landscape{position:absolute;inset:0;width:100%;height:100%;object-fit:contain!important;object-position:center!important}
+#botanicalJars{position:absolute;inset:0;z-index:2}
+.hero-copy{position:absolute;z-index:8;top:calc(100% + 26px);left:50%;transform:translateX(-50%);padding:0;text-align:center;white-space:nowrap}
+.hero-copy .eyebrow,.hero-copy h1,.hero-copy>p{display:none}
+.hero-copy .hero-cta{pointer-events:auto;background:#8B5CF6;color:white;border:1px solid #a78bfa;border-radius:6px;padding:18px 34px;font-size:12px;font-weight:700;letter-spacing:1.5px;box-shadow:0 12px 26px #8b5cf65c;transition:transform .25s,box-shadow .25s,background .25s}
+.hero-copy .hero-cta:hover{background:#7444e8;transform:translateY(-3px);box-shadow:0 16px 32px #8b5cf670}
+.explore-hint{flex:none;min-height:36px;padding:9px 12px 3px;background:#f2e9d8}
+.hero-cycle-toggle{flex:none;margin:0 auto 10px;background:#f2e9d8}
+@media(max-width:700px){
+ .experience{height:100svh;min-height:100svh}
+ .experience header{height:64px;padding:8px 18px}
+ .experience header .brand{width:116px}
+ .panorama-stage{width:100%;aspect-ratio:3/1;max-height:none}
+ .garden{align-items:center}
+ .botanical-jar{height:22%;width:8%}
+ .botanical-name{font-size:9px;padding:3px 5px}
+ .hero-copy{top:calc(100% + 18px);width:auto}
+ .hero-copy .hero-cta{padding:15px 24px;font-size:11px}
+ .explore-hint{font-size:10px}
+}
+
+/* Final full-screen frame: no distortion, only an intentional crop of the original art. */
+.garden .panorama-stage{position:absolute;inset:0;width:auto;height:auto;max-height:none;aspect-ratio:auto}
+.garden .panorama-stage .landscape,.garden .panorama-stage .colour-landscape{object-fit:cover!important;object-position:center center!important}
+.garden .panorama-stage .landscape,.garden .panorama-stage .colour-landscape{transform:scale(1.42);transform-origin:center}
+.garden .botanical-jar{height:22%;width:8%}
+@media(max-width:700px){.garden .panorama-stage{position:absolute;inset:0}.garden .panorama-stage .landscape,.garden .panorama-stage .colour-landscape{transform:scale(3.15)}.garden .botanical-jar{height:11.5%;width:7%}.garden .botanical-jar .jar{max-width:100%}}
+
+/* Preserve the complete panoramic illustration at every viewport. */
+.garden .panorama-stage{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:3/1;max-height:none;flex:none}
+.garden .panorama-stage .landscape,.garden .panorama-stage .colour-landscape{transform:none!important;object-fit:contain!important;object-position:center center!important}
+.garden .botanical-jar{height:28%;width:8%}
+@media(max-width:700px){
+ .garden{align-items:center}
+ .garden .panorama-stage{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:3/1}
+ .garden .botanical-jar{height:28%;width:8%}
+}
+
+/* Final navigation and hero action adjustments. */
+.experience header{border-bottom:1px solid #c99b53!important;box-shadow:0 3px 18px #06241e24!important}
+.experience header .search-button,.experience header #bagButton{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px;border:1px solid #c99b5355!important;border-radius:50%;background:#123c30!important;color:#edd6a3!important}
+.experience header #bagCount{margin-left:5px;background:#c99b53;color:#174434}
+.experience{height:100svh!important;min-height:0!important}
+.experience header .brand{filter:none}
+.hero-copy{top:calc(100% + 10px);z-index:12}
+.hero-copy .hero-cta{padding:13px 22px;font-size:10px;letter-spacing:1.2px}
+.explore-hint{display:none}
+@media(max-width:700px){.hero-copy{top:calc(100% + 8px)}.hero-copy .hero-cta{padding:12px 19px;font-size:10px}}
+
+/* Separate portrait and landscape artwork, all eight platforms on screen. */
+.garden .panorama-stage{height:100%!important;width:100%!important;aspect-ratio:auto!important;position:relative!important}
+.garden .panorama-stage .landscape,.garden .panorama-stage .colour-landscape{object-fit:fill!important;transform:none!important}
+.garden .botanical-jar{height:22%;width:9%;isolation:isolate}
+.garden .botanical-jar .jar{filter:drop-shadow(0 7px 5px #51330c38) drop-shadow(0 0 5px #d5a84538)}
+.garden .botanical-jar .jar-outline{filter:drop-shadow(0 0 2px #e6bc6380)}
+.garden .botanical-jar:after{content:"";position:absolute;z-index:-1;pointer-events:none;bottom:-2%;left:6%;width:88%;height:8%;border-radius:50%;background:#38220a50;filter:blur(4px);transform:scaleX(.9)}
+.garden .botanical-jar:before{content:"";position:absolute;pointer-events:none;z-index:-1;left:8%;right:8%;bottom:18%;height:190%;background:linear-gradient(180deg,#8b5cf600 0%,#8b5cf608 12%,#8b5cf62c 60%,#b48bff55 88%,#8b5cf600 100%);clip-path:polygon(43% 0,57% 0,100% 100%,0 100%);filter:blur(5px);opacity:.65;transition:opacity .7s}
+.garden .botanical-jar.is-colour:before{opacity:1}
+.hero-copy{top:auto!important;bottom:12px;}
+.hero-cycle-toggle{position:absolute;bottom:12px;right:12px;z-index:10;margin:0;font-size:10px}
+@media(max-width:700px){.garden .botanical-jar{height:14%;width:21%}.garden .colour-landscape{mask-image:radial-gradient(ellipse 115px 130px at var(--reveal-x,50%) var(--reveal-y,50%),#000 45%,transparent 100%)}.hero-copy{bottom:8px}.hero-copy .hero-cta{padding:9px 12px;font-size:9px}.hero-cycle-toggle{bottom:8px;right:4px;font-size:8px;padding:5px}.botanical-name{display:none}}

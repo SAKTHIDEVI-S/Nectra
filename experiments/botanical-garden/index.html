@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#173b2e"><title>Nectra · The Honey Garden</title><link rel="stylesheet" href="garden.css"><link rel="stylesheet" href="storefront.css"><link rel="stylesheet" href="storefront-theme.css"><link rel="stylesheet" href="catalogue-luxury.css"></head><body>
+<link rel="stylesheet" href="welcome.css"><script src="welcome.js"></script>
+<main class="experience">
+ <header><a class="brand" href="./" aria-label="Nectra home"><img src="/assets/logo.png" alt="Nectra — From the hive, with love"></a><nav aria-label="Main navigation"><button id="browse">Explore all jars <span>↗</span></button><button id="motion" aria-pressed="false">Pause motion</button></nav><span class="preview">LOCAL CONCEPT</span></header>
+ <section class="garden" aria-label="Explore the eight Nectra honeys in their natural landscapes">
+  <h1 class="sr-only">The Nectra honey landscape</h1>
+  <picture><source media="(max-width:700px)" srcset="art/cinematic-mobile-outline.png"><img class="landscape" fetchpriority="high" src="art/cinematic-desktop-outline.png" alt="A single continuous Nectra landscape with hills, a river, rose gardens, a wildflower meadow, ginger, tulasi, a jamun grove, a forest canopy and a traditional home."></picture>
+  <div class="living-weather" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div id="regions"></div>
+ </section>
+ <aside class="selection" aria-label="Selected honey"><div id="selectedJar"></div><div class="selection-copy"><span id="selectedRegion" class="eyebrow"></span><h2 id="selectedName"></h2><p id="selectedNote"></p><button id="view" class="primary">Discover this jar <span>↗</span></button></div><div class="counter"><span id="number">01</span> / 08</div></aside>
+ <footer><span>Eight jars. One Nectra family.</span><span>Illustrated discovery garden · Not a sourcing map</span></footer>
+</main>
+<dialog id="details"><button class="close" aria-label="Close product details">✕</button><div id="detailBody"></div></dialog>
+<dialog id="catalogue"><button class="close" aria-label="Close catalogue">✕</button><p class="eyebrow">FIND YOUR LITTLE EVERYDAY RITUAL</p><h2>The Nectra collection</h2><div id="jarList"></div></dialog>
+<noscript><p>Enable JavaScript to explore the interactive garden. This is a local design preview.</p></noscript><script type="module" src="garden.js"></script></body></html>
