@@ -8,6 +8,9 @@ function mountRefinements(){
  if(!gift||!figure)return;
  figure.insertAdjacentHTML('beforeend','<div class="gift-letter" hidden><span>A LITTLE NOTE, JUST FOR YOU</span><p></p><small>With love, from Nectra</small></div><ol class="gift-journey" aria-label="Your gift journey"><li>Choose <span>Your favourite jars</span></li><li>Wrap <span>A thoughtful touch</span></li><li>Gift <span>Your words inside</span></li></ol>');
  const note=document.querySelector('#giftNote'),checkbox=document.querySelector('#isGift'),letter=figure.querySelector('.gift-letter');
+ const phone=matchMedia('(max-width:700px)');
+ function placeLetter(){if(phone.matches)note.closest('label').after(letter);else figure.append(letter)}
+ phone.addEventListener('change',placeLetter);placeLetter();
  function sync(){letter.hidden=!checkbox.checked;letter.querySelector('p').textContent=note.value.trim()||'A little sweetness, with all my love.';gift.classList.toggle('with-note',checkbox.checked)}
  note.addEventListener('input',sync);checkbox.addEventListener('change',sync);sync();
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let pending=false;
