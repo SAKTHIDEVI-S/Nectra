@@ -5,6 +5,8 @@
   "description": "Nectra premium honey storefront and order console",
   "type": "module",
   "scripts": {
+    "prestart": "node scripts/build-garden.mjs",
+    "predev": "node scripts/build-garden.mjs",
     "test": "node --test tests/*.test.js",
     "start": "node server.js",
     "dev": "node --watch server.js",

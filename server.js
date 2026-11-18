@@ -252,7 +252,8 @@ function serveStatic(req, res, pathname) {
       ? '/public/product.html'
     : cleanPath === '/shop-honey'
       ? '/public/shop.html'
-    : cleanPath === '/' || cleanPath === '/payment/return'
+    : cleanPath === '/' ? '/public/garden-home.html'
+    : cleanPath === '/payment/return'
       ? '/public/index.html'
       : `/public${cleanPath}`;
   const file = path.normalize(path.join(__dirname, requested));
