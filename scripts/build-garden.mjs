@@ -4,7 +4,7 @@ const src='experiments/botanical-garden';
 for(const dir of ['', 'art', 'assets']){
   mkdirSync(join('public',dir),{recursive:true});
   for(const name of readdirSync(join(src,dir))){
-    if(!/\.(css|js|png|svg)$/.test(name))continue;
+    if(!/\.(css|js|png|svg|webp)$/.test(name))continue;
     copyFileSync(join(src,dir,name),join('public',dir,name));
   }
 }

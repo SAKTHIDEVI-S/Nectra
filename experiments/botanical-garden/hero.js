@@ -3,7 +3,7 @@ export function mountBotanicalHero(products,store){
  const css=document.createElement('link');css.rel='stylesheet';css.href='hero.css';document.head.append(css);
  const scene=document.querySelector('.garden');
  const initialArt=matchMedia('(max-width:700px)').matches?'mobile':'desktop';
- scene.innerHTML=`<div class="panorama-stage"><img class="landscape" src="art/cinematic-${initialArt}-outline.png" alt="A continuous botanical illustration of hills, coffee plants, flowers, tulasi, ginger, woodland, roses and jamun trees"><img class="colour-landscape" src="art/cinematic-${initialArt}-colour.png" alt="" aria-hidden="true"><div id="botanicalJars"></div></div>`;
+ scene.innerHTML=`<div class="panorama-stage"><img class="landscape" src="art/cinematic-${initialArt}-outline.${initialArt==='mobile'?'webp':'png'}" alt="A continuous botanical illustration of hills, coffee plants, flowers, tulasi, ginger, woodland, roses and jamun trees"><img class="colour-landscape" src="art/cinematic-${initialArt}-colour.${initialArt==='mobile'?'webp':'png'}" alt="" aria-hidden="true"><div id="botanicalJars"></div></div>`;
  const viewport=document.createElement('div');viewport.className='landscape-viewport';scene.before(viewport);viewport.append(scene);
  const copy=document.createElement('div');copy.className='hero-copy';copy.innerHTML='<p class="eyebrow">FROM THE HIVE, WITH LOVE</p><h1>A world of honey. <em>Eight stories.</em></h1><p>Find a flavour that feels like yours.</p><a class="hero-cta" href="#collection">SHOP ALL HONEY ↗</a>';scene.querySelector('.panorama-stage').append(copy);
  const hint=document.createElement('p');hint.className='explore-hint';hint.textContent=matchMedia('(hover: none)').matches?'Swipe to explore. Tap a jar to bring its world to life.':'Move over a jar. Watch its world bloom into colour.';viewport.after(hint);
@@ -59,12 +59,12 @@ export function mountBotanicalHero(products,store){
  const portraitPositions={hill:[23,23],coorg:[77,23],multiflora:[23,44],tulasi:[77,44],ginger:[23,65],kombu:[77,65],rose:[23,86],jamun:[77,86]};
  let artVersion=0;
  function layoutArtwork(){
-  const version=++artVersion,source=mobile.matches?'art/cinematic-mobile-colour.png':'art/cinematic-desktop-colour.png';
+  const version=++artVersion,source=mobile.matches?'art/cinematic-mobile-colour.webp':'art/cinematic-desktop-colour.png';
   const colour=scene.querySelector('.colour-landscape'),base=scene.querySelector('.landscape');
   scene.querySelectorAll('.botanical-jar').forEach((button,i)=>{const [x,y]=(mobile.matches?portraitPositions:positions)[products[i].id];button.dataset.x=x;button.dataset.y=y;button.style.setProperty('--place-x',x+'%');button.style.setProperty('--place-y',y+'%')});
   const art=new Image();art.onload=()=>{
    if(version!==artVersion)return;
-   base.src=mobile.matches?'art/cinematic-mobile-outline.png':'art/cinematic-desktop-outline.png';base.alt='Outline of one continuous landscape with hills, a stream, a traditional home and eight botanical habitats';colour.src=source;reset();syncTour();
+   base.src=mobile.matches?'art/cinematic-mobile-outline.webp':'art/cinematic-desktop-outline.png';base.alt='Outline of one continuous landscape with hills, a stream, a traditional home and eight botanical habitats';colour.src=source;reset();syncTour();
   };art.src=source;
  }
  mobile.addEventListener('change',layoutArtwork);reduceMotion.addEventListener('change',syncTour);layoutArtwork();

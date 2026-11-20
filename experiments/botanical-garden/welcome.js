@@ -1,5 +1,5 @@
 (() => {
-  if (location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (matchMedia('(max-width:700px)').matches || location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   try {
     if (localStorage.getItem('nectra-welcome-seen')) return;
     localStorage.setItem('nectra-welcome-seen', '1');

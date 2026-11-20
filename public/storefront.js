@@ -169,8 +169,23 @@ export function mountStore(products,jar){
    const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?innerHeight:1);
    if(captureScroll(delta))event.preventDefault();
   },{passive:false});
+  let swipeUsed=false,startX=0;
+  section.addEventListener('touchstart',e=>{swipeUsed=false;startX=e.touches[0].clientX},{passive:true});
   section.addEventListener('touchstart',event=>{touchY=event.touches[0]?.clientY||0},{passive:true});
-  section.addEventListener('touchmove',event=>{if(event.touches.length!==1)return;const nextY=event.touches[0]?.clientY||touchY,delta=touchY-nextY;touchY=nextY;if(delta&&captureScroll(delta))event.preventDefault()},{passive:false});
+  section.addEventListener('touchmove',event=>{if(event.touches.length!==1)return;const nextY=event.touches[0].clientY,delta=touchY-nextY;
+   if(matchMedia('(max-width:700px)').matches){
+    if(below.hidden||overlay.open||!event.cancelable)return;
+    if(swipeUsed){event.preventDefault();return}
+    const dir=Math.sign(delta),next=active+dir,r=section.getBoundingClientRect();
+    if(!dir||next<0||next>=slides.length||Math.abs(r.top)>innerHeight*.18||Math.abs(delta)<Math.abs(event.touches[0].clientX-startX))return;
+    event.preventDefault();
+    if(Math.abs(delta)<24)return;
+    swipeUsed=true;window.scrollTo({top:scrollY+r.top,behavior:'instant'});
+    const incoming=slides[next];setActive(next);
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)incoming.animate([{clipPath:dir>0?'inset(100% 0 0)':'inset(0 0 100%)'},{clipPath:'inset(0)'}],{duration:230,easing:'ease-out'});
+    return;
+   }
+   touchY=nextY;if(delta&&captureScroll(delta))event.preventDefault()},{passive:false});
   section.addEventListener('keydown',event=>{const delta=(event.key==='ArrowDown'||event.key==='ArrowRight')?260:(event.key==='ArrowUp'||event.key==='ArrowLeft')?-260:0;if(delta&&followScroll(delta))event.preventDefault()});
   slides.forEach(slide=>{
    slide.addEventListener('pointermove',event=>{
