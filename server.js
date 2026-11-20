@@ -252,13 +252,14 @@ function serveStatic(req, res, pathname) {
       ? '/public/product.html'
     : cleanPath === '/shop-honey'
       ? '/public/shop.html'
+    : cleanPath === '/hear-our-hive' ? '/public/hear-our-hive.html'
     : cleanPath === '/' ? '/public/index.html'
     : cleanPath === '/payment/return'
       ? '/public/legacy-home.html'
       : `/public${cleanPath}`;
   const file = path.normalize(path.join(__dirname, requested));
   if (!file.startsWith(path.join(__dirname, 'public')) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return false;
-  const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8' };
+  const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.mp3': 'audio/mpeg', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8' };
   if (cleanPath.startsWith('/product/') || cleanPath.startsWith('/shop-honey/')) {
     const id = Object.keys(globalThis.NectraPaths).find(id => globalThis.NectraPaths[id] === cleanPath);
     const product = products.find(entry => entry.id === id);

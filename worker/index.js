@@ -62,6 +62,7 @@ function pageFor(pathname) {
   if (pathname === '/') return '/index.html';
   if (pathname === '/payment/return') return '/legacy-home.html';
   if (pathname === '/story') return '/story.html';
+  if (pathname === '/hear-our-hive') return '/hear-our-hive.html';
   if (pathname === '/bulk-orders') return '/bulk-orders.html';
   if (pathname === '/journal') return '/journal.html';
   if (/^\/journal\/[a-z0-9-]+$/.test(pathname)) return '/journal-article.html';

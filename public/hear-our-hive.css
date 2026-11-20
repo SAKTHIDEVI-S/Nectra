@@ -1,0 +1,18 @@
+:root{color-scheme:light;--forest:#174434;--paper:#f2e9d8;--gold:#c99b53}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--forest);font-family:system-ui,sans-serif;min-width:0}
+.hive-card{max-width:36rem;margin:auto;background:#fcf6e9;min-height:100svh}
+header{background:#12372b;display:grid;place-items:center;padding:1.1rem 1rem 0}
+header img{width:8.2rem;height:auto;filter:brightness(0) saturate(100%) invert(82%) sepia(43%) saturate(540%) hue-rotate(345deg) brightness(102%) contrast(94%)}
+.hive-art{background:radial-gradient(ellipse at center,#2e5b47,#12372b);border-bottom:1px solid var(--gold);overflow:hidden}
+.hive-art svg{display:block;width:100%;height:auto;max-height:11rem}
+.hive-copy{padding:clamp(1.25rem,6vw,2.25rem);text-align:center}
+.eyebrow{margin:0;color:#705123;letter-spacing:.16em;font-size:.68rem;font-weight:700}
+h1{font:normal clamp(2.2rem,10vw,3.7rem)/1 Georgia,serif;margin:.45rem 0 .8rem}
+.story{max-width:29rem;margin:0 auto 1.25rem;line-height:1.58}
+.player{background:#eee5d2;border:1px solid #cdb17e;border-radius:1rem;padding:.8rem}
+.player-label{font-weight:650;margin:0 0 .6rem}
+audio{display:block;width:100%;min-height:44px}
+.hint{font-size:.8rem;line-height:1.4;margin:.6rem 0 0}
+.signoff{font:italic 1.05rem Georgia,serif;color:#705123;margin:1.2rem 0 0}
+@media(min-width:601px){body{padding:1.5rem}.hive-card{min-height:auto;overflow:hidden;border:1px solid #cdb17e;border-radius:1.25rem}}
